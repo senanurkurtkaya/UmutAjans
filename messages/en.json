@@ -1,0 +1,163 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Transform Your Digital Presence",
+    "subtitle": "We help businesses grow and succeed in the digital world with cutting-edge marketing strategies and innovative solutions.",
+    "cta": "Get Started",
+    "ctaSecondary": "Our Services"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive digital marketing solutions tailored to your business needs",
+    "seo": {
+      "title": "SEO Optimization",
+      "description": "Improve your search engine rankings and drive organic traffic to your website with our proven SEO strategies."
+    },
+    "social": {
+      "title": "Social Media Marketing",
+      "description": "Engage with your audience and grow your brand presence across all major social media platforms."
+    },
+    "ppc": {
+      "title": "PPC Advertising",
+      "description": "Maximize your ROI with targeted pay-per-click campaigns that drive qualified leads and conversions."
+    },
+    "content": {
+      "title": "Content Marketing",
+      "description": "Create compelling content that resonates with your audience and drives meaningful engagement."
+    },
+    "analytics": {
+      "title": "Analytics & Reporting",
+      "description": "Track your performance with comprehensive analytics and data-driven insights to optimize your strategy."
+    },
+    "web": {
+      "title": "Web Design & Development",
+      "description": "Build beautiful, responsive websites that convert visitors into customers and drive business growth."
+    }
+  },
+  "stats": {
+    "clients": "Happy Clients",
+    "projects": "Projects Completed",
+    "satisfaction": "Client Satisfaction",
+    "experience": "Years of Experience"
+  },
+  "cta": {
+    "title": "Ready to Grow Your Business?",
+    "subtitle": "Let's discuss how we can help you achieve your digital marketing goals.",
+    "button": "Get in Touch"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "We are a passionate team of digital marketing experts dedicated to helping businesses succeed online.",
+    "description1": "At Umut Ajans, we believe that every business deserves to thrive in the digital landscape. With over 10 years of experience, we've helped hundreds of companies transform their online presence and achieve remarkable growth.",
+    "description2": "Our team combines creativity, data-driven insights, and cutting-edge technology to deliver marketing solutions that drive real results. We're not just another agency—we're your strategic partner in digital success.",
+    "team": {
+      "title": "Our Team",
+      "subtitle": "Meet the talented individuals driving our success"
+    },
+    "values": {
+      "title": "Our Values",
+      "subtitle": "The principles that guide everything we do",
+      "results": {
+        "title": "Results-Driven",
+        "description": "We focus on delivering measurable results that impact your bottom line."
+      },
+      "client": {
+        "title": "Client-Focused",
+        "description": "Your success is our priority. We build lasting partnerships with our clients."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We stay ahead of trends and leverage the latest technologies and strategies."
+      },
+      "transparency": {
+        "title": "Transparency",
+        "description": "Honest communication and clear reporting keep you informed every step of the way."
+      }
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Ready to grow your business? Let's start a conversation.",
+    "email": {
+      "title": "Email",
+      "description": "Send us an email anytime"
+    },
+    "phone": {
+      "title": "Phone",
+      "description": "Mon-Fri from 9am to 6pm"
+    },
+    "address": {
+      "title": "Address",
+      "description": "Visit our office"
+    },
+    "form": {
+      "title": "Send us a Message",
+      "description": "Fill out the form below and we'll get back to you as soon as possible.",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Thank you for your message!",
+      "successDescription": "We'll get back to you within 24 hours."
+    }
+  },
+  "process": {
+    "title": "Our Process",
+    "subtitle": "A proven methodology for delivering exceptional results",
+    "discovery": {
+      "title": "Discovery",
+      "description": "We analyze your business, goals, and target audience to create a customized strategy."
+    },
+    "strategy": {
+      "title": "Strategy",
+      "description": "Our team develops a comprehensive marketing plan tailored to your unique needs."
+    },
+    "implementation": {
+      "title": "Implementation",
+      "description": "We execute your marketing strategy with precision and attention to detail."
+    },
+    "optimization": {
+      "title": "Optimization",
+      "description": "Continuous monitoring and optimization ensure maximum ROI and performance."
+    }
+  },
+  "footer": {
+    "company": "Company",
+    "legal": "Legal",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved",
+    "description": "Your trusted partner in digital marketing. We help businesses grow and succeed in the digital world.",
+    "links": {
+      "about": "About Us",
+      "services": "Services",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    }
+  },
+  "metadata": {
+    "home": {
+      "title": "Home",
+      "description": "Transform your digital presence with our comprehensive marketing solutions. We help businesses grow and succeed online."
+    },
+    "about": {
+      "title": "About Us",
+      "description": "Learn about Umut Ajans, our mission, values, and the team behind our success in digital marketing."
+    },
+    "services": {
+      "title": "Services",
+      "description": "Comprehensive digital marketing services including SEO, social media marketing, PPC advertising, content marketing, and web design."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Get in touch with Umut Ajans. We're here to help you grow your business with our digital marketing services."
+    }
+  }
+}

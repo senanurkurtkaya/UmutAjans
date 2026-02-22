@@ -1,0 +1,163 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımızda",
+    "services": "Hizmetler",
+    "contact": "İletişim"
+  },
+  "hero": {
+    "title": "Dijital Varlığınızı Dönüştürün",
+    "subtitle": "İşletmelerin dijital dünyada büyümesine ve başarılı olmasına yardımcı oluyoruz. En son pazarlama stratejileri ve yenilikçi çözümlerle.",
+    "cta": "Başlayın",
+    "ctaSecondary": "Hizmetlerimiz"
+  },
+  "services": {
+    "title": "Hizmetlerimiz",
+    "subtitle": "İşletmenizin ihtiyaçlarına göre özelleştirilmiş kapsamlı dijital pazarlama çözümleri",
+    "seo": {
+      "title": "SEO Optimizasyonu",
+      "description": "Kanıtlanmış SEO stratejilerimizle arama motoru sıralamanızı iyileştirin ve web sitenize organik trafik çekin."
+    },
+    "social": {
+      "title": "Sosyal Medya Pazarlama",
+      "description": "Hedef kitlenizle etkileşime geçin ve tüm büyük sosyal medya platformlarında marka varlığınızı büyütün."
+    },
+    "ppc": {
+      "title": "PPC Reklamcılık",
+      "description": "Nitelikli potansiyel müşteriler ve dönüşümler sağlayan hedefli tıklama başına ödeme kampanyalarıyla ROI'nizi maksimize edin."
+    },
+    "content": {
+      "title": "İçerik Pazarlama",
+      "description": "Hedef kitlenizle rezonans kuran ve anlamlı etkileşim sağlayan etkileyici içerikler oluşturun."
+    },
+    "analytics": {
+      "title": "Analitik ve Raporlama",
+      "description": "Stratejinizi optimize etmek için kapsamlı analitik ve veri odaklı içgörülerle performansınızı takip edin."
+    },
+    "web": {
+      "title": "Web Tasarım ve Geliştirme",
+      "description": "Ziyaretçileri müşterilere dönüştüren ve iş büyümesini destekleyen güzel, duyarlı web siteleri oluşturun."
+    }
+  },
+  "stats": {
+    "clients": "Mutlu Müşteri",
+    "projects": "Tamamlanan Proje",
+    "satisfaction": "Müşteri Memnuniyeti",
+    "experience": "Yıllık Deneyim"
+  },
+  "cta": {
+    "title": "İşinizi Büyütmeye Hazır mısınız?",
+    "subtitle": "Dijital pazarlama hedeflerinize ulaşmanıza nasıl yardımcı olabileceğimizi tartışalım.",
+    "button": "İletişime Geçin"
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "subtitle": "İşletmelerin çevrimiçi başarılı olmasına yardımcı olmaya adanmış tutkulu bir dijital pazarlama uzmanları ekibiyiz.",
+    "description1": "Umut Ajans'ta, her işletmenin dijital ortamda gelişmeyi hak ettiğine inanıyoruz. 10 yılı aşkın deneyimimizle, yüzlerce şirketin çevrimiçi varlığını dönüştürmesine ve olağanüstü büyüme elde etmesine yardımcı olduk.",
+    "description2": "Ekibimiz, gerçek sonuçlar sağlayan pazarlama çözümleri sunmak için yaratıcılığı, veri odaklı içgörüleri ve son teknoloji teknolojileri birleştiriyor. Sadece başka bir ajans değiliz—dijital başarınızda stratejik ortağınızız.",
+    "team": {
+      "title": "Ekibimiz",
+      "subtitle": "Başarımızı yönlendiren yetenekli bireylerle tanışın"
+    },
+    "values": {
+      "title": "Değerlerimiz",
+      "subtitle": "Yaptığımız her şeyi yönlendiren ilkeler",
+      "results": {
+        "title": "Sonuç Odaklı",
+        "description": "Kârınızı etkileyen ölçülebilir sonuçlar sunmaya odaklanıyoruz."
+      },
+      "client": {
+        "title": "Müşteri Odaklı",
+        "description": "Başarınız bizim önceliğimizdir. Müşterilerimizle kalıcı ortaklıklar kuruyoruz."
+      },
+      "innovation": {
+        "title": "Yenilik",
+        "description": "Trendlerin önünde kalıyor ve en son teknolojileri ve stratejileri kullanıyoruz."
+      },
+      "transparency": {
+        "title": "Şeffaflık",
+        "description": "Dürüst iletişim ve net raporlama, sizi her adımda bilgilendirir."
+      }
+    }
+  },
+  "contact": {
+    "title": "İletişime Geçin",
+    "subtitle": "İşinizi büyütmeye hazır mısınız? Bir konuşma başlatalım.",
+    "email": {
+      "title": "E-posta",
+      "description": "Bize istediğiniz zaman e-posta gönderin"
+    },
+    "phone": {
+      "title": "Telefon",
+      "description": "Pazartesi-Cuma 09:00-18:00"
+    },
+    "address": {
+      "title": "Adres",
+      "description": "Ofisimizi ziyaret edin"
+    },
+    "form": {
+      "title": "Bize Mesaj Gönderin",
+      "description": "Aşağıdaki formu doldurun, en kısa sürede size geri dönüş yapacağız.",
+      "name": "Ad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "message": "Mesaj",
+      "send": "Mesaj Gönder",
+      "sending": "Gönderiliyor...",
+      "success": "Mesajınız için teşekkürler!",
+      "successDescription": "24 saat içinde size geri dönüş yapacağız."
+    }
+  },
+  "process": {
+    "title": "Sürecimiz",
+    "subtitle": "Olağanüstü sonuçlar sunmak için kanıtlanmış bir metodoloji",
+    "discovery": {
+      "title": "Keşif",
+      "description": "Özelleştirilmiş bir strateji oluşturmak için işletmenizi, hedeflerinizi ve hedef kitlenizi analiz ediyoruz."
+    },
+    "strategy": {
+      "title": "Strateji",
+      "description": "Ekibimiz, benzersiz ihtiyaçlarınıza göre özelleştirilmiş kapsamlı bir pazarlama planı geliştirir."
+    },
+    "implementation": {
+      "title": "Uygulama",
+      "description": "Pazarlama stratejinizi hassasiyet ve dikkatle uyguluyoruz."
+    },
+    "optimization": {
+      "title": "Optimizasyon",
+      "description": "Sürekli izleme ve optimizasyon, maksimum ROI ve performans sağlar."
+    }
+  },
+  "footer": {
+    "company": "Şirket",
+    "legal": "Yasal",
+    "followUs": "Bizi Takip Edin",
+    "rights": "Tüm hakları saklıdır",
+    "description": "Dijital pazarlamada güvenilir ortağınız. İşletmelerin dijital dünyada büyümesine ve başarılı olmasına yardımcı oluyoruz.",
+    "links": {
+      "about": "Hakkımızda",
+      "services": "Hizmetler",
+      "contact": "İletişim",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Hizmet Şartları"
+    }
+  },
+  "metadata": {
+    "home": {
+      "title": "Ana Sayfa",
+      "description": "Kapsamlı pazarlama çözümlerimizle dijital varlığınızı dönüştürün. İşletmelerin çevrimiçi büyümesine ve başarılı olmasına yardımcı oluyoruz."
+    },
+    "about": {
+      "title": "Hakkımızda",
+      "description": "Umut Ajans'ı, misyonumuzu, değerlerimizi ve dijital pazarlamadaki başarımızın arkasındaki ekibi öğrenin."
+    },
+    "services": {
+      "title": "Hizmetler",
+      "description": "SEO, sosyal medya pazarlama, PPC reklamcılık, içerik pazarlama ve web tasarımı dahil kapsamlı dijital pazarlama hizmetleri."
+    },
+    "contact": {
+      "title": "İletişim",
+      "description": "Umut Ajans ile iletişime geçin. Dijital pazarlama hizmetlerimizle işinizi büyütmenize yardımcı olmak için buradayız."
+    }
+  }
+}
