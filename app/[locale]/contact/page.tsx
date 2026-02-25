@@ -3,19 +3,17 @@ import { ContactForm } from '@/components/forms/contact-form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { generateMetadataFromTranslations } from '@/lib/seo/metadata';
-import { toLocale } from '@/lib/utils/validation';
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  await params;
   return generateMetadataFromTranslations({
     titleKey: 'metadata.contact.title',
     descriptionKey: 'metadata.contact.description',
     path: '/contact',
-    locale: toLocale(locale),
   });
 }
 

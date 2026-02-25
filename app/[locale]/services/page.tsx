@@ -2,19 +2,17 @@ import { getTranslations } from 'next-intl/server';
 import { ServicesSection } from '@/components/sections/services-section';
 import { ProcessSection } from '@/components/sections/process-section';
 import { generateMetadataFromTranslations } from '@/lib/seo/metadata';
-import { toLocale } from '@/lib/utils/validation';
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  await params;
   return generateMetadataFromTranslations({
     titleKey: 'metadata.services.title',
     descriptionKey: 'metadata.services.description',
     path: '/services',
-    locale: toLocale(locale),
   });
 }
 

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { usePathname } from '@/lib/i18n/navigation';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -137,7 +137,7 @@ export const Navbar = React.memo(function Navbar() {
                 className="mt-8 flex flex-col space-y-4"
                 aria-label="Mobile navigation"
               >
-                {NAV_ITEMS.map((item, index) => {
+                {NAV_ITEMS.map((item) => {
                   const active = isActive(item.href);
 
                   return (

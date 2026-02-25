@@ -6,6 +6,8 @@ import { siteConfig } from './config';
 import { type Locale } from '@/i18n';
 
 export interface OrganizationSchema {
+  '@context'?: string;
+  '@type'?: string;
   name: string;
   url: string;
   logo?: string;
@@ -19,6 +21,8 @@ export interface OrganizationSchema {
 }
 
 export interface WebSiteSchema {
+  '@context'?: string;
+  '@type'?: string;
   name: string;
   url: string;
   description?: string;
@@ -33,9 +37,17 @@ export interface WebSiteSchema {
 }
 
 export interface BreadcrumbSchema {
-  items: Array<{
+  '@context'?: string;
+  '@type'?: string;
+  items?: Array<{
     name: string;
     url: string;
+  }>;
+  itemListElement?: Array<{
+    '@type': string;
+    position: number;
+    name: string;
+    item: string;
   }>;
 }
 

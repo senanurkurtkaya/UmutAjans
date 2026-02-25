@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Target, TrendingUp, Zap, Users, BarChart3, Globe } from 'lucide-react';
 import { useMemo } from 'react';
 import { useReducedMotion } from '@/lib/hooks/use-reduced-motion';

@@ -7,7 +7,7 @@ export const siteConfig = {
   name: 'Umut Ajans',
   description: 'Professional digital marketing agency helping businesses grow and succeed in the digital world.',
   url: 'https://umutajans.com',
-  ogImage: '/og-image.jpg',
+  ogImage: '/og-image',
   twitterHandle: '@umutajans',
   twitterSite: '@umutajans',
   locale: 'en_US',

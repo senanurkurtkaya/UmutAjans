@@ -36,28 +36,28 @@ export const ContactForm = React.memo(function ContactForm() {
     const newErrors: FormErrors = {};
 
     if (!isRequired(formData.name)) {
-      newErrors.name = 'Name is required';
+      newErrors.name = t('errors.nameRequired');
     }
 
     if (!isRequired(formData.email)) {
-      newErrors.email = 'Email is required';
+      newErrors.email = t('errors.emailRequired');
     } else if (!isValidEmail(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = t('errors.emailInvalid');
     }
 
     if (formData.phone && !isValidPhone(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
+      newErrors.phone = t('errors.phoneInvalid');
     }
 
     if (!isRequired(formData.message)) {
-      newErrors.message = 'Message is required';
+      newErrors.message = t('errors.messageRequired');
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = t('errors.messageMinLength');
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }, [formData]);
+  }, [formData, t]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,19 +70,20 @@ export const ContactForm = React.memo(function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-      // In production, replace with actual API call
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
-      // if (!response.ok) throw new Error('Failed to submit');
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(typeof data.error === 'string' ? data.error : 'Failed to submit');
+      }
 
       logger.info('Contact form submitted', { email: formData.email }, 'ContactForm');
-      
+
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
@@ -92,9 +93,9 @@ export const ContactForm = React.memo(function ContactForm() {
     } catch (error) {
       logger.error('Contact form submission failed', error, 'ContactForm');
       setIsSubmitting(false);
-      setSubmitError('Failed to send message. Please try again.');
+      setSubmitError(t('errors.submitFailed'));
     }
-  }, [formData, validateForm]);
+  }, [formData, validateForm, t]);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

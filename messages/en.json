@@ -105,7 +105,16 @@
       "send": "Send Message",
       "sending": "Sending...",
       "success": "Thank you for your message!",
-      "successDescription": "We'll get back to you within 24 hours."
+      "successDescription": "We'll get back to you within 24 hours.",
+      "errors": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "phoneInvalid": "Please enter a valid phone number",
+        "messageRequired": "Message is required",
+        "messageMinLength": "Message must be at least 10 characters",
+        "submitFailed": "Failed to send message. Please try again."
+      }
     }
   },
   "process": {

@@ -14,7 +14,7 @@ import { memo, useCallback } from 'react';
 
 export const ThemeToggle = memo(function ThemeToggle() {
   const [mounted, setMounted] = React.useState(false);
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   // Prevent hydration mismatch
   React.useEffect(() => {

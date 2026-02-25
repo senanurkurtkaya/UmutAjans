@@ -105,7 +105,16 @@
       "send": "Mesaj Gönder",
       "sending": "Gönderiliyor...",
       "success": "Mesajınız için teşekkürler!",
-      "successDescription": "24 saat içinde size geri dönüş yapacağız."
+      "successDescription": "24 saat içinde size geri dönüş yapacağız.",
+      "errors": {
+        "nameRequired": "Ad zorunludur",
+        "emailRequired": "E-posta zorunludur",
+        "emailInvalid": "Geçerli bir e-posta adresi girin",
+        "phoneInvalid": "Geçerli bir telefon numarası girin",
+        "messageRequired": "Mesaj zorunludur",
+        "messageMinLength": "Mesaj en az 10 karakter olmalıdır",
+        "submitFailed": "Mesaj gönderilemedi. Lütfen tekrar deneyin."
+      }
     }
   },
   "process": {

@@ -1,29 +1,25 @@
 import createMiddleware from 'next-intl/middleware';
+import { type NextRequest } from 'next/server';
 import { locales, defaultLocale } from './i18n';
 
-export default createMiddleware({
-  // A list of all locales that are supported
+const intlMiddleware = createMiddleware({
   locales,
-  
-  // Used when no locale matches
   defaultLocale,
-  
-  // Always show locale prefix in URL
-  // Options: 'always' | 'as-needed' | 'never'
   localePrefix: 'always',
-  
-  // Locale detection strategy
-  // Options: 'as-needed' | 'always'
   localeDetection: true,
 });
 
+export default function middleware(request: NextRequest) {
+  return intlMiddleware(request);
+}
+
 export const config = {
   // Match only internationalized pathnames
-  // Exclude API routes, static files, and Next.js internals
+  // Exclude API routes, static files, Next.js internals, and og-image
   matcher: [
     // Match all pathnames except for
-    // - … if they start with `/api`, `/_next` or `/_vercel`
+    // - … if they start with `/api`, `/_next`, `/_vercel`, `/og-image`
     // - … the ones containing a dot (e.g. `favicon.ico`)
-    '/((?!api|_next|_vercel|.*\\..*).*)',
+    '/((?!api|_next|_vercel|og-image|.*\\..*).*)',
   ],
 };
