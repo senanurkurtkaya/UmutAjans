@@ -1,3 +1,5 @@
+import { createClient } from '@/lib/supabase/server';
+
 import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
 import { StatsSection } from '@/components/sections/stats-section';
@@ -10,6 +12,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   await params;
+
   return generateMetadataFromTranslations({
     titleKey: 'metadata.home.title',
     descriptionKey: 'metadata.home.description',
@@ -17,11 +20,19 @@ export async function generateMetadata({
   });
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = createClient();
+
+  const { data: services } = await (await supabase)
+    .from('services')
+    .select('*')
+    .eq('published', true)
+    .order('created_at', { ascending: false });
+
   return (
     <>
       <HeroSection />
-      <ServicesSection />
+      <ServicesSection services={services || []} />
       <StatsSection />
       <CTASection />
     </>

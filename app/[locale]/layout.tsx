@@ -14,7 +14,6 @@ import { ErrorBoundary } from '@/components/providers/error-boundary';
 import { locales, type Locale } from '@/i18n';
 import { generateSEOMetadata } from '@/lib/seo/metadata';
 
-// Generate metadata based on locale
 export async function generateMetadata({
   params,
 }: {
@@ -39,14 +38,13 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  
-  // Validate locale with proper type guard
+
+
   const validLocale = locales.includes(locale as Locale) ? (locale as Locale) : null;
   if (!validLocale) {
     notFound();
   }
 
-  // Load messages for the current locale
   const messages = await getMessages({ locale });
 
   return (
@@ -60,11 +58,7 @@ export default async function LocaleLayout({
           <ErrorBoundary>
             <div className="flex min-h-screen flex-col">
               <SkipLink />
-              <Navbar />
-              <main className="flex-1" id="main-content" tabIndex={-1}>
-                {children}
-              </main>
-              <Footer />
+              {children}
             </div>
           </ErrorBoundary>
         </ThemeProvider>
