@@ -1,23 +1,13 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey =
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-/**
- * Supabase client for Server Components, Server Actions, and Route Handlers.
- * Creates a new client per request (do not cache).
- */
-export async function createClient() {
-  if (!supabaseUrl || !supabaseKey) {
-    throw new Error(
-      'Missing Supabase env: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (or NEXT_PUBLIC_SUPABASE_ANON_KEY)'
-    );
-  }
-
-  const cookieStore = await cookies();
+export function createSupabaseServerClient() {
+  const cookieStore = cookies();
 
   return createServerClient(supabaseUrl, supabaseKey, {
     cookies: {
@@ -29,10 +19,10 @@ export async function createClient() {
           cookiesToSet.forEach(({ name, value, options }) =>
             cookieStore.set(name, value, options)
           );
-        } catch {
-          // setAll from Server Component can be ignored when middleware refreshes sessions
-        }
+        } catch {}
       },
     },
   });
 }
+
+export const createClient=createSupabaseServerClient;

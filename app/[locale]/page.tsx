@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server';
+import { createSupabaseServerClient } from '@/lib/supabase/server';
 
 import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
@@ -21,7 +21,7 @@ export async function generateMetadata({
 }
 
 export default async function HomePage() {
-  const supabase = createClient();
+  const supabase = createSupabaseServerClient();
 
   const { data: services } = await (await supabase)
     .from('services')

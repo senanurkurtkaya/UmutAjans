@@ -1,6 +1,16 @@
-import { redirect } from 'next/navigation';
-import { defaultLocale } from '@/i18n';
+import { createSupabaseServerClient } from '@/lib/supabase/server';
 
-export default function RootPage() {
-  redirect(`/${defaultLocale}`);
+export default async function HomePage() {
+  const supabase = createSupabaseServerClient();
+
+  const { data: services } = await supabase
+    .from('services')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  return (
+    <div>
+      {/* content */}
+    </div>
+  );
 }

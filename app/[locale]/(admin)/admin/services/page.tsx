@@ -1,8 +1,8 @@
-import { createClient } from '@/lib/supabase/server';
+import { createSupabaseServerClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 
 export default async function AdminServicesPage() {
-    const supabase = await createClient();
+    const supabase = createSupabaseServerClient();
 
     const { data: services } = await supabase
         .from('services')
@@ -18,7 +18,7 @@ export default async function AdminServicesPage() {
                 </h1>
 
                 <Link
-                    href="/admin/services/new"
+                    href="/en/admin/services/new"
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
                 >
                     + New Service
