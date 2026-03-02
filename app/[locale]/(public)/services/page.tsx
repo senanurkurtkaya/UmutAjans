@@ -22,9 +22,11 @@ export default async function ServicesPage() {
   const t = await getTranslations('services');
   const supabase = await createClient();
 
- const { data: services, error } = await supabase
+const { data: services, error } = await supabase
   .from('services')
-  .select('*');
+  .select('*')
+  .eq('published', true)
+  .order('created_at', { ascending: false });
 
 console.log('SERVICES DATA:', services);
 

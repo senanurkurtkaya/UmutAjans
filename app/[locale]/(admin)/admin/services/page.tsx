@@ -1,5 +1,8 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import Link from 'next/link';
+import { toggleServicePublish } from './action';
+import PublishToggle from './_components/PublishToggle';
+
 
 export default async function AdminServicesPage() {
     const supabase = createSupabaseServerClient();
@@ -33,9 +36,15 @@ export default async function AdminServicesPage() {
                     >
                         <div>
                             <h2 className="font-semibold">{service.title}</h2>
-                            <p className="text-sm text-muted-foreground">
-                                Published: {service.published ? 'Yes' : 'No'}
-                            </p>
+                            <form
+                                action={toggleServicePublish.bind(
+                                    null,
+                                    service.id,
+                                    service.published
+                                )}
+                            >
+                                <PublishToggle published={service.published} />
+                            </form>
                         </div>
 
                         <Link
