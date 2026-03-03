@@ -1,28 +1,31 @@
-export default function AdminDashboard() {
+export const dynamic = 'force-dynamic';
+
+import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { HeroSection } from '@/components/sections/hero-section';
+import { StatsSection } from '@/components/sections/stats-section';
+import { CTASection } from '@/components/sections/cta-section';
+
+export default async function HomePage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const supabase = await createSupabaseServerClient();
+
+  const { data: sections } = await supabase
+    .from('homepage_sections')
+    .select('*')
+    .eq('is_active', true);
+
+  const hero = sections?.find(s => s.section_key === 'hero');
+  const stats = sections?.find(s => s.section_key === 'stats');
+  const cta = sections?.find(s => s.section_key === 'cta');
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-10">
-        Dashboard
-      </h1>
-
-      <div className="grid grid-cols-3 gap-6">
-
-        <div className="bg-slate-800 p-6 rounded-xl">
-          <h3 className="text-lg">Total Services</h3>
-          <p className="text-3xl font-bold mt-4">5</p>
-        </div>
-
-        <div className="bg-slate-800 p-6 rounded-xl">
-          <h3 className="text-lg">Active Users</h3>
-          <p className="text-3xl font-bold mt-4">12</p>
-        </div>
-
-        <div className="bg-slate-800 p-6 rounded-xl">
-          <h3 className="text-lg">Published Services</h3>
-          <p className="text-3xl font-bold mt-4">4</p>
-        </div>
-
-      </div>
-    </div>
+    <>
+      <HeroSection data={hero?.content} />
+      <StatsSection data={stats?.content} />
+      <CTASection data={cta?.content} />
+    </>
   );
 }

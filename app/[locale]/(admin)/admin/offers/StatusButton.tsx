@@ -1,7 +1,6 @@
 'use client';
 
 import { useTransition } from 'react';
-import { useRouter } from 'next/navigation';
 import { toggleStatus } from './actions';
 
 export default function StatusButton({
@@ -11,13 +10,11 @@ export default function StatusButton({
   id: string;
   status: string;
 }) {
-  const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const handleClick = () => {
-    startTransition(async () => {
-      await toggleStatus(id, status);
-      router.refresh();
+    startTransition(() => {
+      toggleStatus(id, status);
     });
   };
 
@@ -25,17 +22,13 @@ export default function StatusButton({
     <button
       onClick={handleClick}
       disabled={isPending}
-      className={`px-3 py-1 rounded text-white transition ${
+      className={`px-3 py-1 rounded text-sm font-medium transition ${
         status === 'new'
-          ? 'bg-red-500 hover:bg-red-600'
-          : 'bg-green-600 hover:bg-green-700'
-      } ${isPending ? 'opacity-50 cursor-not-allowed' : ''}`}
+          ? 'bg-red-500 text-white'
+          : 'bg-green-600 text-white'
+      }`}
     >
-      {isPending
-        ? 'Güncelleniyor...'
-        : status === 'new'
-        ? 'New'
-        : 'Done'}
+      {isPending ? '...' : status === 'new' ? 'New' : 'Done'}
     </button>
   );
 }

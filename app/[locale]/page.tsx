@@ -1,40 +1,49 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server';
-
 import { HeroSection } from '@/components/sections/hero-section';
-import { ServicesSection } from '@/components/sections/services-section';
 import { StatsSection } from '@/components/sections/stats-section';
 import { CTASection } from '@/components/sections/cta-section';
-import { generateMetadataFromTranslations } from '@/lib/seo/metadata';
+import { ServicesSection } from '@/components/sections/services-section';
 
-export async function generateMetadata({
+export default async function HomePage({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
-  await params;
+  const supabase = await createSupabaseServerClient();
 
-  return generateMetadataFromTranslations({
-    titleKey: 'metadata.home.title',
-    descriptionKey: 'metadata.home.description',
-    path: '/',
-  });
-}
+  // 🔥 HOMEPAGE SECTIONS
+  const { data: homepageSections } = await supabase
+    .from('homepage_sections')
+    .select('*');
 
-export default async function HomePage() {
-  const supabase = createSupabaseServerClient();
+  console.log('RENDER HOMEPAGE:', homepageSections);
 
-  const { data: services } = await (await supabase)
+  const hero = homepageSections?.find(
+    (s) => s.section_key === 'hero'
+  );
+
+  const stats = homepageSections?.find(
+    (s) => s.section_key === 'stats'
+  );
+
+  const cta = homepageSections?.find(
+    (s) => s.section_key === 'cta'
+  );
+
+  // 🔥 SERVICES
+  const { data: services } = await supabase
     .from('services')
     .select('*')
-    .eq('published', true)
-    .order('created_at', { ascending: false });
+    .eq('published', true);
+
+  console.log('RENDER SERVICES:', services);
 
   return (
     <>
-      <HeroSection />
-      <ServicesSection services={services || []} />
-      <StatsSection />
-      <CTASection />
+      <HeroSection data={hero?.content} />
+      <ServicesSection services={services ?? []} />
+      <StatsSection data={stats?.content} />
+      <CTASection data={cta?.content} />
     </>
   );
 }

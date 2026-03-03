@@ -6,14 +6,40 @@ import { useTranslations } from 'next-intl';
 import { useReducedMotion } from '@/lib/hooks/use-reduced-motion';
 import React from 'react';
 
-const statKeys = ['clients', 'projects', 'satisfaction', 'experience'];
-const statValues = ['500+', '1000+', '98%', '10+'];
+type StatsItem = {
+  label: string;
+  value: string;
+};
 
-export const StatsSection = React.memo(function StatsSection() {
+type StatsData = {
+  stats?: Array<{
+    label?: string | null;
+    value?: string | null;
+  }>;
+};
+
+const fallbackKeys = ['clients', 'projects', 'satisfaction', 'experience'];
+const fallbackValues = ['500+', '1000+', '98%', '10+'];
+
+export const StatsSection = React.memo(function StatsSection({
+  data,
+}: {
+  data?: StatsData;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const t = useTranslations('stats');
   const prefersReducedMotion = useReducedMotion();
+
+const stats =
+  (data?.stats?.map((item) => ({
+    label: item.label ?? '',
+    value: item.value ?? '',
+  })) as StatsItem[]) ??
+  fallbackKeys.map((key, i) => ({
+    label: t(key),
+    value: fallbackValues[i],
+  }));
 
   const animationProps = useMemo(
     () =>
@@ -34,16 +60,12 @@ export const StatsSection = React.memo(function StatsSection() {
   );
 
   return (
-    <section
-      ref={ref}
-      className="py-20 bg-muted/50"
-      aria-label="Statistics"
-    >
+    <section ref={ref} className="py-20 bg-muted/50">
       <div className="container">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {statKeys.map((key, index) => (
+          {stats.map((item, index) => (
             <motion.div
-              key={key}
+              key={index}
               {...animationProps}
               transition={{
                 ...animationProps.transition,
@@ -51,13 +73,12 @@ export const StatsSection = React.memo(function StatsSection() {
               }}
               className="text-center"
             >
-              <div
-                className="text-4xl md:text-5xl font-bold text-primary mb-2"
-                aria-label={`${statValues[index]} ${t(key)}`}
-              >
-                {statValues[index]}
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+                {item.value}
               </div>
-              <div className="text-muted-foreground">{t(key)}</div>
+              <div className="text-muted-foreground">
+                {item.label}
+              </div>
             </motion.div>
           ))}
         </div>

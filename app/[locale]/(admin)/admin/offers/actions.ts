@@ -1,6 +1,7 @@
 'use server';
 
 import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { revalidatePath } from 'next/cache';
 
 export async function toggleStatus(id: string, currentStatus: string) {
   const supabase = createSupabaseServerClient();
@@ -11,4 +12,6 @@ export async function toggleStatus(id: string, currentStatus: string) {
     .from('offers')
     .update({ status: newStatus })
     .eq('id', id);
+
+  revalidatePath('/admin/offers');
 }

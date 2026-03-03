@@ -2,18 +2,6 @@ import { createSupabaseServerClient } from '@/lib/supabase/server';
 import StatusButton from './StatusButton';
 import Link from 'next/link';
 
-async function toggleStatus(id: string, currentStatus: string) {
-  'use server';
-
-  const supabase = createSupabaseServerClient();
-  const newStatus = currentStatus === 'new' ? 'done' : 'new';
-
-  await supabase
-    .from('offers')
-    .update({ status: newStatus })
-    .eq('id', id);
-}
-
 export default async function AdminOffersPage({
   params,
   searchParams,
@@ -27,9 +15,11 @@ export default async function AdminOffersPage({
     .from('offers')
     .select('status');
 
-  const newCount = allOffers?.filter(o => o.status === 'new').length ?? 0;
-  const doneCount = allOffers?.filter(o => o.status === 'done').length ?? 0;
+  const newCount =
+    allOffers?.filter(o => o.status === 'new').length ?? 0;
 
+  const doneCount =
+    allOffers?.filter(o => o.status === 'done').length ?? 0;
 
   let query = supabase
     .from('offers')
@@ -49,9 +39,10 @@ export default async function AdminOffersPage({
   const activeFilter = searchParams?.status ?? 'all';
 
   const filterClass = (value: string) =>
-    `px-4 py-2 border rounded transition ${activeFilter === value
-      ? 'bg-white text-black font-semibold'
-      : 'hover:bg-white/10'
+    `px-4 py-2 border rounded transition ${
+      activeFilter === value
+        ? 'bg-white text-black font-semibold'
+        : 'hover:bg-white/10'
     }`;
 
   return (
@@ -60,6 +51,7 @@ export default async function AdminOffersPage({
         Teklif Talepleri
       </h1>
 
+      {/* Count Cards */}
       <div className="flex gap-6">
         <div className="bg-red-500/10 border border-red-500 p-4 rounded">
           <p className="text-sm text-gray-400">New</p>
@@ -76,6 +68,7 @@ export default async function AdminOffersPage({
         </div>
       </div>
 
+      {/* Filter Buttons */}
       <div className="flex gap-4">
         <Link
           href={`/${params.locale}/admin/offers`}
@@ -99,9 +92,12 @@ export default async function AdminOffersPage({
         </Link>
       </div>
 
+      {/* Offer List */}
       <div className="space-y-4">
         {offers?.length === 0 && (
-          <p className="text-gray-500">Kayıt bulunamadı.</p>
+          <p className="text-gray-500">
+            Kayıt bulunamadı.
+          </p>
         )}
 
         {offers?.map((offer) => (
@@ -111,20 +107,29 @@ export default async function AdminOffersPage({
           >
             <div>
               <p className="font-semibold">{offer.name}</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-gray-400">
                 {offer.product_type} • {offer.quantity} adet
               </p>
               <p className="text-xs text-gray-500">
-                {new Date(offer.created_at).toLocaleString()}
+                {new Date(
+                  offer.created_at
+                ).toLocaleString()}
               </p>
             </div>
-            <StatusButton id={offer.id} status={offer.status} />
-            <Link
-              href={`/${params.locale}/admin/offers/${offer.id}`}
-              className="text-blue-500 underline text-sm"
-            >
-              Detay
-            </Link>
+
+            <div className="flex items-center gap-4">
+              <StatusButton
+                id={offer.id}
+                status={offer.status}
+              />
+
+              <Link
+                href={`/${params.locale}/admin/offers/${offer.id}`}
+                className="text-blue-500 underline text-sm"
+              >
+                Detay
+              </Link>
+            </div>
           </div>
         ))}
       </div>
