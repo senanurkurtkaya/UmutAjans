@@ -1,5 +1,5 @@
 import { getTranslations, getLocale } from 'next-intl/server';
-import { type Locale } from '@/i18n';
+import { type Locale } from '@/lib/i18n/i18n';
 import { generateMetadataFromTranslations } from '@/lib/seo/metadata';
 import { toLocale } from '@/lib/utils/validation';
 

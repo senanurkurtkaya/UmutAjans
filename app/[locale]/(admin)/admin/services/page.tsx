@@ -1,32 +1,34 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { toggleServicePublish } from './action';
-import PublishToggle from './_components/PublishToggle';
+import PublishToggle from './components/PublishToggle';
 
+export default async function AdminServicesPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const supabase = createSupabaseServerClient();
+  const t = await getTranslations({ locale: params.locale, namespace: 'admin' });
+  const tService = await getTranslations({ locale: params.locale, namespace: 'servicesPage' });
 
-export default async function AdminServicesPage() {
-    const supabase = createSupabaseServerClient();
+  const { data: services } = await supabase
+    .from('services')
+    .select('*')
+    .order('created_at', { ascending: false });
 
-    const { data: services } = await supabase
-        .from('services')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-    return (
-        <div className="container py-20">
-
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">
-                    Admin - Services
-                </h1>
-
-                <Link
-                    href="/en/admin/services/new"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-                >
-                    + New Service
-                </Link>
-            </div>
+  return (
+    <div className="container py-20">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">{t('services')}</h1>
+        <Link
+          href={`/${params.locale}/admin/services/new`}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+        >
+          + {tService('newService')}
+        </Link>
+      </div>
 
             <div className="space-y-4">
                 {services?.map((service) => (

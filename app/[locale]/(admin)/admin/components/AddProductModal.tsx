@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/lib/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function AddProductModal({ onClose }: { onClose: () => void }) {
   const supabase = createClient();
   const router = useRouter();
+  const t = useTranslations('admin');
 
   const [title, setTitle] = useState('');
   const [saving, setSaving] = useState(false);
@@ -35,13 +37,13 @@ export default function AddProductModal({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
       <div className="bg-slate-950 border border-slate-800 rounded-xl p-6 w-[420px]">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold">Add Product</h2>
+          <h2 className="text-xl font-bold">{t('addProduct')}</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white">
             ✕
           </button>
         </div>
 
-        <label className="block mb-2 text-sm text-gray-300">Title</label>
+        <label className="block mb-2 text-sm text-gray-300">{t('placeholderTitle')}</label>
         <input
           className="w-full p-2 rounded bg-slate-900 border border-slate-700"
           value={title}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { type Locale } from '@/i18n';
+import { type Locale } from '@/lib/i18n/i18n';
 
 /**
  * Get translations in client components

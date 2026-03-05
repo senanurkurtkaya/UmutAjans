@@ -50,19 +50,17 @@ const stats =
             transition: { duration: 0.3 },
           }
         : {
-            initial: { opacity: 0, scale: 0.5 },
-            animate: isInView
-              ? { opacity: 1, scale: 1 }
-              : { opacity: 0, scale: 0.5 },
+            initial: { opacity: 0, y: 20 },
+            animate: isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
             transition: { duration: 0.5 },
           },
     [isInView, prefersReducedMotion]
   );
 
   return (
-    <section ref={ref} className="py-20 bg-muted/50">
-      <div className="container">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+    <section ref={ref} className="py-16 md:py-24 bg-base-200">
+      <div className="container mx-auto max-w-6xl px-6">
+        <div className="stats stats-vertical md:stats-horizontal w-full shadow-lg bg-base-100 rounded-2xl overflow-hidden border border-base-300/60">
           {stats.map((item, index) => (
             <motion.div
               key={index}
@@ -71,12 +69,12 @@ const stats =
                 ...animationProps.transition,
                 delay: prefersReducedMotion ? 0 : index * 0.1,
               }}
-              className="text-center"
+              className="stat place-items-center py-8 px-6"
             >
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+              <div className="stat-value text-primary text-3xl md:text-4xl font-bold">
                 {item.value}
               </div>
-              <div className="text-muted-foreground">
+              <div className="stat-desc text-base-content/70 font-medium">
                 {item.label}
               </div>
             </motion.div>

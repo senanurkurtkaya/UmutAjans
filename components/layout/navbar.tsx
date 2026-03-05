@@ -3,55 +3,46 @@
 import * as React from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { usePathname } from '@/lib/i18n/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogIn } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { LanguageSwitcher } from './language-switcher';
 import { Link } from '@/lib/i18n/navigation';
 import { useScroll } from '@/lib/hooks/use-scroll';
 import { useReducedMotion } from '@/lib/hooks/use-reduced-motion';
 
-interface NavItem {
-  href: string;
-  key: string;
-  label?: string;
-}
-
-const navItems: NavItem[] = [
+const navItems = [
   { href: '/', key: 'home' },
   { href: '/about', key: 'about' },
   { href: '/services', key: 'services' },
   { href: '/contact', key: 'contact' },
 ] as const;
 
-const NAV_ITEMS = navItems;
+type NavbarProps = {
+  siteName?: string;
+  logoUrl?: string;
+};
 
-export const Navbar = React.memo(function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+export const Navbar = React.memo(function Navbar({ siteName = 'Umut Ajans', logoUrl }: NavbarProps) {
+  const drawerRef = React.useRef<HTMLInputElement>(null);
   const scrolled = useScroll(10);
   const prefersReducedMotion = useReducedMotion();
   const t = useTranslations('nav');
   const pathname = usePathname();
   const locale = useLocale();
 
+  const closeDrawer = React.useCallback(() => {
+    if (drawerRef.current) drawerRef.current.checked = false;
+  }, []);
+
   React.useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
+    closeDrawer();
+  }, [pathname, closeDrawer]);
 
   const isActive = React.useCallback(
     (href: string) => {
-      if (href === '/') {
-        return pathname === `/${locale}` || pathname === `/${locale}/`;
-      }
+      if (href === '/') return pathname === `/${locale}` || pathname === `/${locale}/`;
       return pathname.startsWith(`/${locale}${href}`);
     },
     [pathname, locale]
@@ -61,116 +52,115 @@ export const Navbar = React.memo(function Navbar() {
     () =>
       prefersReducedMotion
         ? {}
-        : {
-            whileHover: { scale: 1.05 },
-            whileTap: { scale: 0.95 },
-            transition: { type: 'spring', stiffness: 400, damping: 17 },
-          },
+        : { whileHover: { scale: 1.02 }, whileTap: { scale: 0.98 }, transition: { type: 'spring', stiffness: 400, damping: 17 } },
     [prefersReducedMotion]
   );
 
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 w-full border-b transition-all duration-300',
-        scrolled
-          ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 shadow-sm'
-          : 'bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60'
+        'sticky top-0 z-50 w-full transition-all duration-300 border-b border-base-300/80',
+        scrolled ? 'bg-base-100/90 shadow-lg shadow-base-content/5 backdrop-blur-xl' : 'bg-base-100/80 backdrop-blur-sm'
       )}
     >
-      <nav className="container flex h-16 items-center justify-between">
-        <Link
-          href="/"
-          className="flex items-center space-x-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
-          aria-label="Home"
-        >
-          <motion.div className="relative" {...animationProps}>
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent">
-              Umut Ajans
-            </span>
-          </motion.div>
-        </Link>
-
-        <nav
-          className="hidden md:flex items-center space-x-1"
-          aria-label="Main navigation"
-        >
-          {NAV_ITEMS.map((item) => {
-            const active = isActive(item.href);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  'relative px-4 py-2 text-sm font-medium transition-colors rounded-md',
-                  active
-                    ? 'text-primary'
-                    : 'text-muted-foreground hover:text-foreground'
-                )}
-              >
-                {t(item.key)}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="hidden md:flex items-center gap-2">
-          <LanguageSwitcher />
-          <ThemeToggle />
-        </div>
-
-        <div className="flex md:hidden items-center gap-2">
-          <ThemeToggle />
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                {mobileMenuOpen ? <X /> : <Menu />}
-              </Button>
-            </SheetTrigger>
-
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <SheetHeader>
-                <SheetTitle className="text-left">Menu</SheetTitle>
-              </SheetHeader>
-
-              <nav
-                className="mt-8 flex flex-col space-y-4"
-                aria-label="Mobile navigation"
-              >
-                {NAV_ITEMS.map((item) => {
-                  const active = isActive(item.href);
-
-                  return (
+      <div className="navbar container mx-auto max-w-7xl gap-4 px-4 min-h-14">
+        <div className="navbar-start">
+          <label
+            htmlFor="nav-drawer"
+            className="btn btn-ghost btn-circle lg:hidden"
+            aria-label="Menu"
+          >
+            <Menu className="h-5 w-5" />
+          </label>
+          <div className="drawer drawer-end lg:hidden">
+            <input ref={drawerRef} id="nav-drawer" type="checkbox" className="drawer-toggle" />
+            <div className="drawer-side z-50">
+              <label htmlFor="nav-drawer" className="drawer-overlay" aria-label="Close menu" />
+              <ul className="menu p-4 w-72 min-h-full bg-base-100 text-base-content border-l border-base-300">
+                <li className="flex justify-end mb-4">
+                  <label htmlFor="nav-drawer" className="btn btn-ghost btn-circle">
+                    <X className="h-5 w-5" />
+                  </label>
+                </li>
+                {navItems.map((item) => (
+                  <li key={item.href}>
                     <Link
-                      key={item.href}
                       href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={closeDrawer}
                       className={cn(
-                        'block px-4 py-3 text-base font-medium rounded-lg transition-colors',
-                        active
-                          ? 'bg-primary/10 text-primary'
-                          : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+                        'rounded-lg',
+                        isActive(item.href) ? 'active bg-primary text-primary-content' : ''
                       )}
                     >
                       {t(item.key)}
                     </Link>
-                  );
-                })}
-
-                <div className="pt-6 border-t">
-                  <div className="px-4">
-                    <p className="text-sm font-medium text-muted-foreground mb-3">
-                      Language
-                    </p>
-                    <LanguageSwitcher variant="mobile" />
-                  </div>
-                </div>
-              </nav>
-              {/* 🔥 nav doğru şekilde kapandı */}
-            </SheetContent>
-          </Sheet>
+                  </li>
+                ))}
+                <li className="pt-2">
+                  <Link href="/offer" onClick={closeDrawer} className="btn btn-primary w-full rounded-lg">
+                    {t('getQuote')}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/login" onClick={closeDrawer} className="rounded-xl flex items-center gap-2">
+                    <LogIn className="w-4 h-4 shrink-0" aria-hidden />
+                    {t('login')}
+                  </Link>
+                </li>
+                <li className="menu-title pt-4 mt-4 border-t border-base-300">
+                  <LanguageSwitcher variant="mobile" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <Link href="/" className="flex items-center gap-2" aria-label="Home">
+            {logoUrl ? (
+              <motion.div {...animationProps} className="relative h-9 md:h-10 w-auto max-w-[180px]">
+                <img src={logoUrl} alt={siteName} className="h-full w-auto object-contain object-left" />
+              </motion.div>
+            ) : (
+              <motion.span
+                className="text-xl md:text-2xl font-bold text-primary"
+                {...animationProps}
+              >
+                {siteName}
+              </motion.span>
+            )}
+          </Link>
         </div>
-      </nav>
+
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal gap-2 px-2">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    'rounded-xl font-medium transition-colors',
+                    isActive(item.href)
+                      ? 'bg-primary text-primary-content shadow-sm'
+                      : 'hover:bg-base-200/80 text-base-content'
+                  )}
+                >
+                  {t(item.key)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="navbar-end gap-2 sm:gap-3 flex-nowrap items-center">
+          <LanguageSwitcher />
+          <ThemeToggle />
+          <Link href="/offer" className="btn btn-primary btn-sm rounded-xl shrink-0 shadow-sm hover:shadow gap-1.5">
+            {t('getQuote')}
+          </Link>
+          <Link href="/login" className="btn btn-outline btn-sm rounded-xl shrink-0 gap-1.5 border-base-300" aria-label={t('login')}>
+            <LogIn className="w-4 h-4 shrink-0" aria-hidden />
+            <span className="hidden sm:inline">{t('login')}</span>
+          </Link>
+        </div>
+      </div>
     </header>
   );
 });

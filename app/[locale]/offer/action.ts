@@ -3,12 +3,14 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 
 export async function submitOffer(
-  prevState: any,
+  _prevState: unknown,
   formData: FormData
 ) {
   const supabase = createSupabaseServerClient();
 
-  const { error } = await supabase.from('offer').insert([
+  const locale = formData.get('locale');
+
+  const { error } = await supabase.from('offers').insert([
     {
       name: formData.get('name'),
       phone: formData.get('phone'),
@@ -17,7 +19,8 @@ export async function submitOffer(
       quantity: Number(formData.get('quantity')),
       size: formData.get('size'),
       description: formData.get('description'),
-      status: 'new'
+      status: 'new',
+      locale: locale
     }
   ]);
 

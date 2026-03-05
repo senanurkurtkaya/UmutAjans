@@ -6,12 +6,24 @@ import { Link } from '@/lib/i18n/navigation';
 import { useMemo } from 'react';
 import React from 'react';
 
-const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-] as const;
+const iconMap = {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+} as const;
+
+type SocialLink = {
+  icon: string;
+  href: string;
+  label: string;
+};
+
+type FooterProps = {
+  siteName?: string;
+  siteDescription?: string;
+  socialLinks?: SocialLink[];
+};
 
 const FOOTER_LINKS = {
   company: [
@@ -25,84 +37,78 @@ const FOOTER_LINKS = {
   ],
 } as const;
 
-export const Footer = React.memo(function Footer() {
+export const Footer = React.memo(function Footer({
+  siteName = 'Umut Ajans',
+  siteDescription,
+  socialLinks: propSocialLinks,
+}: FooterProps) {
   const t = useTranslations('footer');
-
   const footerLinks = useMemo(() => FOOTER_LINKS, []);
-
   const currentYear = useMemo(() => new Date().getFullYear(), []);
+  const description = siteDescription ?? t('description');
+  const socialLinks = propSocialLinks ?? [
+    { icon: 'Facebook', href: '#', label: 'Facebook' },
+    { icon: 'Twitter', href: '#', label: 'Twitter' },
+    { icon: 'Instagram', href: '#', label: 'Instagram' },
+    { icon: 'Linkedin', href: '#', label: 'LinkedIn' },
+  ];
 
   return (
-    <footer className="border-t bg-background" role="contentinfo">
-      <div className="container py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Umut Ajans</h3>
-            <p className="text-sm text-muted-foreground">
-              {t('description')}
-            </p>
-          </div>
-
-          <nav aria-label="Company links">
-            <h4 className="text-sm font-semibold mb-4">{t('company')}</h4>
-            <ul className="space-y-2" role="list">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-                  >
-                    {t(link.key)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <nav aria-label="Legal links">
-            <h4 className="text-sm font-semibold mb-4">{t('legal')}</h4>
-            <ul className="space-y-2" role="list">
-              {footerLinks.legal.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-                  >
-                    {t(link.key)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div>
-            <h4 className="text-sm font-semibold mb-4">{t('followUs')}</h4>
-            <nav aria-label="Social media links">
-              <div className="flex space-x-4">
-                {socialLinks.map((social) => {
-                  const Icon = social.icon;
-                  return (
-                    <Link
-                      key={social.label}
-                      href={social.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-                      aria-label={social.label}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Icon className="h-5 w-5" aria-hidden="true" />
-                      <span className="sr-only">{social.label}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </nav>
-          </div>
+    <footer className="footer footer-center p-10 bg-base-200/90 text-base-content border-t border-base-300/80" role="contentinfo">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-10 max-w-6xl mx-auto w-full">
+        <div className="text-left md:col-span-1">
+          <span className="footer-title text-primary font-bold text-lg">{siteName}</span>
+          <p className="text-sm opacity-80 max-w-xs">{description}</p>
         </div>
-
-        <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>&copy; {currentYear} Umut Ajans. {t('rights')}</p>
+        <nav aria-label="Company links">
+          <h4 className="footer-title text-base font-semibold">{t('company')}</h4>
+          <ul className="grid gap-2">
+            {footerLinks.company.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="link link-hover text-sm">
+                  {t(link.key)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <nav aria-label="Legal links">
+          <h4 className="footer-title text-base font-semibold">{t('legal')}</h4>
+          <ul className="grid gap-2">
+            {footerLinks.legal.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="link link-hover text-sm">
+                  {t(link.key)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div>
+          <h4 className="footer-title text-base font-semibold">{t('followUs')}</h4>
+          <nav aria-label="Social media links" className="flex gap-4">
+            {socialLinks.map((social) => {
+              const Icon = iconMap[social.icon as keyof typeof iconMap] ?? Facebook;
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  className="btn btn-ghost btn-circle btn-sm"
+                  aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </a>
+              );
+            })}
+          </nav>
         </div>
+      </div>
+      <div className="border-t border-base-300 pt-6 mt-6 w-full max-w-6xl mx-auto">
+        <p className="text-sm opacity-80">
+          &copy; {currentYear} {siteName}. {t('rights')}
+        </p>
       </div>
     </footer>
   );

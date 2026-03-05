@@ -28,8 +28,6 @@ const { data: services, error } = await supabase
   .eq('published', true)
   .order('created_at', { ascending: false });
 
-console.log('SERVICES DATA:', services);
-
   if (error) {
     console.error(error);
   }

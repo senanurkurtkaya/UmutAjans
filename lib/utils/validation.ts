@@ -2,7 +2,7 @@
  * Validation utilities for runtime type checking and validation
  */
 
-import { type Locale, locales } from '@/i18n';
+import { type Locale, locales } from '@/lib/i18n/i18n';
 
 /**
  * Type guard to check if a string is a valid locale

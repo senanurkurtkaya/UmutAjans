@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { siteConfig } from '@/lib/seo/config';
-import { locales } from '@/i18n';
+import { locales } from '@/lib/i18n/i18n';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;

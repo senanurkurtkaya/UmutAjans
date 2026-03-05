@@ -1,8 +1,5 @@
 import { Link } from '@/lib/i18n/navigation';
 
-/**
- * Skip to main content link for accessibility
- */
 export function SkipLink() {
   return (
     <Link

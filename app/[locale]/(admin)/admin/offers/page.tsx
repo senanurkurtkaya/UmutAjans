@@ -1,4 +1,5 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { getTranslations } from 'next-intl/server';
 import StatusButton from './StatusButton';
 import Link from 'next/link';
 
@@ -10,6 +11,7 @@ export default async function AdminOffersPage({
   searchParams: { status?: string };
 }) {
   const supabase = createSupabaseServerClient();
+  const t = await getTranslations({ locale: params.locale, namespace: 'admin.offersPage' });
 
   const { data: allOffers } = await supabase
     .from('offers')
@@ -47,57 +49,34 @@ export default async function AdminOffersPage({
 
   return (
     <div className="container py-20 space-y-8">
-      <h1 className="text-3xl font-bold">
-        Teklif Talepleri
-      </h1>
+      <h1 className="text-3xl font-bold">{t('title')}</h1>
 
-      {/* Count Cards */}
       <div className="flex gap-6">
         <div className="bg-red-500/10 border border-red-500 p-4 rounded">
-          <p className="text-sm text-gray-400">New</p>
-          <p className="text-2xl font-bold text-red-400">
-            {newCount}
-          </p>
+          <p className="text-sm text-gray-400">{t('new')}</p>
+          <p className="text-2xl font-bold text-red-400">{newCount}</p>
         </div>
-
         <div className="bg-green-500/10 border border-green-500 p-4 rounded">
-          <p className="text-sm text-gray-400">Done</p>
-          <p className="text-2xl font-bold text-green-400">
-            {doneCount}
-          </p>
+          <p className="text-sm text-gray-400">{t('done')}</p>
+          <p className="text-2xl font-bold text-green-400">{doneCount}</p>
         </div>
       </div>
 
-      {/* Filter Buttons */}
       <div className="flex gap-4">
-        <Link
-          href={`/${params.locale}/admin/offers`}
-          className={filterClass('all')}
-        >
-          Tümü
+        <Link href={`/${params.locale}/admin/offers`} className={filterClass('all')}>
+          {t('all')}
         </Link>
-
-        <Link
-          href={`/${params.locale}/admin/offers?status=new`}
-          className={filterClass('new')}
-        >
-          New
+        <Link href={`/${params.locale}/admin/offers?status=new`} className={filterClass('new')}>
+          {t('new')}
         </Link>
-
-        <Link
-          href={`/${params.locale}/admin/offers?status=done`}
-          className={filterClass('done')}
-        >
-          Done
+        <Link href={`/${params.locale}/admin/offers?status=done`} className={filterClass('done')}>
+          {t('done')}
         </Link>
       </div>
 
-      {/* Offer List */}
       <div className="space-y-4">
         {offers?.length === 0 && (
-          <p className="text-gray-500">
-            Kayıt bulunamadı.
-          </p>
+          <p className="text-gray-500">{t('noRecords')}</p>
         )}
 
         {offers?.map((offer) => (
@@ -108,26 +87,19 @@ export default async function AdminOffersPage({
             <div>
               <p className="font-semibold">{offer.name}</p>
               <p className="text-sm text-gray-400">
-                {offer.product_type} • {offer.quantity} adet
+                {offer.product_type} • {offer.quantity}
               </p>
               <p className="text-xs text-gray-500">
-                {new Date(
-                  offer.created_at
-                ).toLocaleString()}
+                {new Date(offer.created_at).toLocaleString()}
               </p>
             </div>
-
             <div className="flex items-center gap-4">
-              <StatusButton
-                id={offer.id}
-                status={offer.status}
-              />
-
+              <StatusButton id={offer.id} status={offer.status} />
               <Link
                 href={`/${params.locale}/admin/offers/${offer.id}`}
                 className="text-blue-500 underline text-sm"
               >
-                Detay
+                {t('viewDetail')}
               </Link>
             </div>
           </div>

@@ -1,6 +1,6 @@
-import { ReactNode, useState } from 'react';
-import AdminSidebar from './_components/AdminSidebar';
-import AdminTopbar from './_components/AdminTopbar';
+import { ReactNode } from 'react';
+import AdminSidebar from './components/AdminSidebar';
+import AdminTopbar from './components/AdminTopbar';
 
 export default function AdminLayout({
   children,

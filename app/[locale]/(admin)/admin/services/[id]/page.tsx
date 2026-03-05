@@ -3,15 +3,18 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useParams, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function EditServicePage() {
   const supabase = createClient();
   const router = useRouter();
   const params = useParams();
 
+  const t = useTranslations('admin.servicesPage');
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [icon, setIcon] = useState('seo');
+  const [icon, setIcon] = useState('FileText');
   const [published, setPublished] = useState(false);
 
   useEffect(() => {
@@ -42,11 +45,11 @@ export default function EditServicePage() {
         title,
         description,
         icon,
-        published,
+        published
       })
       .eq('id', params.id);
 
-    router.push('/en/admin/services');
+    router.push(`/${params.locale}/admin/services`);
     router.refresh();
   };
 
@@ -56,19 +59,21 @@ export default function EditServicePage() {
       .delete()
       .eq('id', params.id);
 
-    router.push('/en/admin/services');
+    router.push(`/${params.locale}/admin/services`);
     router.refresh();
   };
 
   return (
     <div className="container py-20">
       <h1 className="text-3xl font-bold mb-8">
-        Edit Service
+        {t('editTitle')}
       </h1>
 
       <form onSubmit={handleUpdate} className="space-y-6 max-w-xl">
         <div>
-          <label className="block mb-2">Title</label>
+          <label className="block mb-2">
+            {t('title')}
+          </label>
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -77,7 +82,9 @@ export default function EditServicePage() {
         </div>
 
         <div>
-          <label className="block mb-2">Description</label>
+          <label className="block mb-2">
+            {t('description')}
+          </label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -86,19 +93,30 @@ export default function EditServicePage() {
         </div>
 
         <div>
-          <label className="block mb-2">Icon</label>
+          <label className="block mb-2">
+            {t('icon')}
+          </label>
           <select
             value={icon}
             onChange={(e) => setIcon(e.target.value)}
             className="w-full p-2 border rounded"
           >
-            <option value="seo">SEO</option>
-            <option value="social">Social</option>
-            <option value="ppc">PPC</option>
-            <option value="content">Content</option>
-            <option value="analytics">Analytics</option>
-            <option value="web">Web</option>
-            <option value="globe">Globe</option>
+            <option value="FileText">Kartvizit / El ilanı / Bloknot</option>
+            <option value="BookOpen">Broşür / Katalog / Dergi / Menü</option>
+            <option value="Mail">Zarf / Davetiye</option>
+            <option value="Folder">Cepli dosya</option>
+            <option value="Tag">Etiket / Sticker</option>
+            <option value="Barcode">Barkod etiket</option>
+            <option value="Image">Poster / Afiş / Rollup</option>
+            <option value="Gift">Promosyon ürünleri</option>
+            <option value="Award">Plaket</option>
+            <option value="Book">Ajanda</option>
+            <option value="Layout">Kurumsal kimlik / Masa isimliği</option>
+            <option value="Shirt">Tekstil baskı</option>
+            <option value="ShoppingBag">Bez çanta</option>
+            <option value="Magnet">Magnet baskı</option>
+            <option value="Calendar">Takvim</option>
+            <option value="Globe">Diğer</option>
           </select>
         </div>
 
@@ -108,7 +126,9 @@ export default function EditServicePage() {
             checked={published}
             onChange={(e) => setPublished(e.target.checked)}
           />
-          <label>Published</label>
+          <label>
+            {t('published')}
+          </label>
         </div>
 
         <div className="flex gap-4">
@@ -116,7 +136,7 @@ export default function EditServicePage() {
             type="submit"
             className="px-6 py-2 bg-blue-600 text-white rounded"
           >
-            Update
+            {t('update')}
           </button>
 
           <button
@@ -124,7 +144,7 @@ export default function EditServicePage() {
             onClick={handleDelete}
             className="px-6 py-2 bg-red-600 text-white rounded"
           >
-            Delete
+            {t('delete')}
           </button>
         </div>
       </form>
