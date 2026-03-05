@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import './globals.css';
 
 export default function RootLayout({
   children,

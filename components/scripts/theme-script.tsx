@@ -31,14 +31,14 @@ export function ThemeScript() {
             const theme = getTheme();
             const root = document.documentElement;
             
-            // Apply theme immediately before React hydrates
             if (theme === 'dark') {
               root.classList.add('dark');
+              root.setAttribute('data-theme', 'matbaadark');
             } else {
               root.classList.remove('dark');
+              root.setAttribute('data-theme', 'matbaa');
             }
             
-            // Mark theme as loaded to enable transitions after hydration
             root.setAttribute('data-theme-loaded', 'true');
           })();
         `,

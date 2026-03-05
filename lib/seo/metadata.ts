@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { siteConfig, getOgLocale, getCanonicalUrl, defaultKeywords } from './config';
-import { type Locale } from '@/i18n';
+import { type Locale } from '@/lib/i18n/i18n';
 import { toLocale } from '@/lib/utils/validation';
 
 export interface SEOProps {

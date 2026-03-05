@@ -3,7 +3,9 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
-    "contact": "Contact"
+    "contact": "Contact",
+    "login": "Login",
+    "getQuote": "Get Quote"
   },
   "hero": {
     "title": "Transform Your Digital Presence",
@@ -53,88 +55,41 @@
   "about": {
     "title": "About Us",
     "subtitle": "We are a passionate team of digital marketing experts dedicated to helping businesses succeed online.",
-    "description1": "At Umut Ajans, we believe that every business deserves to thrive in the digital landscape. With over 10 years of experience, we've helped hundreds of companies transform their online presence and achieve remarkable growth.",
-    "description2": "Our team combines creativity, data-driven insights, and cutting-edge technology to deliver marketing solutions that drive real results. We're not just another agency—we're your strategic partner in digital success.",
     "team": {
       "title": "Our Team",
-      "subtitle": "Meet the talented individuals driving our success"
+      "subtitle": "Meet the people behind our success"
     },
     "values": {
       "title": "Our Values",
       "subtitle": "The principles that guide everything we do",
-      "results": {
-        "title": "Results-Driven",
-        "description": "We focus on delivering measurable results that impact your bottom line."
-      },
-      "client": {
-        "title": "Client-Focused",
-        "description": "Your success is our priority. We build lasting partnerships with our clients."
-      },
-      "innovation": {
-        "title": "Innovation",
-        "description": "We stay ahead of trends and leverage the latest technologies and strategies."
-      },
-      "transparency": {
-        "title": "Transparency",
-        "description": "Honest communication and clear reporting keep you informed every step of the way."
-      }
+      "results": { "title": "Results Driven", "description": "We focus on delivering measurable outcomes for your business." },
+      "client": { "title": "Client First", "description": "Your success is our priority. We build lasting partnerships." },
+      "innovation": { "title": "Innovation", "description": "We stay ahead with the latest strategies and technologies." },
+      "transparency": { "title": "Transparency", "description": "Clear communication and honest reporting at every step." }
     }
   },
+
+  "process": {
+    "title": "Our Process",
+    "subtitle": "A proven approach to digital marketing success",
+    "discovery": { "title": "Discovery", "description": "We analyze your business and market to define goals." },
+    "strategy": { "title": "Strategy", "description": "We create a tailored plan to achieve your objectives." },
+    "implementation": { "title": "Implementation", "description": "We execute campaigns with precision and care." },
+    "optimization": { "title": "Optimization", "description": "We continuously improve based on data and results." }
+  },
+
   "contact": {
     "title": "Get in Touch",
     "subtitle": "Ready to grow your business? Let's start a conversation.",
-    "email": {
-      "title": "Email",
-      "description": "Send us an email anytime"
-    },
-    "phone": {
-      "title": "Phone",
-      "description": "Mon-Fri from 9am to 6pm"
-    },
-    "address": {
-      "title": "Address",
-      "description": "Visit our office"
-    },
     "form": {
-      "title": "Send us a Message",
-      "description": "Fill out the form below and we'll get back to you as soon as possible.",
       "name": "Name",
       "email": "Email",
       "phone": "Phone",
       "message": "Message",
-      "send": "Send Message",
+      "submit": "Send Message",
       "sending": "Sending...",
-      "success": "Thank you for your message!",
-      "successDescription": "We'll get back to you within 24 hours.",
-      "errors": {
-        "nameRequired": "Name is required",
-        "emailRequired": "Email is required",
-        "emailInvalid": "Please enter a valid email address",
-        "phoneInvalid": "Please enter a valid phone number",
-        "messageRequired": "Message is required",
-        "messageMinLength": "Message must be at least 10 characters",
-        "submitFailed": "Failed to send message. Please try again."
-      }
-    }
-  },
-  "process": {
-    "title": "Our Process",
-    "subtitle": "A proven methodology for delivering exceptional results",
-    "discovery": {
-      "title": "Discovery",
-      "description": "We analyze your business, goals, and target audience to create a customized strategy."
-    },
-    "strategy": {
-      "title": "Strategy",
-      "description": "Our team develops a comprehensive marketing plan tailored to your unique needs."
-    },
-    "implementation": {
-      "title": "Implementation",
-      "description": "We execute your marketing strategy with precision and attention to detail."
-    },
-    "optimization": {
-      "title": "Optimization",
-      "description": "Continuous monitoring and optimization ensure maximum ROI and performance."
+      "success": "Message sent successfully!",
+      "error": "Something went wrong. Please try again."
     }
   },
   "footer": {
@@ -144,29 +99,144 @@
     "rights": "All rights reserved",
     "description": "Your trusted partner in digital marketing. We help businesses grow and succeed in the digital world.",
     "links": {
-      "about": "About Us",
+      "about": "About",
       "services": "Services",
       "contact": "Contact",
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service"
+      "privacy": "Privacy",
+      "terms": "Terms"
     }
+  },
+
+  "admin": {
+    "panel": "Admin Panel",
+    "dashboard": "Dashboard",
+    "dashboardTitle": "Admin Dashboard",
+    "welcome": "Welcome to Umut Ajans admin panel.",
+    "totalServices": "Total Services",
+    "totalPortfolio": "Total Portfolio",
+    "totalOffers": "Incoming Offers",
+    "productsTitle": "Products",
+    "portfolioTitle": "Portfolio",
+    "homepageHeroSection": "Hero Section",
+    "homepageStatsSection": "Stats Section",
+    "homepageCtaSection": "CTA Section",
+    "addProduct": "Add Product",
+    "homepageTitle": "Homepage Management",
+    "save": "Save",
+    "placeholderTitle": "Title",
+    "placeholderSubtitle": "Subtitle",
+    "placeholderButton": "Button text",
+    "label": "Label",
+    "value": "Value",
+    "hero": "Hero Slider",
+    "homepage": "Homepage",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "products": "Products",
+    "offers": "Offers",
+    "settings": "Settings",
+    "offersPage": {
+      "title": "Offer Requests",
+      "all": "All",
+      "new": "New",
+      "done": "Done",
+      "detail": "Offer Detail",
+      "viewDetail": "View",
+      "noRecords": "No records found.",
+      "back": "Back to Offers",
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "product": "Product",
+      "quantity": "Quantity",
+      "description": "Description",
+      "status": "Status",
+      "created": "Created",
+      "noDescription": "No description provided."
+    },
+    "portfolioNewProject": "New Project",
+    "topbar": {
+      "dashboard": "Admin Dashboard",
+      "profile": "Profile",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
+    "settingsPage": {
+      "title": "Settings",
+      "siteSection": "Site information",
+      "socialSection": "Social media links",
+      "notificationsSection": "Notifications",
+      "siteName": "Site name",
+      "siteDescription": "Site description",
+      "siteUrl": "Site URL",
+      "notificationEmail": "Email for new offer alerts",
+      "facebookUrl": "Facebook URL",
+      "instagramUrl": "Instagram URL",
+      "twitterUrl": "Twitter URL",
+      "linkedinUrl": "LinkedIn URL",
+      "save": "Save settings",
+      "saved": "Settings saved.",
+      "error": "Failed to save.",
+      "notificationHint": "This email can be used later to send alerts when new offers arrive.",
+      "imagesSection": "Images",
+      "logoUrl": "Logo URL",
+      "faviconUrl": "Favicon URL",
+      "ogImageUrl": "Default share image (OG Image) URL",
+      "imageHint": "Enter full URL (e.g. https://...) or the URL of an image you uploaded."
+    }
+  },
+
+  "offer": {
+    "title": "Get a Quote",
+    "name": "Full Name",
+    "phone": "Phone",
+    "email": "Email",
+    "quantity": "Quantity",
+    "size": "Size (e.g. 10x15 cm)",
+    "description": "Description",
+    "submit": "Send Quote",
+    "sending": "Sending...",
+    "success": "Quote sent successfully 🎉",
+    "brochure": "Brochure",
+    "card": "Business Card",
+    "poster": "Poster",
+    "other": "Other"
+  },
+
+  "servicesPage": {
+    "editTitle": "Edit Service",
+    "title": "Title",
+    "description": "Description",
+    "icon": "Icon",
+    "published": "Published",
+    "update": "Update",
+    "delete": "Delete",
+    "newService": "New Service",
+    "serviceType": "Service Type",
+    "seo": "SEO",
+    "social": "Social",
+    "ppc": "PPC",
+    "content": "Content",
+    "analytics": "Analytics",
+    "web": "Web"
+  },
+
+  "login": {
+    "title": "Admin Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login",
+    "logout": "Logout"
+  },
+
+  "home": {
+    "exploreTitle": "Explore",
+    "exploreSubtitle": "About us, services, contact and get a quote."
   },
   "metadata": {
     "home": {
       "title": "Home",
-      "description": "Transform your digital presence with our comprehensive marketing solutions. We help businesses grow and succeed online."
-    },
-    "about": {
-      "title": "About Us",
-      "description": "Learn about Umut Ajans, our mission, values, and the team behind our success in digital marketing."
-    },
-    "services": {
-      "title": "Services",
-      "description": "Comprehensive digital marketing services including SEO, social media marketing, PPC advertising, content marketing, and web design."
-    },
-    "contact": {
-      "title": "Contact Us",
-      "description": "Get in touch with Umut Ajans. We're here to help you grow your business with our digital marketing services."
+      "description": "Transform your digital presence with our comprehensive marketing solutions."
     }
   }
 }

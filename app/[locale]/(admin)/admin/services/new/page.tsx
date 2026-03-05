@@ -10,7 +10,7 @@ export default function NewServicePage() {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [icon, setIcon] = useState('seo');
+  const [icon, setIcon] = useState('FileText');
   const [published, setPublished] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -63,13 +63,22 @@ export default function NewServicePage() {
             onChange={(e) => setIcon(e.target.value)}
             className="w-full p-2 border rounded"
           >
-            <option value="seo">SEO</option>
-            <option value="social">Social</option>
-            <option value="ppc">PPC</option>
-            <option value="content">Content</option>
-            <option value="analytics">Analytics</option>
-            <option value="web">Web</option>
-            <option value="globe">Globe</option>
+            <option value="FileText">Kartvizit / El ilanı / Bloknot</option>
+            <option value="BookOpen">Broşür / Katalog / Dergi / Menü</option>
+            <option value="Mail">Zarf / Davetiye</option>
+            <option value="Folder">Cepli dosya</option>
+            <option value="Tag">Etiket / Sticker</option>
+            <option value="Barcode">Barkod etiket</option>
+            <option value="Image">Poster / Afiş / Rollup</option>
+            <option value="Gift">Promosyon ürünleri</option>
+            <option value="Award">Plaket</option>
+            <option value="Book">Ajanda</option>
+            <option value="Layout">Kurumsal kimlik / Masa isimliği</option>
+            <option value="Shirt">Tekstil baskı</option>
+            <option value="ShoppingBag">Bez çanta</option>
+            <option value="Magnet">Magnet baskı</option>
+            <option value="Calendar">Takvim</option>
+            <option value="Globe">Diğer</option>
           </select>
         </div>
 

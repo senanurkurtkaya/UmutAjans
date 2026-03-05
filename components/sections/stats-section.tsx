@@ -6,14 +6,40 @@ import { useTranslations } from 'next-intl';
 import { useReducedMotion } from '@/lib/hooks/use-reduced-motion';
 import React from 'react';
 
-const statKeys = ['clients', 'projects', 'satisfaction', 'experience'];
-const statValues = ['500+', '1000+', '98%', '10+'];
+type StatsItem = {
+  label: string;
+  value: string;
+};
 
-export const StatsSection = React.memo(function StatsSection() {
+type StatsData = {
+  stats?: Array<{
+    label?: string | null;
+    value?: string | null;
+  }>;
+};
+
+const fallbackKeys = ['clients', 'projects', 'satisfaction', 'experience'];
+const fallbackValues = ['500+', '1000+', '98%', '10+'];
+
+export const StatsSection = React.memo(function StatsSection({
+  data,
+}: {
+  data?: StatsData;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const t = useTranslations('stats');
   const prefersReducedMotion = useReducedMotion();
+
+const stats =
+  (data?.stats?.map((item) => ({
+    label: item.label ?? '',
+    value: item.value ?? '',
+  })) as StatsItem[]) ??
+  fallbackKeys.map((key, i) => ({
+    label: t(key),
+    value: fallbackValues[i],
+  }));
 
   const animationProps = useMemo(
     () =>
@@ -24,40 +50,33 @@ export const StatsSection = React.memo(function StatsSection() {
             transition: { duration: 0.3 },
           }
         : {
-            initial: { opacity: 0, scale: 0.5 },
-            animate: isInView
-              ? { opacity: 1, scale: 1 }
-              : { opacity: 0, scale: 0.5 },
+            initial: { opacity: 0, y: 20 },
+            animate: isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
             transition: { duration: 0.5 },
           },
     [isInView, prefersReducedMotion]
   );
 
   return (
-    <section
-      ref={ref}
-      className="py-20 bg-muted/50"
-      aria-label="Statistics"
-    >
-      <div className="container">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {statKeys.map((key, index) => (
+    <section ref={ref} className="py-16 md:py-24 bg-base-200">
+      <div className="container mx-auto max-w-6xl px-6">
+        <div className="stats stats-vertical md:stats-horizontal w-full shadow-lg bg-base-100 rounded-2xl overflow-hidden border border-base-300/60">
+          {stats.map((item, index) => (
             <motion.div
-              key={key}
+              key={index}
               {...animationProps}
               transition={{
                 ...animationProps.transition,
                 delay: prefersReducedMotion ? 0 : index * 0.1,
               }}
-              className="text-center"
+              className="stat place-items-center py-8 px-6"
             >
-              <div
-                className="text-4xl md:text-5xl font-bold text-primary mb-2"
-                aria-label={`${statValues[index]} ${t(key)}`}
-              >
-                {statValues[index]}
+              <div className="stat-value text-primary text-3xl md:text-4xl font-bold">
+                {item.value}
               </div>
-              <div className="text-muted-foreground">{t(key)}</div>
+              <div className="stat-desc text-base-content/70 font-medium">
+                {item.label}
+              </div>
             </motion.div>
           ))}
         </div>

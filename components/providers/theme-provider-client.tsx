@@ -11,21 +11,20 @@ import React from 'react';
 export const ThemeProviderClient = React.memo(function ThemeProviderClient() {
   const { theme, systemTheme } = useTheme();
 
-  // Mark theme as loaded after React hydrates
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute('data-theme-loaded', 'true');
   }, []);
 
-  // Sync theme changes - memoized to prevent unnecessary re-renders
   const syncTheme = useCallback(() => {
     const root = document.documentElement;
     const currentTheme = theme === 'system' ? systemTheme : theme;
-    
     if (currentTheme === 'dark') {
       root.classList.add('dark');
+      root.setAttribute('data-theme', 'matbaadark');
     } else {
       root.classList.remove('dark');
+      root.setAttribute('data-theme', 'matbaa');
     }
   }, [theme, systemTheme]);
 

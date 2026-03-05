@@ -16,7 +16,7 @@ export const ThemeToggle = memo(function ThemeToggle() {
   const [mounted, setMounted] = React.useState(false);
   const { setTheme } = useTheme();
 
-  // Prevent hydration mismatch
+ 
   React.useEffect(() => {
     setMounted(true);
   }, []);

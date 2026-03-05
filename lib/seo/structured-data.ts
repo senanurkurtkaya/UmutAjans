@@ -3,7 +3,7 @@
  */
 
 import { siteConfig } from './config';
-import { type Locale } from '@/i18n';
+import { type Locale } from '@/lib/i18n/i18n';
 
 export interface OrganizationSchema {
   '@context'?: string;
