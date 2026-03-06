@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 
 export default function NewPortfolioPage() {
-
+  const t = useTranslations("adminAlerts");
+  const tAdmin = useTranslations("admin");
   const router = useRouter();
   const params = useParams();
 
@@ -51,7 +53,7 @@ const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
 
       if (uploadError) {
 
-        alert("Görsel yüklenemedi");
+        alert(t("imageUploadFailed"));
         return;
 
       }
@@ -77,7 +79,7 @@ const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
 
     if (error) {
 
-      alert("Proje eklenirken hata oluştu");
+      alert(t("projectAddError"));
       return;
 
     }
@@ -90,49 +92,49 @@ const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
     <div className="container max-w-2xl py-20">
 
       <h1 className="text-3xl font-bold mb-10">
-        Yeni Portfolio Projesi
+        {t("newPortfolioProject")}
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
 
         <input
           name="title"
-          placeholder="Başlık"
+          placeholder={tAdmin("placeholderTitle")}
           onChange={handleChange}
           className="input input-bordered w-full"
         />
 
         <input
           name="slug"
-          placeholder="Slug"
+          placeholder={t("slug")}
           onChange={handleChange}
           className="input input-bordered w-full"
         />
 
         <textarea
           name="description"
-          placeholder="Proje açıklaması"
+          placeholder={t("projectDescription")}
           onChange={handleChange}
           className="textarea textarea-bordered w-full"
         />
 
         <input
           name="client"
-          placeholder="Client"
+          placeholder={t("client")}
           onChange={handleChange}
           className="input input-bordered w-full"
         />
 
         <input
           name="year"
-          placeholder="Year"
+          placeholder={t("year")}
           onChange={handleChange}
           className="input input-bordered w-full"
         />
 
         <input
           name="category"
-          placeholder="Category"
+          placeholder={t("category")}
           onChange={handleChange}
           className="input input-bordered w-full"
         />
@@ -147,7 +149,7 @@ const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
         />
 
         <button className="btn btn-primary w-full">
-          Projeyi Kaydet
+          {t("saveProject")}
         </button>
 
       </form>

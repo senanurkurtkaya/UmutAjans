@@ -55,6 +55,8 @@
   "about": {
     "title": "Hakkımızda",
     "subtitle": "İşletmelerin çevrimiçi başarısına adanmış tutkulu bir dijital pazarlama ekibiyiz.",
+    "description1": "Yaratıcılığı veri odaklı stratejilerle bir araya getirerek önemli sonuçlar elde ediyoruz. Ekibimiz dijital pazarlama, marka ve büyüme alanında yıllarca deneyim getiriyor.",
+    "description2": "SEO, sosyal medya veya tam kanal kampanyalara ihtiyacınız olsun, hedeflerinizi anlamak ve işletmenize uygun bir plan oluşturmak için sizinle yakın çalışıyoruz.",
     "team": {
       "title": "Ekibimiz",
       "subtitle": "Başarımızın arkasındaki isimlerle tanışın"
@@ -147,9 +149,12 @@
     "addProduct": "Ürün Ekle",
     "homepageTitle": "Ana Sayfa Yönetimi",
     "save": "Kaydet",
+    "update": "Güncelle",
     "placeholderTitle": "Başlık",
     "placeholderSubtitle": "Alt Başlık",
     "placeholderButton": "Buton Yazısı",
+    "placeholderOrder": "Sıra",
+    "addSlide": "Slide Ekle",
     "label": "Etiket",
     "value": "Değer",
     "hero": "Hero Slider",
@@ -212,6 +217,7 @@
 
   "offer": {
     "title": "Teklif Alın",
+    "subtitle": "İhtiyaçlarınızı kısaca anlatın, size özel baskı teklifini iletelim.",
     "name": "Ad Soyad",
     "phone": "Telefon",
     "email": "E-posta",
@@ -261,6 +267,74 @@
     "home": {
       "title": "Ana Sayfa",
       "description": "Kapsamlı pazarlama çözümlerimizle dijital varlığınızı dönüştürün."
+    },
+    "about": {
+      "title": "Hakkımızda",
+      "description": "Ekibimizi, değerlerimizi ve işletmelerin dijital dünyada büyümesine nasıl yardımcı olduğumuzu keşfedin."
     }
+  },
+
+  "common": {
+    "skipToContent": "Ana içeriğe geç",
+    "toggleTheme": "Tema değiştir",
+    "light": "Açık",
+    "dark": "Koyu",
+    "system": "Sistem",
+    "close": "Kapat",
+    "somethingWentWrong": "Bir şeyler yanlış gitti",
+    "somethingWentWrongDescription": "Üzgünüz, beklenmeyen bir hata oluştu. Lütfen sayfayı yenilemeyi deneyin.",
+    "refreshPage": "Sayfayı Yenile",
+    "loading": "Yükleniyor..."
+  },
+
+  "languageSwitcher": {
+    "ariaLabel": "Dil seçimi",
+    "english": "English",
+    "turkish": "Türkçe"
+  },
+
+  "adminAlerts": {
+    "titleRequired": "Başlık girin",
+    "selectImage": "Resim seçin",
+    "uploadError": "Upload hatası",
+    "dbError": "DB kayıt hatası",
+    "cardAdded": "Kart eklendi",
+    "selectFile": "Dosya seçmelisiniz",
+    "productAdded": "Ürün eklendi",
+    "imageUploadFailed": "Görsel yüklenemedi",
+    "projectAddError": "Proje eklenirken hata oluştu",
+    "updateError": "Güncelleme hatası",
+    "newServiceCard": "Yeni Service Kart",
+    "newProduct": "Yeni Ürün",
+    "newPortfolioProject": "Yeni Portfolio Projesi",
+    "editPortfolio": "Portfolio Düzenle",
+    "saveProject": "Projeyi Kaydet",
+    "slug": "Slug",
+    "projectDescription": "Proje açıklaması",
+    "client": "Client",
+    "year": "Year",
+    "category": "Category",
+    "createNewService": "Yeni Hizmet Oluştur",
+    "heroManagement": "Hero Slider Yönetimi",
+    "statusPending": "..."
+  },
+
+  "adminIconOptions": {
+    "FileText": "Kartvizit / El ilanı / Bloknot",
+    "BookOpen": "Broşür / Katalog / Dergi / Menü",
+    "Mail": "Zarf / Davetiye",
+    "Folder": "Cepli dosya",
+    "Tag": "Etiket / Sticker",
+    "Barcode": "Barkod etiket",
+    "Image": "Poster / Afiş / Rollup",
+    "Gift": "Promosyon ürünleri",
+    "Award": "Plaket",
+    "Book": "Ajanda",
+    "Layout": "Kurumsal kimlik / Masa isimliği",
+    "Shirt": "Tekstil baskı",
+    "ShoppingBag": "Bez çanta",
+    "Magnet": "Magnet baskı",
+    "Calendar": "Takvim",
+    "Globe": "Diğer"
   }
 }

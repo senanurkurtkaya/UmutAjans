@@ -2,11 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import PortfolioPreview from "../../../components/PortfolioPreview";
 
 export default function EditPortfolioPage() {
-
+  const t = useTranslations("adminAlerts");
+  const tAdmin = useTranslations("admin");
+  const tCommon = useTranslations("common");
   const router = useRouter();
   const params = useParams();
 
@@ -69,7 +72,7 @@ export default function EditPortfolioPage() {
         .upload(fileName, imageFile);
 
       if (uploadError) {
-        alert("Görsel yüklenemedi");
+        alert(t("imageUploadFailed"));
         return;
       }
 
@@ -94,7 +97,7 @@ export default function EditPortfolioPage() {
     if (error) {
 
       console.error(error);
-      alert("Güncelleme hatası");
+      alert(t("updateError"));
       return;
 
     }
@@ -104,7 +107,7 @@ export default function EditPortfolioPage() {
 
   }
 
-  if (!form) return <p>Loading...</p>;
+  if (!form) return <p>{tCommon("loading")}</p>;
 
   return (
     <div className="grid grid-cols-2 gap-12 p-10">
@@ -112,7 +115,7 @@ export default function EditPortfolioPage() {
       <div>
 
         <h1 className="text-3xl font-bold mb-10">
-          Portfolio Düzenle
+          {t("editPortfolio")}
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -148,7 +151,7 @@ export default function EditPortfolioPage() {
           />
 
           <button className="btn btn-primary w-full">
-            Güncelle
+            {tAdmin("update")}
           </button>
 
         </form>

@@ -55,6 +55,8 @@
   "about": {
     "title": "About Us",
     "subtitle": "We are a passionate team of digital marketing experts dedicated to helping businesses succeed online.",
+    "description1": "We combine creativity with data-driven strategies to deliver results that matter. Our team brings years of experience across digital marketing, branding, and growth.",
+    "description2": "Whether you need SEO, social media, or full-funnel campaigns, we work closely with you to understand your goals and build a plan that fits your business.",
     "team": {
       "title": "Our Team",
       "subtitle": "Meet the people behind our success"
@@ -147,9 +149,12 @@
     "addProduct": "Add Product",
     "homepageTitle": "Homepage Management",
     "save": "Save",
+    "update": "Update",
     "placeholderTitle": "Title",
     "placeholderSubtitle": "Subtitle",
     "placeholderButton": "Button text",
+    "placeholderOrder": "Order",
+    "addSlide": "Add slide",
     "label": "Label",
     "value": "Value",
     "hero": "Hero Slider",
@@ -212,6 +217,7 @@
 
   "offer": {
     "title": "Get a Quote",
+    "subtitle": "Tell us briefly what you need and we will send you a tailored print quote.",
     "name": "Full Name",
     "phone": "Phone",
     "email": "Email",
@@ -261,6 +267,74 @@
     "home": {
       "title": "Home",
       "description": "Transform your digital presence with our comprehensive marketing solutions."
+    },
+    "about": {
+      "title": "About Us",
+      "description": "Learn about our team, values and how we help businesses grow in the digital world."
     }
+  },
+
+  "common": {
+    "skipToContent": "Skip to main content",
+    "toggleTheme": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "close": "Close",
+    "somethingWentWrong": "Something went wrong",
+    "somethingWentWrongDescription": "We're sorry, but something unexpected happened. Please try refreshing the page.",
+    "refreshPage": "Refresh Page",
+    "loading": "Loading..."
+  },
+
+  "languageSwitcher": {
+    "ariaLabel": "Language selection",
+    "english": "English",
+    "turkish": "Türkçe"
+  },
+
+  "adminAlerts": {
+    "titleRequired": "Please enter a title",
+    "selectImage": "Please select an image",
+    "uploadError": "Upload error",
+    "dbError": "Database error",
+    "cardAdded": "Card added",
+    "selectFile": "Please select a file",
+    "productAdded": "Product added",
+    "imageUploadFailed": "Failed to upload image",
+    "projectAddError": "Error adding project",
+    "updateError": "Update error",
+    "newServiceCard": "New Service Card",
+    "newProduct": "New Product",
+    "newPortfolioProject": "New Portfolio Project",
+    "editPortfolio": "Edit Portfolio",
+    "saveProject": "Save Project",
+    "slug": "Slug",
+    "projectDescription": "Project description",
+    "client": "Client",
+    "year": "Year",
+    "category": "Category",
+    "createNewService": "Create New Service",
+    "heroManagement": "Hero Slider Management",
+    "statusPending": "..."
+  },
+
+  "adminIconOptions": {
+    "FileText": "Business card / Flyer / Notepad",
+    "BookOpen": "Brochure / Catalog / Magazine / Menu",
+    "Mail": "Envelope / Invitation",
+    "Folder": "Folder with pockets",
+    "Tag": "Label / Sticker",
+    "Barcode": "Barcode label",
+    "Image": "Poster / Banner / Rollup",
+    "Gift": "Promotional products",
+    "Award": "Plaque",
+    "Book": "Agenda",
+    "Layout": "Corporate identity / Name plate",
+    "Shirt": "Textile printing",
+    "ShoppingBag": "Tote bag",
+    "Magnet": "Magnet printing",
+    "Calendar": "Calendar",
+    "Globe": "Other"
   }
 }

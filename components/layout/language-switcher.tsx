@@ -1,6 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/lib/i18n/navigation';
 import { locales, type Locale } from '@/lib/i18n/i18n';
 import { cn } from '@/lib/utils';
@@ -12,12 +13,13 @@ interface LanguageSwitcherProps {
   className?: string;
 }
 
-const labels: Record<Locale, string> = { en: 'EN', tr: 'TR' };
+const shortLabels: Record<Locale, string> = { en: 'EN', tr: 'TR' };
 
 export const LanguageSwitcher = memo(function LanguageSwitcher({
   variant = 'default',
   className,
 }: LanguageSwitcherProps) {
+  const t = useTranslations('languageSwitcher');
   const locale = toLocale(useLocale());
   const router = useRouter();
   const pathname = usePathname();
@@ -41,7 +43,7 @@ export const LanguageSwitcher = memo(function LanguageSwitcher({
                 : 'bg-base-200 text-base-content hover:bg-base-300'
             )}
           >
-            {loc === 'en' ? 'English' : 'Türkçe'}
+            {loc === 'en' ? t('english') : t('turkish')}
             {locale === loc && <span className="ml-auto opacity-70">✓</span>}
           </button>
         ))}
@@ -56,7 +58,7 @@ export const LanguageSwitcher = memo(function LanguageSwitcher({
         className
       )}
       role="group"
-      aria-label="Dil seçimi"
+      aria-label={t('ariaLabel')}
     >
       {locales.map((loc) => (
         <button
@@ -70,7 +72,7 @@ export const LanguageSwitcher = memo(function LanguageSwitcher({
               : 'text-base-content/80 hover:text-base-content hover:bg-base-300/50'
           )}
         >
-          {labels[loc]}
+          {shortLabels[loc]}
         </button>
       ))}
     </div>

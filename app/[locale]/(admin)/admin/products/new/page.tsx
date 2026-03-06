@@ -1,10 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { createClient } from '@/lib/supabase/client'
 
 export default function NewProductPage() {
-
+  const t = useTranslations('adminAlerts')
+  const tAdmin = useTranslations('admin')
   const supabase = createClient()
 
   const [title, setTitle] = useState('')
@@ -14,7 +16,7 @@ export default function NewProductPage() {
     e.preventDefault()
 
     if (!file) {
-      alert("Dosya seçmelisiniz")
+      alert(t('selectFile'))
       return
     }
 
@@ -60,7 +62,7 @@ export default function NewProductPage() {
       return
     }
 
-    alert("Ürün eklendi")
+    alert(t('productAdded'))
 
     setTitle('')
     setFile(null)
@@ -70,14 +72,14 @@ export default function NewProductPage() {
     <div className="p-10">
 
       <h1 className="text-2xl font-bold mb-6">
-        Yeni Ürün
+        {t('newProduct')}
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
 
         <input
           className="border p-2 w-full"
-          placeholder="Başlık"
+          placeholder={tAdmin('placeholderTitle')}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -91,7 +93,7 @@ export default function NewProductPage() {
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded"
         >
-          Kaydet
+          {tAdmin('save')}
         </button>
 
       </form>

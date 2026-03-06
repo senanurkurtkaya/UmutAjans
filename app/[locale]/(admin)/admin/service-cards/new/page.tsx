@@ -1,10 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { createClient } from '@/lib/supabase/client'
 
 export default function NewServiceCard() {
-
+  const t = useTranslations('adminAlerts')
+  const tAdmin = useTranslations('admin')
   const supabase = createClient()
 
   const [title, setTitle] = useState('')
@@ -14,12 +16,12 @@ export default function NewServiceCard() {
     e.preventDefault()
 
     if (!title) {
-      alert("Başlık gir")
+      alert(t('titleRequired'))
       return
     }
 
     if (!imageFile) {
-      alert("Resim seç")
+      alert(t('selectImage'))
       return
     }
 
@@ -31,7 +33,7 @@ export default function NewServiceCard() {
       .upload(fileName, imageFile, { upsert: true })
     if (uploadError) {
       console.log(uploadError)
-      alert("Upload hatası")
+      alert(t('uploadError'))
       return
     }
 
@@ -55,11 +57,11 @@ export default function NewServiceCard() {
 
     if (error) {
       console.log(error)
-      alert("DB kayıt hatası")
+      alert(t('dbError'))
       return
     }
 
-    alert("Kart eklendi")
+    alert(t('cardAdded'))
 
     // reset
     setTitle('')
@@ -71,13 +73,13 @@ export default function NewServiceCard() {
     <div className="p-10 max-w-lg">
 
       <h1 className="text-2xl font-bold mb-6">
-        Yeni Service Kart
+        {t('newServiceCard')}
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
 
         <input
-          placeholder="Başlık"
+          placeholder={tAdmin('placeholderTitle')}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="border p-2 w-full"
@@ -91,7 +93,7 @@ export default function NewServiceCard() {
         />
 
         <button className="bg-blue-500 text-white px-4 py-2 rounded">
-          Kaydet
+          {tAdmin('save')}
         </button>
 
       </form>

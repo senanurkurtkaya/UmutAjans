@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 
+import { getTranslations } from 'next-intl/server';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { createSupabaseAdminClient } from '@/lib/supabase/admin';
 import { revalidatePath } from 'next/cache';
@@ -14,6 +15,8 @@ export default async function HeroAdminPage({
     params,
     searchParams,
 }: Props) {
+    const t = await getTranslations('adminAlerts');
+    const tAdmin = await getTranslations('admin');
     const supabase = await createSupabaseServerClient();
 
     const { data: slides } = await supabase
@@ -128,7 +131,7 @@ export default async function HeroAdminPage({
 
     return (
         <div className="max-w-5xl mx-auto py-20 space-y-10">
-            <h1 className="text-3xl font-bold">Hero Slider Yönetimi</h1>
+            <h1 className="text-3xl font-bold">{t('heroManagement')}</h1>
 
             {/* FORM */}
             <form
@@ -137,21 +140,21 @@ export default async function HeroAdminPage({
             >
                 <input
                     name="title"
-                    placeholder="Başlık"
+                    placeholder={tAdmin('placeholderTitle')}
                     defaultValue={editingSlide?.title ?? ''}
                     className="w-full p-2 border rounded"
                 />
 
                 <textarea
                     name="subtitle"
-                    placeholder="Alt Başlık"
+                    placeholder={tAdmin('placeholderSubtitle')}
                     defaultValue={editingSlide?.subtitle ?? ''}
                     className="w-full p-2 border rounded"
                 />
 
                 <input
                     name="button_text"
-                    placeholder="Buton Yazısı"
+                    placeholder={tAdmin('placeholderButton')}
                     defaultValue={editingSlide?.button_text ?? ''}
                     className="w-full p-2 border rounded"
                 />
@@ -159,7 +162,7 @@ export default async function HeroAdminPage({
                 <input
                     name="order"
                     type="number"
-                    placeholder="Sıra"
+                    placeholder={tAdmin('placeholderOrder')}
                     defaultValue={editingSlide?.display_order ?? 0}
                     className="w-full p-2 border rounded"
                 />
@@ -177,7 +180,7 @@ export default async function HeroAdminPage({
                     type="submit"
                     className="bg-black text-white px-4 py-2 rounded"
                 >
-                    {editingSlide ? 'Güncelle' : 'Slide Ekle'}
+                    {editingSlide ? tAdmin('update') : tAdmin('addSlide')}
                 </button>
             </form>
 

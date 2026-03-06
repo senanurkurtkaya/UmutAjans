@@ -22,6 +22,7 @@ type Settings = Record<keyof typeof SETTING_KEYS, string>;
 
 export default function AdminSettingsPage() {
   const t = useTranslations('admin.settingsPage');
+  const tCommon = useTranslations('common');
   const [settings, setSettings] = useState<Settings>({ ...SETTING_KEYS });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -66,7 +67,7 @@ export default function AdminSettingsPage() {
   if (loading) {
     return (
       <div className="container py-20">
-        <p className="text-neutral-400">Loading...</p>
+        <p className="text-neutral-400">{tCommon('loading')}</p>
       </div>
     );
   }
