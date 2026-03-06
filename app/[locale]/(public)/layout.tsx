@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
+import { FloatingContact } from '@/components/ui/floating-contact';
 import { getSiteSettings, getSocialLinks } from '@/lib/site-settings';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,6 +26,7 @@ export default async function PublicLayout({
     <div className="flex min-h-screen flex-col bg-base-100">
       <Navbar siteName={settings.site_name} logoUrl={settings.logo_url || undefined} />
       <main className="flex-1">{children}</main>
+      <FloatingContact />
       <Footer
         siteName={settings.site_name}
         siteDescription={settings.site_description}
