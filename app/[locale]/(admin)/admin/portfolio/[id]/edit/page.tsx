@@ -4,118 +4,165 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import PortfolioPreview from "../../../components/PortfolioPreview";
+
 export default function EditPortfolioPage() {
 
-    const router = useRouter();
-    const params = useParams();
+  const router = useRouter();
+  const params = useParams();
 
-    const locale = params.locale as string;
-    const id = params.id as string;
+  const locale = params.locale as string;
+  const id = params.id as string;
 
-    const supabase = createClient();
+  const supabase = createClient();
 
-    const [form, setForm] = useState<any>(null);
+  const [form, setForm] = useState<any>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-    useEffect(() => {
+  useEffect(() => {
 
-        async function fetchProject() {
+    async function fetchProject() {
 
-            const { data, error } = await supabase
-                .from("portfolio_projects")
-                .select("*")
-                .eq("id", id)
-                .single();
+      const { data, error } = await supabase
+        .from("portfolio_projects")
+        .select("*")
+        .eq("id", id)
+        .single();
 
-            if (error) {
-                console.error(error);
-                return;
-            }
+      if (error) {
+        console.error(error);
+        return;
+      }
 
-            setForm(data);
-
-        }
-
-        fetchProject();
-
-    }, [id]);
-
-    function handleChange(
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) {
-
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        });
+      setForm(data);
 
     }
 
-    async function handleSubmit(e: React.FormEvent) {
+    fetchProject();
 
-        e.preventDefault();
+  }, [id]);
 
-        const { error } = await supabase
-            .from("portfolio_projects")
-            .update({
-                title: form.title,
-                description: form.description,
-            })
-            .eq("id", id);
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
 
-        if (error) {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
 
-            console.error(error);
-            alert("Güncelleme hatası");
-            return;
+  }
 
-        }
+  async function handleSubmit(e: React.FormEvent) {
 
-        // Liste sayfasına dön
-        router.push(`/${locale}/admin/portfolio`);
+    e.preventDefault();
 
-        // Cache temizle ve yeniden fetch
-        router.refresh();
+    let imageUrl = form.cover_image;
+
+    if (imageFile) {
+
+      const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
+
+      const { error: uploadError } = await supabase
+        .storage
+        .from("portfolio")
+        .upload(fileName, imageFile);
+
+      if (uploadError) {
+        alert("Görsel yüklenemedi");
+        return;
+      }
+
+      const { data } = supabase
+        .storage
+        .from("portfolio")
+        .getPublicUrl(fileName);
+
+      imageUrl = data.publicUrl;
 
     }
 
-    if (!form) return <p>Loading...</p>;
+    const { error } = await supabase
+      .from("portfolio_projects")
+      .update({
+        title: form.title,
+        description: form.description,
+        cover_image: imageUrl,
+      })
+      .eq("id", id);
 
-    return (
-        <div className="grid grid-cols-2 gap-12 p-10">
+    if (error) {
 
-            <div>
+      console.error(error);
+      alert("Güncelleme hatası");
+      return;
 
-                <h1 className="text-3xl font-bold mb-10">
-                    Portfolio Düzenle
-                </h1>
+    }
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+    router.push(`/${locale}/admin/portfolio`);
+    router.refresh();
 
-                    <input
-                        name="title"
-                        value={form.title}
-                        onChange={handleChange}
-                        className="input input-bordered w-full"
-                    />
+  }
 
-                    <textarea
-                        name="description"
-                        value={form.description}
-                        onChange={handleChange}
-                        className="textarea textarea-bordered w-full"
-                    />
+  if (!form) return <p>Loading...</p>;
 
-                    <button className="btn btn-primary w-full">
-                        Güncelle
-                    </button>
+  return (
+    <div className="grid grid-cols-2 gap-12 p-10">
 
-                </form>
+      <div>
 
-            </div>
+        <h1 className="text-3xl font-bold mb-10">
+          Portfolio Düzenle
+        </h1>
 
-            <PortfolioPreview project={form} />
+        <form onSubmit={handleSubmit} className="space-y-6">
 
-        </div>
-    );
+          <input
+            name="title"
+            value={form.title}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+          />
+
+          <textarea
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            className="textarea textarea-bordered w-full"
+          />
+
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+
+              const file = e.target.files?.[0] || null;
+              setImageFile(file);
+
+              if (file) {
+                setPreviewUrl(URL.createObjectURL(file));
+              }
+
+            }}
+            className="file-input file-input-bordered w-full"
+          />
+
+          <button className="btn btn-primary w-full">
+            Güncelle
+          </button>
+
+        </form>
+
+      </div>
+
+      <PortfolioPreview
+        project={{
+          ...form,
+          cover_image: previewUrl || form.cover_image
+        }}
+      />
+
+    </div>
+  );
 
 }

@@ -1,50 +1,35 @@
-import createNextIntlPlugin from 'next-intl/plugin';
+import createNextIntlPlugin from "next-intl/plugin";
 
-const withNextIntl = createNextIntlPlugin('./lib/i18n/i18n.ts');
+const withNextIntl = createNextIntlPlugin("./lib/i18n/i18n.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  
-  // Image optimization
+
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**',
+        protocol: "https",
+        hostname: "**",
       },
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
-  // Performance optimizations
   compress: true,
   poweredByHeader: false,
-  
-  // Security headers
+
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
-          },
+          { key: "X-DNS-Prefetch-Control", value: "on" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "origin-when-cross-origin" },
         ],
       },
     ];

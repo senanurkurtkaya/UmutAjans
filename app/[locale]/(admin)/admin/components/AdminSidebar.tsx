@@ -12,14 +12,13 @@ export default function AdminSidebar() {
   const [open, setOpen] = useState(false);
 
   const linkClass = (path: string, exact = false) =>
-    `block px-4 py-3 rounded-lg transition ${
-      exact
-        ? pathname === path
-          ? 'bg-white text-black font-semibold'
-          : 'hover:bg-white/10'
-        : pathname.startsWith(path)
-          ? 'bg-white text-black font-semibold'
-          : 'hover:bg-white/10'
+    `block px-4 py-3 rounded-lg transition ${exact
+      ? pathname === path
+        ? 'bg-white text-black font-semibold'
+        : 'hover:bg-white/10'
+      : pathname.startsWith(path)
+        ? 'bg-white text-black font-semibold'
+        : 'hover:bg-white/10'
     }`;
 
   const handleNavigate = () => {
@@ -54,27 +53,39 @@ export default function AdminSidebar() {
         </h2>
 
         <nav className="space-y-2">
+
           <Link href="/admin" className={linkClass('/admin', true)}>
             {t('dashboard')}
           </Link>
+
           <Link href="/admin/hero" onClick={handleNavigate} className={linkClass('/admin/hero')}>
             {t('hero')}
           </Link>
+
           <Link href="/admin/homepage" onClick={handleNavigate} className={linkClass('/admin/homepage')}>
             {t('homepage')}
           </Link>
+
           <Link href="/admin/services" onClick={handleNavigate} className={linkClass('/admin/services')}>
             {t('services')}
           </Link>
+
+          <Link href="/admin/service-cards" onClick={handleNavigate} className={linkClass('/admin/service-cards')}>
+            Service Cards
+          </Link>
+
           <Link href="/admin/portfolio" onClick={handleNavigate} className={linkClass('/admin/portfolio')}>
             {t('portfolio')}
           </Link>
+
           <Link href="/admin/offers" onClick={handleNavigate} className={linkClass('/admin/offers')}>
             {t('offers')}
           </Link>
+
           <Link href="/admin/settings" onClick={handleNavigate} className={linkClass('/admin/settings')}>
             {t('settings')}
           </Link>
+
         </nav>
       </aside>
     </>

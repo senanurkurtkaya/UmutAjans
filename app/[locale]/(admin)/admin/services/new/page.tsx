@@ -38,6 +38,7 @@ export default function NewServicePage() {
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6 max-w-xl">
+
         <div>
           <label className="block mb-2">Title</label>
           <input
@@ -52,16 +53,17 @@ export default function NewServicePage() {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border rounded h-32"
           />
         </div>
 
         <div>
           <label className="block mb-2">Icon</label>
+
           <select
             value={icon}
             onChange={(e) => setIcon(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded h-10 text-base-content"
           >
             <option value="FileText">Kartvizit / El ilanı / Bloknot</option>
             <option value="BookOpen">Broşür / Katalog / Dergi / Menü</option>
@@ -81,7 +83,6 @@ export default function NewServicePage() {
             <option value="Globe">Diğer</option>
           </select>
         </div>
-
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
@@ -97,6 +98,7 @@ export default function NewServicePage() {
         >
           Save
         </button>
+
       </form>
     </div>
   );

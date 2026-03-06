@@ -81,15 +81,39 @@
   "contact": {
     "title": "İletişime Geçin",
     "subtitle": "İşletmenizi büyütmeye hazır mısınız? Hemen sohbet edelim.",
+    "email": {
+      "title": "E-posta",
+      "description": "Size en kısa sürede dönüş yapalım."
+    },
+    "phone": {
+      "title": "Telefon",
+      "description": "Hafta içi mesai saatlerinde ulaşabilirsiniz."
+    },
+    "address": {
+      "title": "Adres",
+      "description": "Ofisimizi ziyaret etmek için randevu alabilirsiniz."
+    },
     "form": {
-      "name": "Ad",
+      "title": "Mesaj Gönderin",
+      "description": "Sorularınız veya teklif talebiniz için formu doldurun.",
+      "name": "Ad Soyad",
       "email": "E-posta",
       "phone": "Telefon",
-      "message": "Mesaj",
-      "submit": "Gönder",
+      "message": "Mesajınız",
+      "send": "Gönder",
       "sending": "Gönderiliyor...",
       "success": "Mesajınız iletildi!",
-      "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+      "successDescription": "En kısa sürede size dönüş yapacağız.",
+      "error": "Bir hata oluştu. Lütfen tekrar deneyin.",
+      "errors": {
+        "nameRequired": "Ad alanı zorunludur.",
+        "emailRequired": "E-posta alanı zorunludur.",
+        "emailInvalid": "Geçerli bir e-posta adresi girin.",
+        "phoneInvalid": "Geçerli bir telefon numarası girin.",
+        "messageRequired": "Mesaj alanı zorunludur.",
+        "messageMinLength": "Mesaj en az 10 karakter olmalıdır.",
+        "submitFailed": "Gönderilemedi. Lütfen tekrar deneyin."
+      }
     }
   },
   "footer": {

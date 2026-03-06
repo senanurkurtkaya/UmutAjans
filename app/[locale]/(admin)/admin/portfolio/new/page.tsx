@@ -43,8 +43,7 @@ export default function NewPortfolioPage() {
 
     if (imageFile) {
 
-      const fileName = `${Date.now()}-${imageFile.name}`;
-
+const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
       const { error: uploadError } = await supabase
         .storage
         .from("portfolio")

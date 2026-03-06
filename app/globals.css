@@ -81,3 +81,21 @@
     background-size: 40px 40px;
   }
 }
+
+@keyframes slider {
+
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+
+}
+
+.animate-slider {
+
+  animation: slider 30s linear infinite;
+
+}

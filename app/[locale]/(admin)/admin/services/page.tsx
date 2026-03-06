@@ -13,6 +13,8 @@ export default async function AdminServicesPage({
   const t = await getTranslations({ locale: params.locale, namespace: 'admin' });
   const tService = await getTranslations({ locale: params.locale, namespace: 'servicesPage' });
 
+  
+
   const { data: services } = await supabase
     .from('services')
     .select('*')
