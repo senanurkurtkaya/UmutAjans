@@ -4,8 +4,8 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useMemo, useState } from 'react';
 import { Link } from '@/lib/i18n/navigation';
 import { useReducedMotion } from '@/lib/hooks/use-reduced-motion';
+import { useTranslations } from 'next-intl';
 import Image from "next/image";
-const VIEW_ALL_BUTTON = { en: 'View all', tr: 'Tümünü Gör' };
 
 export type CategoryItem = {
   id?: string;
@@ -32,13 +32,12 @@ const LAYOUT = [
   { colSpan: 1, rowSpan: 1, colStart: 3, rowStart: 3 }, // 6 ✅
 ] as const;
 
-export function CategoryShowcase({ categories, locale = 'tr' }: CategoryShowcaseProps) {
+export function CategoryShowcase({ categories }: CategoryShowcaseProps) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const prefersReducedMotion = useReducedMotion();
-
-  const viewAllLabel =
-    VIEW_ALL_BUTTON[locale as keyof typeof VIEW_ALL_BUTTON] ?? VIEW_ALL_BUTTON.tr;
+  const t = useTranslations('home');
+  const viewAllLabel = t('viewAll');
 
   const containerVariants = useMemo(
     () =>

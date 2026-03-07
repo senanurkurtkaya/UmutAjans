@@ -10,6 +10,7 @@ export default function AdminTopbar() {
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations('admin.topbar');
+  const tAdmin = useTranslations('admin');
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -43,13 +44,13 @@ export default function AdminTopbar() {
   };
 
   const pageTitles: [string, string][] = [
-    ['/admin/service-cards', 'Service Cards'],
-    ['/admin/services', 'Services'],
-    ['/admin/portfolio', 'Portfolio'],
-    ['/admin/offers', 'Offers'],
-    ['/admin/homepage', 'Homepage'],
-    ['/admin/hero', 'Hero'],
-    ['/admin/products', 'Products'],
+    ['/admin/service-cards', tAdmin('serviceCards')],
+    ['/admin/services', tAdmin('services')],
+    ['/admin/portfolio', tAdmin('portfolio')],
+    ['/admin/offers', tAdmin('offers')],
+    ['/admin/homepage', tAdmin('homepage')],
+    ['/admin/hero', tAdmin('hero')],
+    ['/admin/products', tAdmin('products')],
     ['/admin', t('dashboard')],
   ];
   const currentTitle = pageTitles.find(([path]) =>

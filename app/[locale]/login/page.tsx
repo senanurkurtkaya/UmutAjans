@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from '@/lib/i18n/navigation';
 import { useTranslations, useLocale } from 'next-intl';
+import { Link } from '@/lib/i18n/navigation';
 
 export default function LoginPage() {
   const supabase = createClient();
@@ -25,11 +26,6 @@ export default function LoginPage() {
     }
     router.push('/admin/services');
     router.refresh();
-  };
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut({ scope: 'global' });
-    window.location.href = `/${locale}/login`;
   };
 
   return (
@@ -95,13 +91,12 @@ export default function LoginPage() {
               </button>
             </form>
 
-            <button
-              type="button"
-              onClick={handleLogout}
+            <Link
+              href="/"
               className="btn btn-ghost w-full rounded-xl text-sm mt-2"
             >
-              {t('logout')}
-            </button>
+              {t('backToHome')}
+            </Link>
           </div>
         </div>
       </div>

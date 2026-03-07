@@ -3,13 +3,14 @@
     "home": "Ana Sayfa",
     "about": "Hakkımızda",
     "services": "Neler Yapıyoruz",
+    "portfolio": "Portfolyo",
     "contact": "İletişim",
     "login": "Giriş",
     "getQuote": "Teklif Al"
   },
   "hero": {
-    "title": "Dijital Varlığınızı Dönüştürün",
-    "subtitle": "İşletmelerin dijital dünyada büyümesi ve başarılı olması için yenilikçi pazarlama stratejileri ve çözümler sunuyoruz.",
+    "title": "Fikirleriniz Kağıda Değil, Markanıza Basılır",
+    "subtitle": "Kartvizitten kataloğa, etiketlerden promosyon ürünlerine kadar tüm baskı çözümlerini modern teknolojiyle üretiyoruz.",
     "cta": "Başlayın",
     "ctaSecondary": "Hizmetlerimiz"
   },
@@ -73,6 +74,7 @@
 
   "process": {
     "title": "Sürecimiz",
+    "step": "Adım",
     "subtitle": "Dijital pazarlama başarısı için kanıtlanmış yaklaşım",
     "discovery": { "title": "Keşif", "description": "Hedefleri belirlemek için işletmenizi ve pazarı analiz ediyoruz." },
     "strategy": { "title": "Strateji", "description": "Hedeflerinize ulaşmak için özel bir plan oluşturuyoruz." },
@@ -93,7 +95,9 @@
     },
     "address": {
       "title": "Adres",
-      "description": "Ofisimizi ziyaret etmek için randevu alabilirsiniz."
+      "description": "Ofisimizi ziyaret etmek için randevu alabilirsiniz.",
+      "street": "Kazım Karabekir Cd. No:87/36 D:36 43",
+      "openInMap": "Haritada aç"
     },
     "form": {
       "title": "Mesaj Gönderin",
@@ -118,6 +122,67 @@
       }
     }
   },
+
+  "privacy": {
+    "title": "Gizlilik Politikası",
+    "intro": "Umut Ajans olarak ziyaretçilerimizin gizliliğine önem veriyoruz. Bu gizlilik politikası, web sitemizi ziyaret ettiğinizde hangi bilgilerin toplandığını ve bu bilgilerin nasıl kullanıldığını açıklamaktadır.",
+    "collectedTitle": "Toplanan Bilgiler",
+    "collectedIntro": "Web sitemizi kullandığınızda aşağıdaki bilgiler toplanabilir:",
+    "collectedItem1": "Ad ve soyad",
+    "collectedItem2": "E-posta adresi",
+    "collectedItem3": "Telefon numarası",
+    "collectedItem4": "Mesaj içeriği",
+    "collectedItem5": "IP adresi ve tarayıcı bilgileri",
+    "collectedNote": "Bu bilgiler yalnızca iletişim kurmak ve hizmet sunmak amacıyla kullanılmaktadır.",
+    "usageTitle": "Bilgilerin Kullanımı",
+    "usageIntro": "Toplanan bilgiler aşağıdaki amaçlarla kullanılabilir:",
+    "usageItem1": "Teklif taleplerini değerlendirmek",
+    "usageItem2": "Kullanıcılarla iletişim kurmak",
+    "usageItem3": "Web sitesi performansını analiz etmek",
+    "usageItem4": "Hizmet kalitesini geliştirmek",
+    "cookiesTitle": "Çerezler (Cookies)",
+    "cookiesText": "Web sitemiz kullanıcı deneyimini geliştirmek amacıyla çerezler kullanabilir. Çerezler, tarayıcınız tarafından cihazınıza kaydedilen küçük veri dosyalarıdır.",
+    "securityTitle": "Veri Güvenliği",
+    "securityText": "Kullanıcı bilgilerinin güvenliği bizim için önemlidir. Bu nedenle veriler güvenli altyapılar üzerinde saklanmaktadır ve yetkisiz erişime karşı korunmaktadır.",
+    "thirdPartyTitle": "Üçüncü Taraf Hizmetler",
+    "thirdPartyText": "Web sitemiz Google Analytics gibi analiz araçları veya üçüncü taraf servisler kullanabilir. Bu servisler kendi gizlilik politikalarına tabidir.",
+    "contactTitle": "İletişim",
+    "contactText": "Gizlilik politikamız hakkında sorularınız için bizimle iletişime geçebilirsiniz."
+  },
+
+  "terms": {
+    "title": "Kullanım Koşulları",
+    "intro": "Bu web sitesini kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız.",
+    "servicesTitle": "Hizmetler",
+    "servicesText": "Umut Ajans, dijital pazarlama, tasarım ve baskı hizmetleri sunmaktadır. Web sitesinde yer alan bilgiler yalnızca bilgilendirme amaçlıdır.",
+    "contentTitle": "İçerik Hakları",
+    "contentText": "Web sitesinde yer alan tüm içerik, tasarım, metinler ve görseller Umut Ajans'a aittir. İzinsiz kopyalanamaz, dağıtılamaz veya ticari amaçlarla kullanılamaz.",
+    "disclaimerTitle": "Sorumluluk Reddi",
+    "disclaimerText": "Web sitesinde yer alan bilgiler mümkün olduğunca doğru ve güncel tutulmaya çalışılmaktadır. Ancak bilgilerin doğruluğu veya eksiksizliği konusunda garanti verilmemektedir.",
+    "linksTitle": "Bağlantılar",
+    "linksText": "Web sitemiz üçüncü taraf web sitelerine bağlantılar içerebilir. Bu sitelerin içeriklerinden Umut Ajans sorumlu değildir.",
+    "changesTitle": "Değişiklikler",
+    "changesText": "Umut Ajans bu kullanım koşullarını herhangi bir zamanda güncelleme hakkını saklı tutar."
+  },
+
+  "cookies": {
+    "title": "Çerez Politikası",
+    "intro": "Umut Ajans web sitesi olarak çerez kullanımı ve bu çerezlerin nasıl yönetildiği hakkında sizi bilgilendirmek istiyoruz.",
+    "whatTitle": "Çerez Nedir?",
+    "whatText": "Çerezler, web siteleri tarafından cihazınıza (bilgisayar, tablet veya mobil cihaz) kaydedilen küçük metin dosyalarıdır. Çerezler, sitenin düzgün çalışması, kullanıcı tercihlerinin hatırlanması ve site deneyiminin iyileştirilmesi amacıyla kullanılır.",
+    "typesTitle": "Kullandığımız Çerez Türleri",
+    "typesEssential": "Zorunlu çerezler:",
+    "typesEssentialDesc": "Sitenin temel işlevlerinin çalışması için gereklidir.",
+    "typesAnalytics": "Analitik çerezler:",
+    "typesAnalyticsDesc": "Ziyaretçi davranışını anlamamıza ve siteyi geliştirmemize yardımcı olur.",
+    "typesFunctional": "İşlevsel çerezler:",
+    "typesFunctionalDesc": "Dil veya bölge gibi tercihlerinizi hatırlamamızı sağlar.",
+    "manageTitle": "Çerezleri Yönetme",
+    "manageText": "Tarayıcı ayarlarınızdan çerezleri silebilir veya belirli çerez türlerini engelleyebilirsiniz. Çerezleri devre dışı bırakmanız halinde sitenin bazı özellikleri düzgün çalışmayabilir.",
+    "contactTitle": "İletişim",
+    "contactText": "Çerez politikamız hakkında sorularınız için bizimle iletişime geçebilirsiniz."
+  },
+
   "footer": {
     "company": "Şirket",
     "legal": "Yasal",
@@ -128,8 +193,9 @@
       "about": "Hakkımızda",
       "services": "Hizmetler",
       "contact": "İletişim",
-      "privacy": "Gizlilik",
-      "terms": "Koşullar"
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Koşulları",
+      "cookies": "Çerez Politikası"
     }
   },
 
@@ -155,11 +221,13 @@
     "placeholderButton": "Buton Yazısı",
     "placeholderOrder": "Sıra",
     "addSlide": "Slide Ekle",
+    "newCard": "Yeni Kart",
     "label": "Etiket",
     "value": "Değer",
     "hero": "Hero Slider",
     "homepage": "Ana Sayfa",
     "services": "Neler Yapıyoruz",
+    "serviceCards": "Hizmet Kartları",
     "portfolio": "Portfolyo",
     "products": "Ürünler",
     "offers": "Teklifler",
@@ -256,14 +324,40 @@
     "email": "E-posta",
     "password": "Şifre",
     "submit": "Giriş Yap",
-    "logout": "Çıkış"
+    "backToHome": "Ana Sayfaya Dön"
   },
 
   "home": {
     "exploreTitle": "Keşfet",
-    "exploreSubtitle": "Hakkımızda, hizmetler, iletişim ve teklif alın."
+    "exploreSubtitle": "Hakkımızda, hizmetler, iletişim ve teklif alın.",
+    "viewAll": "Tümünü Gör",
+    "categories": {
+      "boxProduction": "KUTU ÜRETİMİ",
+      "cardboardBag": "KARTON ÇANTA",
+      "catalogMagazine": "KATALOG / DERGİ",
+      "businessCard": "KARTVİZİT",
+      "signboard": "TABELA",
+      "wetWipe": "ISLAK MENDİL"
+    }
   },
+
+  "portfolio": {
+    "title": "Portfolyo"
+  },
+
+  "portfolioDetail": {
+    "client": "Müşteri",
+    "year": "Yıl",
+    "category": "Kategori",
+    "projectImages": "Proje Görselleri",
+    "projectImageAlt": "Proje görseli"
+  },
+
   "metadata": {
+    "contact": {
+      "title": "İletişim",
+      "description": "Umut Ajans ile iletişime geçin. Sorularınız ve teklif talepleriniz için bize ulaşın."
+    },
     "home": {
       "title": "Ana Sayfa",
       "description": "Kapsamlı pazarlama çözümlerimizle dijital varlığınızı dönüştürün."
@@ -271,6 +365,30 @@
     "about": {
       "title": "Hakkımızda",
       "description": "Ekibimizi, değerlerimizi ve işletmelerin dijital dünyada büyümesine nasıl yardımcı olduğumuzu keşfedin."
+    },
+    "services": {
+      "title": "Hizmetler",
+      "description": "Dijital pazarlama, tasarım ve baskı hizmetlerimiz. İşletmeniz için çözümler."
+    },
+    "portfolio": {
+      "title": "Portfolyo",
+      "description": "Projelerimiz ve referanslarımız."
+    },
+    "offer": {
+      "title": "Teklif Alın",
+      "description": "Baskı ve ürün teklifi almak için iletişime geçin."
+    },
+    "privacy": {
+      "title": "Gizlilik Politikası",
+      "description": "Umut Ajans gizlilik politikası. Web sitemizde hangi bilgilerin toplandığı ve nasıl kullanıldığı."
+    },
+    "terms": {
+      "title": "Kullanım Koşulları",
+      "description": "Umut Ajans web sitesi kullanım koşulları ve şartları."
+    },
+    "cookies": {
+      "title": "Çerez Politikası",
+      "description": "Umut Ajans çerez kullanımı ve çerez yönetimi hakkında bilgi."
     }
   },
 

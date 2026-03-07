@@ -71,7 +71,7 @@ export default function AdminSidebar() {
           </Link>
 
           <Link href="/admin/service-cards" onClick={handleNavigate} className={linkClass('/admin/service-cards')}>
-            Service Cards
+            {t('serviceCards')}
           </Link>
 
           <Link href="/admin/portfolio" onClick={handleNavigate} className={linkClass('/admin/portfolio')}>

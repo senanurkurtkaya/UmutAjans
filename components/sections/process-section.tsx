@@ -73,7 +73,7 @@ export const ProcessSection = React.memo(function ProcessSection() {
                       </div>
                     </div>
                     <div className="text-sm font-semibold text-primary mb-2">
-                      <span aria-label={`Step ${index + 1}`}>Step {index + 1}</span>
+                      <span aria-label={`${t('step')} ${index + 1}`}>{t('step')} {index + 1}</span>
                     </div>
                     <CardTitle>{t(`${step.key}.title`)}</CardTitle>
                   </CardHeader>

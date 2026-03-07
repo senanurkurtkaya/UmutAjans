@@ -34,6 +34,7 @@ const FOOTER_LINKS = {
   legal: [
     { href: '/privacy', key: 'links.privacy' },
     { href: '/terms', key: 'links.terms' },
+    { href: '/cookies', key: 'links.cookies' },
   ],
 } as const;
 

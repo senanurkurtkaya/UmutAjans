@@ -1,8 +1,10 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 
-export default async function AdminServiceCardsPage({ params }: any) {
-
+export default async function AdminServiceCardsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const t = await getTranslations('admin')
   const supabase = createSupabaseServerClient()
 
   const { data: cards } = await supabase
@@ -14,14 +16,14 @@ export default async function AdminServiceCardsPage({ params }: any) {
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-2xl md:text-3xl font-bold">
-          Service Cards
+          {t('serviceCards')}
         </h1>
 
         <Link
-          href={`/${params.locale}/admin/service-cards/new`}
+          href={`/${locale}/admin/service-cards/new`}
           className="px-4 py-2.5 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition shrink-0"
         >
-          + Yeni Kart
+          + {t('newCard')}
         </Link>
       </div>
 

@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { getTranslations } from 'next-intl/server';
 
 import { StatsSection } from '@/components/sections/stats-section';
 import { CTASection } from '@/components/sections/cta-section';
@@ -12,12 +13,12 @@ import { LocationSection } from '@/components/sections/location-section';
 import type { CategoryItem } from '@/components/sections/category-showcase';
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function HomePage({ params }: Props) {
-  const locale = params.locale;
-
+  const { locale } = await params;
+  const t = await getTranslations('home');
   const supabase = await createSupabaseServerClient();
 
   /* HERO SLIDER */
@@ -62,32 +63,32 @@ export default async function HomePage({ params }: Props) {
 
   const categories: CategoryItem[] = [
     {
-      title: "KUTU ÜRETİMİ",
+      title: t('categories.boxProduction'),
       image: "/images/categories/Kutu.png",
       link: "/services"
     },
     {
-      title: "KARTON ÇANTA",
+      title: t('categories.cardboardBag'),
       image: "/images/categories/KutuCanta.png",
       link: "/services"
     },
     {
-      title: "KATALOG / DERGİ",
+      title: t('categories.catalogMagazine'),
       image: "/images/categories/Dergi.png",
       link: "/services"
     },
     {
-      title: "KARTVİZİT",
+      title: t('categories.businessCard'),
       image: "/images/categories/Kartvizit.png",
       link: "/services"
     },
     {
-      title: "TABELA",
+      title: t('categories.signboard'),
       image: "/images/categories/Tabela.png",
       link: "/services"
     },
     {
-      title: "ISLAK MENDİL",
+      title: t('categories.wetWipe'),
       image: "/images/categories/islak-mendil.png",
       link: "/services"
     }
@@ -98,7 +99,7 @@ export default async function HomePage({ params }: Props) {
       <HeroSlider slides={slides ?? []} heroContent={heroContent} />
 
       {/* CATEGORY SHOWCASE */}
-      <CategoryShowcase categories={categories} locale={locale as "tr" | "en"} />
+      <CategoryShowcase categories={categories} />
 
       {/* ÜRÜNLER - ADMIN PANELDEN EKLENİR */}
       <ProductSlider products={products ?? []} />

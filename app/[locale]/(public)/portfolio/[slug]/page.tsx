@@ -1,6 +1,7 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 export default async function PortfolioDetailPage({
   params,
@@ -20,6 +21,7 @@ export default async function PortfolioDetailPage({
     return notFound();
   }
 
+  const t = await getTranslations("portfolioDetail");
   const { data: images } = await supabase
     .from("portfolio_images")
     .select("*")
@@ -27,10 +29,10 @@ export default async function PortfolioDetailPage({
     .order("display_order", { ascending: true });
 
   return (
-    <div className="container mx-auto py-20 max-w-4xl">
+    <div className="container mx-auto max-w-4xl px-4 py-12 sm:py-16 md:py-20">
 
       {project.cover_image && (
-        <div className="relative w-full h-[400px] mb-10">
+        <div className="relative w-full h-56 sm:h-72 md:h-80 lg:h-[400px] mb-8 md:mb-10">
           <Image
             src={project.cover_image}
             alt={project.title}
@@ -40,22 +42,22 @@ export default async function PortfolioDetailPage({
         </div>
       )}
 
-      <h1 className="text-4xl font-bold mb-6">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-6">
         {project.title}
       </h1>
 
       <div className="flex gap-6 text-sm text-gray-500 mb-8">
 
         {project.client && (
-          <span>Client: {project.client}</span>
+          <span>{t("client")}: {project.client}</span>
         )}
 
         {project.year && (
-          <span>Year: {project.year}</span>
+          <span>{t("year")}: {project.year}</span>
         )}
 
         {project.category && (
-          <span>Category: {project.category}</span>
+          <span>{t("category")}: {project.category}</span>
         )}
 
       </div>
@@ -68,7 +70,7 @@ export default async function PortfolioDetailPage({
         <div>
 
           <h2 className="text-2xl font-semibold mb-6">
-            Project Images
+            {t("projectImages")}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -77,7 +79,7 @@ export default async function PortfolioDetailPage({
               <div key={img.id} className="relative w-full h-64">
                 <Image
                   src={img.image_url}
-                  alt="Project Image"
+                  alt={t("projectImageAlt")}
                   fill
                   className="object-cover rounded-lg"
                 />
