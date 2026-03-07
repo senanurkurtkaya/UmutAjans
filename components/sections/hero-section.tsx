@@ -70,7 +70,6 @@ export function HeroSection({
           animate="visible"
           className="max-w-5xl mx-auto text-center space-y-8"
         >
-          {/* Badge */}
           <motion.div variants={itemVariants}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 text-primary" />
@@ -80,7 +79,6 @@ export function HeroSection({
             </div>
           </motion.div>
 
-          {/* Title */}
           <motion.div variants={itemVariants} className="space-y-6">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
               <span className="block bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
@@ -89,14 +87,12 @@ export function HeroSection({
             </h1>
           </motion.div>
 
-          {/* Subtitle */}
           <motion.div variants={itemVariants}>
             <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
               {data?.subtitle ?? t('subtitle')}
             </p>
           </motion.div>
 
-          {/* Buttons */}
           <motion.div
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"

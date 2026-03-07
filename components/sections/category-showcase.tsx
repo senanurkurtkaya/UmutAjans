@@ -19,17 +19,13 @@ type CategoryShowcaseProps = {
   locale?: string;
 };
 
-/**
- * Grid: 3 cols, gap-0. Card 1 = col-span-2 row-span-2. Cards 2–5 = col-span-1 row-span-1.
- * Uses 3 rows so 5 cards fit: Card 1 (1–2,1–2), Card 2 (3,1), Card 3 (3,2), Card 4 (1,3), Card 5 (2,3).
- */
 const LAYOUT = [
-  { colSpan: 2, rowSpan: 2, colStart: 1, rowStart: 1 }, // Card 1 large
-  { colSpan: 1, rowSpan: 1, colStart: 3, rowStart: 1 }, // Card 2
-  { colSpan: 1, rowSpan: 1, colStart: 3, rowStart: 2 }, // Card 3
-  { colSpan: 1, rowSpan: 1, colStart: 1, rowStart: 3 }, // Card 4
-  { colSpan: 1, rowSpan: 1, colStart: 2, rowStart: 3 }, // Card 5
-  { colSpan: 1, rowSpan: 1, colStart: 3, rowStart: 3 }, // 6 ✅
+  { colSpan: 2, rowSpan: 2, colStart: 1, rowStart: 1 },
+  { colSpan: 1, rowSpan: 1, colStart: 3, rowStart: 1 },
+  { colSpan: 1, rowSpan: 1, colStart: 3, rowStart: 2 },
+  { colSpan: 1, rowSpan: 1, colStart: 1, rowStart: 3 },
+  { colSpan: 1, rowSpan: 1, colStart: 2, rowStart: 3 },
+  { colSpan: 1, rowSpan: 1, colStart: 3, rowStart: 3 },
 ] as const;
 
 export function CategoryShowcase({ categories }: CategoryShowcaseProps) {
@@ -75,7 +71,6 @@ export function CategoryShowcase({ categories }: CategoryShowcaseProps) {
   return (
     <section ref={ref} className="mt-16">
       <div className="container mx-auto max-w-6xl px-0">
-        {/* Mobile: stacked, no gaps */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -93,7 +88,6 @@ export function CategoryShowcase({ categories }: CategoryShowcaseProps) {
           ))}
         </motion.div>
 
-        {/* Desktop: grid-cols-3 grid-rows-2 (plus row 3 for cards 4–5), gap-0, cards touch */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -136,7 +130,6 @@ function CategoryCard({
   return (
     <Link href={category.link} className="block relative overflow-hidden group w-full h-full">
 
-      {/* IMAGE */}
       <div className="relative overflow-hidden group w-full h-full min-h-[260px] bg-neutral-800">
         {!imgError ? (
           <Image
@@ -155,7 +148,6 @@ function CategoryCard({
         )}
       </div>
 
-      {/* OVERLAY */}
       <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
         <h3 className="text-2xl font-bold text-white text-center px-4">
           {category.title}

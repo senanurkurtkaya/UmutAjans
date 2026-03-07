@@ -53,13 +53,10 @@ export default async function ServicesPage() {
         </div>
       </div>
 
-      {/* RESİMLİ SERVICE KARTLARI */}
       <ServicesGrid services={serviceCards ?? []} />
 
-      {/* ICON SERVICE LIST */}
       <ServicesSection services={services ?? []} />
 
-      {/* PROCESS SECTION */}
       <ProcessSection />
 
     </div>

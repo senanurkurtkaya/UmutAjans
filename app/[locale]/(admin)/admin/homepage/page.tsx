@@ -25,7 +25,6 @@ export default async function HomepageAdminPage({ params }: Props) {
   const stats = sections?.find(s => s.section_key === 'stats');
   const cta = sections?.find(s => s.section_key === 'cta');
 
-  /* ================= HERO ================= */
   async function updateHero(formData: FormData) {
     'use server';
 
@@ -38,6 +37,7 @@ export default async function HomepageAdminPage({ params }: Props) {
           title: String(formData.get('title') ?? ''),
           subtitle: String(formData.get('subtitle') ?? ''),
           button_text: String(formData.get('button_text') ?? ''),
+          button_link: (formData.get('button_link') as string) || undefined,
         },
       })
       .eq('section_key', 'hero');
@@ -50,7 +50,6 @@ export default async function HomepageAdminPage({ params }: Props) {
     revalidatePath(`/${params.locale}`, 'page');
   }
 
-  /* ================= STATS ================= */
   async function updateStats(formData: FormData) {
     'use server';
 
@@ -90,7 +89,6 @@ export default async function HomepageAdminPage({ params }: Props) {
     revalidatePath(`/${params.locale}`, 'page');
   }
 
-  /* ================= CTA ================= */
   async function updateCTA(formData: FormData) {
     'use server';
 
@@ -139,6 +137,12 @@ export default async function HomepageAdminPage({ params }: Props) {
           name="button_text"
           defaultValue={hero?.content?.button_text ?? ''}
           placeholder={t('placeholderButton')}
+          className={inputClass}
+        />
+        <input
+          name="button_link"
+          defaultValue={hero?.content?.button_link ?? ''}
+          placeholder={t('placeholderButtonLink')}
           className={inputClass}
         />
         <button type="submit" className="px-4 py-2.5 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition">

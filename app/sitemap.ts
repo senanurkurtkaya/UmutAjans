@@ -4,11 +4,7 @@ import { locales } from '@/lib/i18n/i18n';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
-  
-  // Static routes
   const routes = ['', '/about', '/services', '/contact'];
-  
-  // Generate sitemap entries for each locale and route
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
   locales.forEach((locale) => {

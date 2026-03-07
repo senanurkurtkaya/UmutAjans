@@ -10,7 +10,6 @@ class Logger {
   private isProduction = process.env.NODE_ENV === 'production';
 
   private log(level: LogLevel, message: string, data?: unknown, context?: string): void {
-    // In development, log to console
     if (this.isDevelopment) {
       const consoleMethod = level === 'error' ? console.error : 
                            level === 'warn' ? console.warn : 
@@ -20,11 +19,7 @@ class Logger {
       consoleMethod(`[${level.toUpperCase()}]`, context ? `[${context}] ${message}` : message, data || '');
     }
 
-    // In production, you can send to external logging service
-    // Example: Sentry, LogRocket, etc.
     if (this.isProduction && level === 'error') {
-      // TODO: Integrate with error tracking service
-      // Example: Sentry.captureException(new Error(message), { extra: data });
     }
   }
 

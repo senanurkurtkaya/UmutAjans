@@ -26,7 +26,6 @@ export function ProductSlider({ products }: { products: Product[] }) {
                             className="group flex flex-col items-center min-w-[160px]"
                         >
 
-                            {/* IMAGE CARD */}
                             <div
                                 className="
         w-[140px]
@@ -56,7 +55,6 @@ export function ProductSlider({ products }: { products: Product[] }) {
 
                             </div>
 
-                            {/* TITLE */}
                             <span
                                 className="
         text-sm

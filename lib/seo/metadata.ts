@@ -52,8 +52,7 @@ export async function generateSEOMetadata({
     creator: siteConfig.name,
     publisher: siteConfig.name,
     metadataBase: new URL(siteConfig.url),
-    
-    // Canonical URL
+
     alternates: {
       canonical: canonicalUrl,
       languages: {
@@ -63,7 +62,6 @@ export async function generateSEOMetadata({
       },
     },
 
-    // Open Graph
     openGraph: {
       type,
       locale: ogLocale,
@@ -83,7 +81,6 @@ export async function generateSEOMetadata({
       ...(modifiedTime && { modifiedTime }),
     },
 
-    // Twitter Card
     twitter: {
       card: 'summary_large_image',
       site: siteConfig.twitterSite,
@@ -106,7 +103,6 @@ export async function generateSEOMetadata({
       },
     },
 
-    // Additional metadata
     category: 'Digital Marketing',
     classification: 'Business',
   };

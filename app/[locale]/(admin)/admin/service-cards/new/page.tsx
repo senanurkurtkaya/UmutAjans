@@ -27,7 +27,6 @@ export default function NewServiceCard() {
 
     const fileName = Date.now() + "-" + imageFile.name
 
-    // STORAGE UPLOAD
     const { error: uploadError } = await supabase.storage
       .from('service-images')
       .upload(fileName, imageFile, { upsert: true })
@@ -37,14 +36,12 @@ export default function NewServiceCard() {
       return
     }
 
-    // PUBLIC URL
     const { data } = supabase.storage
       .from('service-images')
       .getPublicUrl(fileName)
 
     const imageUrl = data.publicUrl
 
-    // DATABASE INSERT
     const { error } = await supabase
       .from('service_cards')
       .insert([
@@ -63,7 +60,6 @@ export default function NewServiceCard() {
 
     alert(t('cardAdded'))
 
-    // reset
     setTitle('')
     setImageFile(null)
   }

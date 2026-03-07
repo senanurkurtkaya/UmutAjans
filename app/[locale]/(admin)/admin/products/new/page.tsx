@@ -22,7 +22,6 @@ export default function NewProductPage() {
 
     const fileName = `${Date.now()}-${file.name}`
 
-    /* STORAGE UPLOAD */
     const { data: uploadData, error: uploadError } =
       await supabase.storage
         .from('products')
@@ -37,14 +36,12 @@ export default function NewProductPage() {
       return
     }
 
-    /* PUBLIC URL */
     const { data: publicUrlData } = supabase.storage
       .from('products')
       .getPublicUrl(fileName)
 
     const image_url = publicUrlData.publicUrl
 
-    /* DATABASE INSERT */
     const { error: insertError } = await supabase
       .from('products')
       .insert([

@@ -21,21 +21,18 @@ export default async function HomePage({ params }: Props) {
   const t = await getTranslations('home');
   const supabase = await createSupabaseServerClient();
 
-  /* HERO SLIDER */
   const { data: slides } = await supabase
     .from('hero_slides')
     .select('*')
     .eq('is_active', true)
     .order('display_order', { ascending: true });
 
-  /* PRODUCTS (SONSUZ KAYAN SLIDER) */
   const { data: products } = await supabase
     .from('products')
     .select('id,title,image_url')
     .eq('published', true)
     .order('created_at', { ascending: true });
 
-  /* PORTFOLIO */
   const { data: portfolio } = await supabase
     .from('portfolio_projects')
     .select('id, title, slug, category, cover_image')
@@ -43,7 +40,6 @@ export default async function HomePage({ params }: Props) {
     .order('created_at', { ascending: false })
     .limit(6);
 
-  /* HOMEPAGE SECTIONS */
   const { data: homepageSections } = await supabase
     .from('homepage_sections')
     .select('*')
@@ -58,6 +54,7 @@ export default async function HomePage({ params }: Props) {
       title?: string | null;
       subtitle?: string | null;
       button_text?: string | null;
+      button_link?: string | null;
     }
     | undefined;
 
@@ -95,26 +92,17 @@ export default async function HomePage({ params }: Props) {
   ]
   return (
     <>
-      {/* HERO */}
       <HeroSlider slides={slides ?? []} heroContent={heroContent} />
 
-      {/* CATEGORY SHOWCASE */}
       <CategoryShowcase categories={categories} />
 
-      {/* ÜRÜNLER - ADMIN PANELDEN EKLENİR */}
       <ProductSlider products={products ?? []} />
 
-
-      {/* PORTFOLIO */}
       <HomePortfolioStrip projects={portfolio ?? []} locale={locale} />
 
-      {/* LOCATION */}
       <LocationSection />
-      {/* CTA */}
       <CTASection data={sections.cta?.content} />
 
-
-      {/* STATS */}
       <StatsSection data={sections.stats?.content} />
 
     </>

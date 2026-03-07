@@ -40,7 +40,6 @@ interface ServicesSectionProps {
 }
 
 const iconMap: Record<string, React.ElementType> = {
-  // Eski dijital hizmet anahtarlarını da çalışır bırakıyoruz
   seo: Target,
   social: TrendingUp,
   ppc: Zap,
@@ -48,8 +47,6 @@ const iconMap: Record<string, React.ElementType> = {
   analytics: BarChart3,
   web: Globe,
   globe: Globe,
-
-  // Matbaa hizmetleri – ikon alanına bu değerleri yazabilirsin
   filetext: FileText,
   FileText,
   bookopen: BookOpen,

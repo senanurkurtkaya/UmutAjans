@@ -28,7 +28,6 @@ export const ThemeToggle = memo(function ThemeToggle() {
   }, [setTheme]);
 
   if (!mounted) {
-    // Return a placeholder with the same dimensions to prevent layout shift
     return (
       <Button variant="ghost" size="icon" className="h-10 w-10" aria-label={t('toggleTheme')}>
         <Sun className="h-5 w-5" />

@@ -219,6 +219,7 @@
     "placeholderTitle": "Başlık",
     "placeholderSubtitle": "Alt Başlık",
     "placeholderButton": "Buton Yazısı",
+    "placeholderButtonLink": "Buton linki (örn: /tr/contact, https://wa.me/90...)",
     "placeholderOrder": "Sıra",
     "addSlide": "Slide Ekle",
     "newCard": "Yeni Kart",

@@ -28,7 +28,6 @@ export default async function HeroAdminPage({
         (s) => s.id === searchParams.edit
     );
 
-    /* ================= ADD ================= */
     async function addSlide(formData: FormData) {
         'use server';
 
@@ -55,6 +54,7 @@ export default async function HeroAdminPage({
             title: String(formData.get('title') ?? ''),
             subtitle: String(formData.get('subtitle') ?? ''),
             button_text: String(formData.get('button_text') ?? ''),
+            button_link: (formData.get('button_link') as string) || null,
             display_order: Number(formData.get('order') ?? 0),
             image_url: imageUrl,
             is_active: true,
@@ -63,7 +63,6 @@ export default async function HeroAdminPage({
         revalidatePath(`/${params.locale}`);
     }
 
-    /* ================= UPDATE ================= */
     async function updateSlide(formData: FormData) {
         'use server';
 
@@ -77,6 +76,7 @@ export default async function HeroAdminPage({
                 title: String(formData.get('title') ?? ''),
                 subtitle: String(formData.get('subtitle') ?? ''),
                 button_text: String(formData.get('button_text') ?? ''),
+                button_link: (formData.get('button_link') as string) || null,
                 display_order: Number(formData.get('order') ?? 0),
             })
             .eq('id', id);
@@ -84,7 +84,6 @@ export default async function HeroAdminPage({
         revalidatePath(`/${params.locale}`);
     }
 
-    /* ================= TOGGLE ================= */
     async function toggleSlide(formData: FormData) {
         'use server';
 
@@ -101,7 +100,6 @@ export default async function HeroAdminPage({
         revalidatePath(`/${params.locale}`);
     }
 
-    /* ================= DELETE ================= */
     async function deleteSlide(formData: FormData) {
         'use server';
 
@@ -113,7 +111,6 @@ export default async function HeroAdminPage({
         revalidatePath(`/${params.locale}`);
     }
 
-    /* ================= REORDER ================= */
     async function reorderSlides(ids: string[]) {
         'use server';
 
@@ -135,7 +132,6 @@ export default async function HeroAdminPage({
         <div className="max-w-5xl space-y-10">
             <h1 className="text-2xl md:text-3xl font-bold">{t('heroManagement')}</h1>
 
-            {/* FORM */}
             <form
                 action={editingSlide ? updateSlide : addSlide}
                 className="space-y-4 p-6 bg-[#0f1a2b] border border-white/10 rounded-xl shadow-xl"
@@ -158,6 +154,13 @@ export default async function HeroAdminPage({
                     name="button_text"
                     placeholder={tAdmin('placeholderButton')}
                     defaultValue={editingSlide?.button_text ?? ''}
+                    className={inputClass}
+                />
+
+                <input
+                    name="button_link"
+                    placeholder={tAdmin('placeholderButtonLink')}
+                    defaultValue={editingSlide?.button_link ?? ''}
                     className={inputClass}
                 />
 

@@ -30,10 +30,7 @@ export class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // Log error using production-ready logger
     logger.error('Error caught by boundary', error, 'ErrorBoundary');
-    
-    // Log additional error info in development
     if (process.env.NODE_ENV === 'development') {
       logger.debug('Error details', {
         componentStack: errorInfo.componentStack,

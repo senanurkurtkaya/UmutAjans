@@ -62,10 +62,8 @@ export const StatsSection = React.memo(function StatsSection({
 
       <div className="container mx-auto max-w-6xl px-6">
 
-        {/* GRID LAYOUT */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* LEFT TEXT */}
           <motion.h2
             {...animationProps}
             className="text-4xl md:text-5xl font-bold leading-tight 
@@ -79,7 +77,6 @@ export const StatsSection = React.memo(function StatsSection({
             Kaliteli İmza.
           </motion.h2>
 
-          {/* RIGHT STATS */} 
           <div className="bg-[#0f1a2b] rounded-2xl shadow-xl border border-white/10 overflow-hidden">
 
             <div className="grid grid-cols-2 divide-x divide-y lg:divide-y-0 divide-white/10">

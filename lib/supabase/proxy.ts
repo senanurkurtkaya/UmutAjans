@@ -53,7 +53,6 @@ export async function updateSession(request: NextRequest) {
     );
     await Promise.race([claimsPromise, timeoutPromise]);
   } catch {
-    // Timeout or network error: continue without failing the request
   }
 
   return response;
