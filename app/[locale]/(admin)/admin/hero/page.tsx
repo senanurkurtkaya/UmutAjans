@@ -129,34 +129,36 @@ export default async function HeroAdminPage({
         revalidatePath(`/${params.locale}`);
     }
 
+    const inputClass = 'w-full px-3 py-2.5 rounded-lg bg-[#0f1a2b] border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 transition';
+
     return (
-        <div className="max-w-5xl mx-auto py-20 space-y-10">
-            <h1 className="text-3xl font-bold">{t('heroManagement')}</h1>
+        <div className="max-w-5xl space-y-10">
+            <h1 className="text-2xl md:text-3xl font-bold">{t('heroManagement')}</h1>
 
             {/* FORM */}
             <form
                 action={editingSlide ? updateSlide : addSlide}
-                className="space-y-4 border p-6 rounded-xl"
+                className="space-y-4 p-6 bg-[#0f1a2b] border border-white/10 rounded-xl shadow-xl"
             >
                 <input
                     name="title"
                     placeholder={tAdmin('placeholderTitle')}
                     defaultValue={editingSlide?.title ?? ''}
-                    className="w-full p-2 border rounded"
+                    className={inputClass}
                 />
 
                 <textarea
                     name="subtitle"
                     placeholder={tAdmin('placeholderSubtitle')}
                     defaultValue={editingSlide?.subtitle ?? ''}
-                    className="w-full p-2 border rounded"
+                    className={inputClass}
                 />
 
                 <input
                     name="button_text"
                     placeholder={tAdmin('placeholderButton')}
                     defaultValue={editingSlide?.button_text ?? ''}
-                    className="w-full p-2 border rounded"
+                    className={inputClass}
                 />
 
                 <input
@@ -164,7 +166,7 @@ export default async function HeroAdminPage({
                     type="number"
                     placeholder={tAdmin('placeholderOrder')}
                     defaultValue={editingSlide?.display_order ?? 0}
-                    className="w-full p-2 border rounded"
+                    className={inputClass}
                 />
 
                 {!editingSlide && (
@@ -172,13 +174,13 @@ export default async function HeroAdminPage({
                         name="image"
                         type="file"
                         accept="image/*"
-                        className="w-full"
+                        className="w-full text-sm file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-500 file:text-white file:font-medium file:cursor-pointer"
                     />
                 )}
 
                 <button
                     type="submit"
-                    className="bg-black text-white px-4 py-2 rounded"
+                    className="px-4 py-2.5 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
                 >
                     {editingSlide ? tAdmin('update') : tAdmin('addSlide')}
                 </button>

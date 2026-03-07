@@ -13,11 +13,11 @@ export default function PublishToggle({
     <button
       type="submit"
       disabled={pending}
-      className={`px-3 py-1 rounded text-sm font-medium transition ${
+      className={`px-3 py-1.5 rounded-lg text-sm font-medium text-white transition disabled:opacity-50 ${
         published
-          ? 'bg-green-600 hover:bg-green-700'
-          : 'bg-red-600 hover:bg-red-700'
-      } ${pending ? 'opacity-50 cursor-not-allowed' : ''}`}
+          ? 'bg-green-600/90 hover:bg-green-600'
+          : 'bg-red-600/90 hover:bg-red-600'
+      }`}
     >
       {pending
         ? 'Updating...'

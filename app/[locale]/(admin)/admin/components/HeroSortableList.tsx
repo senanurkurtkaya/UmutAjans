@@ -66,38 +66,38 @@ export function HeroSortableList({
         items={items.map((i) => i.id)}
         strategy={verticalListSortingStrategy}
       >
-        <div className="space-y-4">
+        <div className="space-y-3">
           {items.map((slide) => (
             <SortableItem key={slide.id} id={slide.id}>
-              <div className="border p-4 rounded flex justify-between items-center bg-zinc-900 text-white cursor-grab">
+              <div className="border border-white/10 p-4 rounded-xl flex flex-wrap justify-between items-center gap-4 bg-[#0f1a2b] text-white cursor-grab hover:border-white/20 transition-colors shadow-xl">
 
                 <div>
                   <p className="font-bold text-lg">{slide.title}</p>
-                  <p className="text-sm opacity-70">
+                  <p className="text-sm text-white/70">
                     Order: {slide.display_order}
                   </p>
-                  <p className="text-xs">
+                  <p className="text-xs text-white/50">
                     {slide.is_active ? 'Aktif' : 'Pasif'}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-2">
                   {slide.image_url && (
                     <img
                       src={slide.image_url}
                       alt="slide"
-                      className="w-32 h-20 object-cover rounded"
+                      className="w-32 h-20 object-cover rounded-lg"
                     />
                   )}
 
                   <a
                     href={`?edit=${slide.id}`}
-                    className="px-3 py-1 bg-blue-600 text-white rounded"
+                    className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-sm font-medium rounded-lg transition"
                   >
                     Düzenle
                   </a>
 
-                  <form action={onToggle}>
+                  <form action={onToggle} className="inline">
                     <input type="hidden" name="id" value={slide.id} />
                     <input
                       type="hidden"
@@ -106,17 +106,17 @@ export function HeroSortableList({
                     />
                     <button
                       type="submit"
-                      className="px-3 py-1 bg-gray-700 text-white rounded"
+                      className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-sm font-medium rounded-lg transition"
                     >
                       Toggle
                     </button>
                   </form>
 
-                  <form action={onDelete}>
+                  <form action={onDelete} className="inline">
                     <input type="hidden" name="id" value={slide.id} />
                     <button
                       type="submit"
-                      className="px-3 py-1 bg-red-600 text-white rounded"
+                      className="px-3 py-1.5 text-red-400 hover:bg-red-500/10 text-sm font-medium rounded-lg transition"
                     >
                       Sil
                     </button>

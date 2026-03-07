@@ -115,80 +115,82 @@ export default async function HomepageAdminPage({ params }: Props) {
     revalidatePath(`/${params.locale}`, 'page');
   }
 
-  return (
-    <div className="max-w-4xl mx-auto py-20 space-y-16">
-      <h1 className="text-3xl font-bold">{t('homepageTitle')}</h1>
+  const inputClass = 'w-full px-3 py-2.5 rounded-lg bg-[#0f1a2b] border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 transition';
 
-      <form action={updateHero} className="space-y-4 border p-6 rounded-xl">
-        <h2 className="text-xl font-semibold">{t('homepageHeroSection')}</h2>
+  return (
+    <div className="max-w-4xl space-y-12">
+      <h1 className="text-2xl md:text-3xl font-bold">{t('homepageTitle')}</h1>
+
+      <form action={updateHero} className="space-y-4 p-6 bg-[#0f1a2b] border border-white/10 rounded-xl shadow-xl">
+        <h2 className="text-lg font-semibold border-b border-white/10 pb-2">{t('homepageHeroSection')}</h2>
         <input
           name="title"
           defaultValue={hero?.content?.title ?? ''}
           placeholder={t('placeholderTitle')}
-          className="w-full p-2 border rounded"
+          className={inputClass}
         />
         <textarea
           name="subtitle"
           defaultValue={hero?.content?.subtitle ?? ''}
           placeholder={t('placeholderSubtitle')}
-          className="w-full p-2 border rounded"
+          className={inputClass}
         />
         <input
           name="button_text"
           defaultValue={hero?.content?.button_text ?? ''}
           placeholder={t('placeholderButton')}
-          className="w-full p-2 border rounded"
+          className={inputClass}
         />
-        <button type="submit" className="bg-black text-white px-4 py-2 rounded">
+        <button type="submit" className="px-4 py-2.5 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition">
           {t('save')}
         </button>
       </form>
 
-      <form action={updateStats} className="space-y-4 border p-6 rounded-xl">
-        <h2 className="text-xl font-semibold">{t('homepageStatsSection')}</h2>
+      <form action={updateStats} className="space-y-4 p-6 bg-[#0f1a2b] border border-white/10 rounded-xl shadow-xl">
+        <h2 className="text-lg font-semibold border-b border-white/10 pb-2">{t('homepageStatsSection')}</h2>
         {stats?.content?.stats?.map((item: any, i: number) => (
-          <div key={i} className="flex gap-4">
+          <div key={i} className="flex flex-wrap gap-4">
             <input
               name={`label${i + 1}`}
               defaultValue={item.label ?? ''}
               placeholder={t('label')}
-              className="w-full p-2 border rounded"
+              className={inputClass}
             />
             <input
               name={`value${i + 1}`}
               defaultValue={item.value ?? ''}
               placeholder={t('value')}
-              className="w-full p-2 border rounded"
+              className={inputClass}
             />
           </div>
         ))}
-        <button type="submit" className="bg-black text-white px-4 py-2 rounded">
+        <button type="submit" className="px-4 py-2.5 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition">
           {t('save')}
         </button>
       </form>
 
-      <form action={updateCTA} className="space-y-4 border p-6 rounded-xl">
-        <h2 className="text-xl font-semibold">{t('homepageCtaSection')}</h2>
+      <form action={updateCTA} className="space-y-4 p-6 bg-[#0f1a2b] border border-white/10 rounded-xl shadow-xl">
+        <h2 className="text-lg font-semibold border-b border-white/10 pb-2">{t('homepageCtaSection')}</h2>
         <input
           name="cta_title"
           defaultValue={cta?.content?.title ?? ''}
           placeholder={t('placeholderTitle')}
-          className="w-full p-2 border rounded"
+          className={inputClass}
         />
         <textarea
           name="cta_subtitle"
           defaultValue={cta?.content?.subtitle ?? ''}
           placeholder={t('placeholderSubtitle')}
-          className="w-full p-2 border rounded"
+          className={inputClass}
         />
         <input
           name="cta_button"
           defaultValue={cta?.content?.button_text ?? ''}
           placeholder={t('placeholderButton')}
-          className="w-full p-2 border rounded"
+          className={inputClass}
         />
 
-        <button type="submit" className="bg-black text-white px-4 py-2 rounded">
+        <button type="submit" className="px-4 py-2.5 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition">
           {t('save')}
         </button>
       </form>

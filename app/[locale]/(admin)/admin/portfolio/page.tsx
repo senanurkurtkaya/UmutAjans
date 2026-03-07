@@ -36,83 +36,62 @@ export default async function AdminPortfolioPage({
     .order('created_at', { ascending: false });
 
   return (
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">{t('portfolioTitle')}</h1>
+    <div className="space-y-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <h1 className="text-2xl md:text-3xl font-bold">{t('portfolioTitle')}</h1>
         <Link
           href={`/${locale}/admin/portfolio/new`}
-          className="px-4 py-2 bg-blue-600 text-white rounded"
+          className="px-4 py-2.5 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition shrink-0"
         >
           {t('portfolioNewProject')}
         </Link>
       </div>
 
-      <div className="space-y-4">
-
+      <div className="space-y-3">
         {projects?.map((project) => (
-
           <div
             key={project.id}
-            className="border p-4 rounded flex justify-between items-center"
+            className="p-4 bg-[#0f1a2b] border border-white/10 rounded-xl flex flex-wrap justify-between items-center gap-4 hover:border-white/20 transition-colors shadow-xl"
           >
-
             <div className="flex items-center gap-4">
-
               {project.cover_image && (
                 <img
                   src={project.cover_image}
-                  className="w-16 h-16 object-cover rounded"
+                  alt=""
+                  className="w-16 h-16 object-cover rounded-lg"
                 />
               )}
 
               <div>
                 <h2 className="font-semibold">{project.title}</h2>
-
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-white/60">
                   {project.category}
                 </p>
               </div>
-
             </div>
 
-            <div className="flex gap-4">
-
+            <div className="flex items-center gap-3">
               <Link
                 href={`/${locale}/admin/portfolio/${project.id}/edit`}
-                className="text-blue-600"
+                className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-sm font-medium rounded-lg transition"
               >
                 Düzenle
               </Link>
 
               <form action={deleteProject}>
-                <input
-                  type="hidden"
-                  name="id"
-                  value={project.id}
-                />
-
-                <input
-                  type="hidden"
-                  name="locale"
-                  value={locale}
-                />
-
+                <input type="hidden" name="id" value={project.id} />
+                <input type="hidden" name="locale" value={locale} />
                 <button
                   type="submit"
-                  className="text-red-600"
+                  className="px-3 py-1.5 text-sm font-medium text-red-400 hover:bg-red-500/10 rounded-lg transition"
                 >
                   Sil
                 </button>
               </form>
-
             </div>
-
           </div>
-
         ))}
-
       </div>
-
     </div>
   );
 }
