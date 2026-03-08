@@ -3,23 +3,12 @@ import { getBaseUrl } from '@/lib/api-base-url';
 import { safeJson } from '@/lib/safe-json';
 import { ProcessSection } from '@/components/sections/process-section';
 import { generateMetadataFromTranslations } from '@/lib/seo/metadata';
-import ServicesGrid from '@/components/sections/services-grid';
 import { ServicesSection } from '@/components/sections/services-section';
 
 type Service = {
   id: string;
   title: string;
   description: string;
-  image_url?: string;
-  published: boolean;
-  created_at?: string;
-};
-
-type ServiceCard = {
-  id: string;
-  title: string;
-  description?: string;
-  icon?: string;
   image_url?: string;
   published: boolean;
   created_at?: string;
@@ -43,20 +32,9 @@ export default async function ServicesPage() {
   const t = await getTranslations('services');
   const base = await getBaseUrl();
 
-  const [servicesRes, serviceCardsRes] = await Promise.all([
-    fetch(`${base}/api/services?published=true`, { cache: 'no-store' }),
-    fetch(`${base}/api/service-cards?published=true`, { cache: 'no-store' }),
-  ]);
-
+  const servicesRes = await fetch(`${base}/api/services?published=true`, { cache: 'no-store' });
   const services =
-    (servicesRes.ok
-      ? await safeJson<Service[]>(servicesRes)
-      : null) ?? [];
-
-  const serviceCards =
-    (serviceCardsRes.ok
-      ? await safeJson<ServiceCard[]>(serviceCardsRes)
-      : null) ?? [];
+    (servicesRes.ok ? await safeJson<Service[]>(servicesRes) : null) ?? [];
 
   return (
     <div className="py-20">
@@ -71,8 +49,6 @@ export default async function ServicesPage() {
           </p>
         </div>
       </div>
-
-      <ServicesGrid services={serviceCards} />
 
       <ServicesSection services={services} />
 

@@ -3,6 +3,7 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
+    "whatWeDo": "What We Do",
     "portfolio": "Portfolio",
     "contact": "Contact",
     "login": "Login",
@@ -72,6 +73,12 @@
     }
   },
 
+  "whatWeDo": {
+    "title": "What We Do",
+    "subtitle": "How we work in digital marketing, design and print.",
+    "intro": "From strategy to implementation and reporting, we are with you step by step to help your business reach its goals. We have outlined our process below.",
+    "viewServices": "View Our Services"
+  },
   "process": {
     "title": "Our Process",
     "step": "Step",
@@ -192,6 +199,7 @@
     "links": {
       "about": "About",
       "services": "Services",
+      "whatWeDo": "What We Do",
       "contact": "Contact",
       "privacy": "Privacy Policy",
       "terms": "Terms & Conditions",
@@ -372,6 +380,10 @@
     "services": {
       "title": "Services",
       "description": "Our digital marketing, design and print services. Solutions for your business."
+    },
+    "whatWeDo": {
+      "title": "What We Do",
+      "description": "Our digital marketing, design and print processes. How we work."
     },
     "portfolio": {
       "title": "Portfolio",

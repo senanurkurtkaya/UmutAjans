@@ -2,7 +2,8 @@
   "nav": {
     "home": "Ana Sayfa",
     "about": "Hakkımızda",
-    "services": "Neler Yapıyoruz",
+    "services": "Hizmetlerimiz",
+    "whatWeDo": "Neler Yapıyoruz",
     "portfolio": "Portfolyo",
     "contact": "İletişim",
     "login": "Giriş",
@@ -72,6 +73,12 @@
     }
   },
 
+  "whatWeDo": {
+    "title": "Neler Yapıyoruz",
+    "subtitle": "Dijital pazarlama, tasarım ve baskı alanında nasıl çalışıyoruz.",
+    "intro": "Strateji belirlemeden uygulama ve raporlamaya kadar işletmenizin hedeflerine ulaşması için adım adım yanınızdayız. Sürecimizi aşağıda özetledik.",
+    "viewServices": "Hizmetlerimizi Görüntüle"
+  },
   "process": {
     "title": "Sürecimiz",
     "step": "Adım",
@@ -192,6 +199,7 @@
     "links": {
       "about": "Hakkımızda",
       "services": "Hizmetler",
+      "whatWeDo": "Neler Yapıyoruz",
       "contact": "İletişim",
       "privacy": "Gizlilik Politikası",
       "terms": "Kullanım Koşulları",
@@ -229,7 +237,7 @@
     "value": "Değer",
     "hero": "Hero Slider",
     "homepage": "Ana Sayfa",
-    "services": "Neler Yapıyoruz",
+    "services": "Hizmetlerimiz",
     "serviceCards": "Hizmet Kartları",
     "portfolio": "Portfolyo",
     "products": "Ürünler",
@@ -372,6 +380,10 @@
     "services": {
       "title": "Hizmetler",
       "description": "Dijital pazarlama, tasarım ve baskı hizmetlerimiz. İşletmeniz için çözümler."
+    },
+    "whatWeDo": {
+      "title": "Neler Yapıyoruz",
+      "description": "Dijital pazarlama, tasarım ve baskı süreçlerimiz. Nasıl çalışıyoruz?"
     },
     "portfolio": {
       "title": "Portfolyo",
