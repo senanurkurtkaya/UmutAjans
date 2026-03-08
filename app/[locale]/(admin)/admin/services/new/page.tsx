@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 
 const ICON_OPTIONS = ['FileText', 'BookOpen', 'Mail', 'Folder', 'Tag', 'Barcode', 'Image', 'Gift', 'Award', 'Book', 'Layout', 'Shirt', 'ShoppingBag', 'Magnet', 'Calendar', 'Globe'] as const;
@@ -12,7 +11,6 @@ export default function NewServicePage() {
   const tAlerts = useTranslations('adminAlerts');
   const tIcons = useTranslations('adminIconOptions');
   const tAdmin = useTranslations('admin');
-  const supabase = createClient();
   const router = useRouter();
 
   const [title, setTitle] = useState('');
@@ -23,18 +21,19 @@ export default function NewServicePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { error } = await supabase.from('services').insert({
-      title,
-      description,
-      icon,
-      published,
+    const response = await fetch('/api/services/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, description, icon, published }),
     });
 
-    if (!error) {
+    const result = await response.json();
+
+    if (result.success) {
       router.push('../services');
       router.refresh();
     } else {
-      console.error(error);
+      console.error(result);
     }
   };
 

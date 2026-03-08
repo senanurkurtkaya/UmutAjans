@@ -2,12 +2,12 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { createClient } from '@/lib/supabase/client'
+// import { createClient } from '@/lib/supabase/client'
 
 export default function NewServiceCard() {
   const t = useTranslations('adminAlerts')
   const tAdmin = useTranslations('admin')
-  const supabase = createClient()
+  // const supabase = createClient()
 
   const [title, setTitle] = useState('')
   const [imageFile, setImageFile] = useState<File | null>(null)
@@ -27,36 +27,36 @@ export default function NewServiceCard() {
 
     const fileName = Date.now() + "-" + imageFile.name
 
-    const { error: uploadError } = await supabase.storage
-      .from('service-images')
-      .upload(fileName, imageFile, { upsert: true })
-    if (uploadError) {
-      console.log(uploadError)
-      alert(t('uploadError'))
-      return
-    }
+    // const { error: uploadError } = await supabase.storage
+    //   .from('service-images')
+    //   .upload(fileName, imageFile, { upsert: true })
+    // if (uploadError) {
+    //   console.log(uploadError)
+    //   alert(t('uploadError'))
+    //   return
+    // }
 
-    const { data } = supabase.storage
-      .from('service-images')
-      .getPublicUrl(fileName)
+    // const { data } = supabase.storage
+    //   .from('service-images')
+    //   .getPublicUrl(fileName)
 
-    const imageUrl = data.publicUrl
+    // const imageUrl = data.publicUrl
 
-    const { error } = await supabase
-      .from('service_cards')
-      .insert([
-        {
-          title,
-          image_url: imageUrl,
-          published: true
-        }
-      ])
+    // const { error } = await supabase
+    //   .from('service_cards')
+    //   .insert([
+    //     {
+    //       title,
+    //       image_url: imageUrl,
+    //       published: true
+    //     }
+    //   ])
 
-    if (error) {
-      console.log(error)
-      alert(t('dbError'))
-      return
-    }
+    // if (error) {
+    //   console.log(error)
+    //   alert(t('dbError'))
+    //   return
+    // }
 
     alert(t('cardAdded'))
 
