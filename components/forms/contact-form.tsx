@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -21,6 +21,7 @@ interface FormErrors {
 
 export const ContactForm = React.memo(function ContactForm() {
   const t = useTranslations('contact.form');
+  const locale = useLocale();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -73,7 +74,7 @@ export const ContactForm = React.memo(function ContactForm() {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, locale }),
       });
 
       const data = await response.json().catch(() => ({}));
@@ -104,7 +105,6 @@ export const ContactForm = React.memo(function ContactForm() {
         ...prev,
         [name]: value,
       }));
-      // Clear error for this field when user starts typing
       if (errors[name as keyof FormErrors]) {
         setErrors((prev) => ({
           ...prev,

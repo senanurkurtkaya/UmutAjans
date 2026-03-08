@@ -29,11 +29,13 @@ const FOOTER_LINKS = {
   company: [
     { href: '/about', key: 'links.about' },
     { href: '/services', key: 'links.services' },
+    { href: '/what-we-do', key: 'links.whatWeDo' },
     { href: '/contact', key: 'links.contact' },
   ],
   legal: [
     { href: '/privacy', key: 'links.privacy' },
     { href: '/terms', key: 'links.terms' },
+    { href: '/cookies', key: 'links.cookies' },
   ],
 } as const;
 

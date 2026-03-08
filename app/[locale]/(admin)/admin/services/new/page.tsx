@@ -1,11 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
+const ICON_OPTIONS = ['FileText', 'BookOpen', 'Mail', 'Folder', 'Tag', 'Barcode', 'Image', 'Gift', 'Award', 'Book', 'Layout', 'Shirt', 'ShoppingBag', 'Magnet', 'Calendar', 'Globe'] as const;
+
 export default function NewServicePage() {
-  const supabase = createClient();
+  const t = useTranslations('servicesPage');
+  const tAlerts = useTranslations('adminAlerts');
+  const tIcons = useTranslations('adminIconOptions');
+  const tAdmin = useTranslations('admin');
   const router = useRouter();
 
   const [title, setTitle] = useState('');
@@ -16,30 +21,32 @@ export default function NewServicePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { error } = await supabase.from('services').insert({
-      title,
-      description,
-      icon,
-      published,
+    const response = await fetch('/api/services/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, description, icon, published }),
     });
 
-    if (!error) {
+    const result = await response.json();
+
+    if (result.success) {
       router.push('../services');
       router.refresh();
     } else {
-      console.error(error);
+      console.error(result);
     }
   };
 
   return (
     <div className="container py-20">
       <h1 className="text-3xl font-bold mb-8">
-        Create New Service
+        {tAlerts('createNewService')}
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6 max-w-xl">
+
         <div>
-          <label className="block mb-2">Title</label>
+          <label className="block mb-2">{t('title')}</label>
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -48,55 +55,43 @@ export default function NewServicePage() {
         </div>
 
         <div>
-          <label className="block mb-2">Description</label>
+          <label className="block mb-2">{t('description')}</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border rounded h-32"
           />
         </div>
 
         <div>
-          <label className="block mb-2">Icon</label>
+          <label className="block mb-2">{t('icon')}</label>
+
           <select
             value={icon}
             onChange={(e) => setIcon(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded h-10 text-base-content"
           >
-            <option value="FileText">Kartvizit / El ilanı / Bloknot</option>
-            <option value="BookOpen">Broşür / Katalog / Dergi / Menü</option>
-            <option value="Mail">Zarf / Davetiye</option>
-            <option value="Folder">Cepli dosya</option>
-            <option value="Tag">Etiket / Sticker</option>
-            <option value="Barcode">Barkod etiket</option>
-            <option value="Image">Poster / Afiş / Rollup</option>
-            <option value="Gift">Promosyon ürünleri</option>
-            <option value="Award">Plaket</option>
-            <option value="Book">Ajanda</option>
-            <option value="Layout">Kurumsal kimlik / Masa isimliği</option>
-            <option value="Shirt">Tekstil baskı</option>
-            <option value="ShoppingBag">Bez çanta</option>
-            <option value="Magnet">Magnet baskı</option>
-            <option value="Calendar">Takvim</option>
-            <option value="Globe">Diğer</option>
+            {ICON_OPTIONS.map((key) => (
+              <option key={key} value={key}>{tIcons(key)}</option>
+            ))}
           </select>
         </div>
-
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
             checked={published}
             onChange={(e) => setPublished(e.target.checked)}
           />
-          <label>Published</label>
+          <label>{t('published')}</label>
         </div>
 
         <button
           type="submit"
           className="px-6 py-2 bg-primary text-white rounded"
         >
-          Save
+          {tAdmin('save')}
         </button>
+
       </form>
     </div>
   );

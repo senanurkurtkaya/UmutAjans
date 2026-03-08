@@ -1,8 +1,18 @@
 import { getTranslations } from 'next-intl/server';
-import { createClient } from '@/lib/supabase/server';
-import { ServicesSection } from '@/components/sections/services-section';
+import { getBaseUrl } from '@/lib/api-base-url';
+import { safeJson } from '@/lib/safe-json';
 import { ProcessSection } from '@/components/sections/process-section';
 import { generateMetadataFromTranslations } from '@/lib/seo/metadata';
+import { ServicesSection } from '@/components/sections/services-section';
+
+type Service = {
+  id: string;
+  title: string;
+  description: string;
+  image_url?: string;
+  published: boolean;
+  created_at?: string;
+};
 
 export async function generateMetadata({
   params,
@@ -20,17 +30,11 @@ export async function generateMetadata({
 
 export default async function ServicesPage() {
   const t = await getTranslations('services');
-  const supabase = await createClient();
+  const base = await getBaseUrl();
 
-const { data: services, error } = await supabase
-  .from('services')
-  .select('*')
-  .eq('published', true)
-  .order('created_at', { ascending: false });
-
-  if (error) {
-    console.error(error);
-  }
+  const servicesRes = await fetch(`${base}/api/services?published=true`, { cache: 'no-store' });
+  const services =
+    (servicesRes.ok ? await safeJson<Service[]>(servicesRes) : null) ?? [];
 
   return (
     <div className="py-20">
@@ -39,13 +43,15 @@ const { data: services, error } = await supabase
           <h1 className="text-4xl md:text-5xl font-bold">
             {t('title')}
           </h1>
+
           <p className="text-xl text-muted-foreground">
             {t('subtitle')}
           </p>
         </div>
       </div>
 
-      <ServicesSection services={services ?? []} />
+      <ServicesSection services={services} />
+
       <ProcessSection />
     </div>
   );

@@ -1,16 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
+const ICON_OPTIONS = ['FileText', 'BookOpen', 'Mail', 'Folder', 'Tag', 'Barcode', 'Image', 'Gift', 'Award', 'Book', 'Layout', 'Shirt', 'ShoppingBag', 'Magnet', 'Calendar', 'Globe'] as const;
+
 export default function EditServicePage() {
-  const supabase = createClient();
   const router = useRouter();
   const params = useParams();
 
-  const t = useTranslations('admin.servicesPage');
+  const t = useTranslations('servicesPage');
+  const tIcons = useTranslations('adminIconOptions');
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -19,17 +20,14 @@ export default function EditServicePage() {
 
   useEffect(() => {
     const fetchService = async () => {
-      const { data } = await supabase
-        .from('services')
-        .select('*')
-        .eq('id', params.id)
-        .single();
-
+      const res = await fetch(`/api/services/${params.id}`);
+      if (!res.ok) return;
+      const data = await res.json();
       if (data) {
-        setTitle(data.title);
-        setDescription(data.description);
-        setIcon(data.icon);
-        setPublished(data.published);
+        setTitle(data.title ?? '');
+        setDescription(data.description ?? '');
+        setIcon(data.icon ?? 'FileText');
+        setPublished(data.published ?? false);
       }
     };
 
@@ -38,29 +36,25 @@ export default function EditServicePage() {
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    await supabase
-      .from('services')
-      .update({
-        title,
-        description,
-        icon,
-        published
-      })
-      .eq('id', params.id);
-
-    router.push(`/${params.locale}/admin/services`);
-    router.refresh();
+    const res = await fetch(`/api/services/${params.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, description, icon, published }),
+    });
+    const result = await res.json();
+    if (result.success) {
+      router.push(`/${params.locale}/admin/services`);
+      router.refresh();
+    }
   };
 
   const handleDelete = async () => {
-    await supabase
-      .from('services')
-      .delete()
-      .eq('id', params.id);
-
-    router.push(`/${params.locale}/admin/services`);
-    router.refresh();
+    const res = await fetch(`/api/services/${params.id}`, { method: 'DELETE' });
+    const result = await res.json();
+    if (result.success) {
+      router.push(`/${params.locale}/admin/services`);
+      router.refresh();
+    }
   };
 
   return (
@@ -101,22 +95,9 @@ export default function EditServicePage() {
             onChange={(e) => setIcon(e.target.value)}
             className="w-full p-2 border rounded"
           >
-            <option value="FileText">Kartvizit / El ilanı / Bloknot</option>
-            <option value="BookOpen">Broşür / Katalog / Dergi / Menü</option>
-            <option value="Mail">Zarf / Davetiye</option>
-            <option value="Folder">Cepli dosya</option>
-            <option value="Tag">Etiket / Sticker</option>
-            <option value="Barcode">Barkod etiket</option>
-            <option value="Image">Poster / Afiş / Rollup</option>
-            <option value="Gift">Promosyon ürünleri</option>
-            <option value="Award">Plaket</option>
-            <option value="Book">Ajanda</option>
-            <option value="Layout">Kurumsal kimlik / Masa isimliği</option>
-            <option value="Shirt">Tekstil baskı</option>
-            <option value="ShoppingBag">Bez çanta</option>
-            <option value="Magnet">Magnet baskı</option>
-            <option value="Calendar">Takvim</option>
-            <option value="Globe">Diğer</option>
+            {ICON_OPTIONS.map((key) => (
+              <option key={key} value={key}>{tIcons(key)}</option>
+            ))}
           </select>
         </div>
 

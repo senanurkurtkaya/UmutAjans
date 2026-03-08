@@ -31,56 +31,85 @@ export const StatsSection = React.memo(function StatsSection({
   const t = useTranslations('stats');
   const prefersReducedMotion = useReducedMotion();
 
-const stats =
-  (data?.stats?.map((item) => ({
-    label: item.label ?? '',
-    value: item.value ?? '',
-  })) as StatsItem[]) ??
-  fallbackKeys.map((key, i) => ({
-    label: t(key),
-    value: fallbackValues[i],
-  }));
+  const stats =
+    (data?.stats?.map((item) => ({
+      label: item.label ?? '',
+      value: item.value ?? '',
+    })) as StatsItem[]) ??
+    fallbackKeys.map((key, i) => ({
+      label: t(key),
+      value: fallbackValues[i],
+    }));
 
   const animationProps = useMemo(
     () =>
       prefersReducedMotion
         ? {
-            initial: { opacity: 0 },
-            animate: isInView ? { opacity: 1 } : { opacity: 0 },
-            transition: { duration: 0.3 },
-          }
+          initial: { opacity: 0 },
+          animate: isInView ? { opacity: 1 } : { opacity: 0 },
+          transition: { duration: 0.3 },
+        }
         : {
-            initial: { opacity: 0, y: 20 },
-            animate: isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
-            transition: { duration: 0.5 },
-          },
+          initial: { opacity: 0, y: 30 },
+          animate: isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 },
+          transition: { duration: 0.5 },
+        },
     [isInView, prefersReducedMotion]
   );
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-base-200">
+    <section ref={ref} className="py-24 bg-[#243147]">
+
       <div className="container mx-auto max-w-6xl px-6">
-        <div className="stats stats-vertical md:stats-horizontal w-full shadow-lg bg-base-100 rounded-2xl overflow-hidden border border-base-300/60">
-          {stats.map((item, index) => (
-            <motion.div
-              key={index}
-              {...animationProps}
-              transition={{
-                ...animationProps.transition,
-                delay: prefersReducedMotion ? 0 : index * 0.1,
-              }}
-              className="stat place-items-center py-8 px-6"
-            >
-              <div className="stat-value text-primary text-3xl md:text-4xl font-bold">
-                {item.value}
-              </div>
-              <div className="stat-desc text-base-content/70 font-medium">
-                {item.label}
-              </div>
-            </motion.div>
-          ))}
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          <motion.h2
+            {...animationProps}
+            className="text-4xl md:text-5xl font-bold leading-tight 
+  text-transparent bg-clip-text 
+  bg-gradient-to-r from-blue-400 via-blue-300 to-indigo-400"
+          >
+            Her Detayda Özen,
+            <br />
+            Her Tasarımda
+            <br />
+            Kaliteli İmza.
+          </motion.h2>
+
+          <div className="bg-[#0f1a2b] rounded-2xl shadow-xl border border-white/10 overflow-hidden">
+
+            <div className="grid grid-cols-2 divide-x divide-y lg:divide-y-0 divide-white/10">
+
+              {stats.map((item, index) => (
+                <motion.div
+                  key={index}
+                  {...animationProps}
+                  transition={{
+                    ...animationProps.transition,
+                    delay: prefersReducedMotion ? 0 : index * 0.1,
+                  }}
+                  className="text-center py-10 px-6"
+                >
+                  <div className="text-3xl md:text-4xl font-bold text-blue-400">
+                    {item.value}
+                  </div>
+
+                  <div className="mt-2 text-white/70 font-medium">
+                    {item.label}
+                  </div>
+
+                </motion.div>
+              ))}
+
+            </div>
+
+          </div>
+
         </div>
+
       </div>
+
     </section>
   );
 });

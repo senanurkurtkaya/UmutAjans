@@ -1,12 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 import { useRouter } from '@/lib/i18n/navigation';
 import { useTranslations } from 'next-intl';
 
 export default function AddProductModal({ onClose }: { onClose: () => void }) {
-  const supabase = createClient();
   const router = useRouter();
   const t = useTranslations('admin');
 
@@ -18,19 +16,22 @@ export default function AddProductModal({ onClose }: { onClose: () => void }) {
     setSaving(true);
     setError(null);
 
-    const { error } = await supabase.from('products').insert({
-      title,
+    const res = await fetch('/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title }),
     });
+    const result = await res.json();
 
-    if (error) {
-      setError(error.message);
+    if (!result.success) {
+      setError(result.error ?? 'Failed to save');
       setSaving(false);
       return;
     }
 
     setSaving(false);
     onClose();
-    router.refresh(); // server page yeniden data çeksin
+    router.refresh();
   };
 
   return (

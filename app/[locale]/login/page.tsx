@@ -1,13 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
-import { useRouter } from '@/lib/i18n/navigation';
 import { useTranslations, useLocale } from 'next-intl';
+import { Link } from '@/lib/i18n/navigation';
 
 export default function LoginPage() {
-  const supabase = createClient();
-  const router = useRouter();
   const locale = useLocale();
   const t = useTranslations('login');
 
@@ -18,18 +15,29 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      setError(error.message);
+
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+      credentials: 'include',
+    });
+
+    let result: { success?: boolean; error?: string };
+    try {
+      result = await res.json();
+    } catch {
+      setError('Sunucu yanıtı işlenemedi');
       return;
     }
-    router.push('/admin/services');
-    router.refresh();
-  };
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut({ scope: 'global' });
-    window.location.href = `/${locale}/login`;
+    if (!result?.success) {
+      setError(result?.error ?? 'Giriş başarısız');
+      return;
+    }
+
+    // Tam sayfa yönlendirme; tarayıcı çerezleri bir sonraki istekte gönderir
+    window.location.href = `/${locale}/admin/services`;
   };
 
   return (
@@ -95,13 +103,12 @@ export default function LoginPage() {
               </button>
             </form>
 
-            <button
-              type="button"
-              onClick={handleLogout}
+            <Link
+              href="/"
               className="btn btn-ghost w-full rounded-xl text-sm mt-2"
             >
-              {t('logout')}
-            </button>
+              {t('backToHome')}
+            </Link>
           </div>
         </div>
       </div>

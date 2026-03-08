@@ -32,7 +32,7 @@ type Service = {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  icon?: string;
 };
 
 interface ServicesSectionProps {
@@ -40,7 +40,6 @@ interface ServicesSectionProps {
 }
 
 const iconMap: Record<string, React.ElementType> = {
-  // Eski dijital hizmet anahtarlarını da çalışır bırakıyoruz
   seo: Target,
   social: TrendingUp,
   ppc: Zap,
@@ -48,8 +47,6 @@ const iconMap: Record<string, React.ElementType> = {
   analytics: BarChart3,
   web: Globe,
   globe: Globe,
-
-  // Matbaa hizmetleri – ikon alanına bu değerleri yazabilirsin
   filetext: FileText,
   FileText,
   bookopen: BookOpen,
@@ -92,12 +89,12 @@ export const ServicesSection = React.memo(function ServicesSection({
       prefersReducedMotion
         ? { hidden: { opacity: 0 }, visible: { opacity: 1 } }
         : {
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.1 },
-            },
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.1 },
           },
+        },
     [prefersReducedMotion]
   );
 
@@ -106,13 +103,13 @@ export const ServicesSection = React.memo(function ServicesSection({
       prefersReducedMotion
         ? { hidden: { opacity: 0 }, visible: { opacity: 1 } }
         : {
-            hidden: { opacity: 0, y: 20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.5 },
-            },
+          hidden: { opacity: 0, y: 20 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5 },
           },
+        },
     [prefersReducedMotion]
   );
 
@@ -129,8 +126,7 @@ export const ServicesSection = React.memo(function ServicesSection({
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           {services.map((service: Service) => {
-            const Icon = iconMap[service.icon] || Globe;
-            return (
+            const Icon = service.icon ? iconMap[service.icon] || Globe : Globe; return (
               <motion.div key={service.id} variants={itemVariants} className="h-full">
                 <div className="card h-full flex flex-col bg-base-200/80 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden border border-base-300/80 hover:border-primary/40">
                   <div className="card-body flex flex-col justify-between">

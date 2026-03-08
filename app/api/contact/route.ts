@@ -1,21 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isValidEmail, isValidPhone, isRequired } from '@/lib/utils/validation';
 import { logger } from '@/lib/utils/logger';
+import { createSupabaseServerClient } from '@/lib/supabase/server';
 
 const CONTACT_BODY_MAX_LENGTH = 50_000;
 
-export interface ContactBody {
+const CONTACT_OFFER_PRODUCT_TYPE = 'İletişim formu';
+
+interface ContactBody {
   name: string;
   email: string;
   phone?: string;
   message: string;
+  locale?: string;
 }
 
 function validateBody(body: unknown): { ok: true; data: ContactBody } | { ok: false; error: string } {
   if (body == null || typeof body !== 'object') {
     return { ok: false, error: 'Invalid request body' };
   }
-  const { name, email, phone, message } = body as Record<string, unknown>;
+  const { name, email, phone, message, locale } = body as Record<string, unknown>;
 
   if (!isRequired(String(name ?? ''))) {
     return { ok: false, error: 'Name is required' };
@@ -42,6 +46,9 @@ function validateBody(body: unknown): { ok: true; data: ContactBody } | { ok: fa
   };
   if (phone != null && String(phone).trim() !== '') {
     data.phone = String(phone).trim();
+  }
+  if (locale != null && typeof locale === 'string' && ['tr', 'en'].includes(locale)) {
+    data.locale = locale;
   }
   return { ok: true, data };
 }
@@ -79,11 +86,30 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: result.error }, { status: 400 });
     }
 
-    // TODO: Send email (e.g. Resend, SendGrid) or save to DB
-    logger.info('Contact form submission', {
+    const supabase = await createSupabaseServerClient();
+    const { error } = await supabase.from('offers').insert({
+      name: result.data.name,
+      email: result.data.email,
+      phone: result.data.phone ?? null,
+      product_type: CONTACT_OFFER_PRODUCT_TYPE,
+      quantity: 0,
+      size: null,
+      description: result.data.message,
+      status: 'new',
+      locale: result.data.locale ?? null,
+    });
+
+    if (error) {
+      logger.error('Contact form DB insert failed', error, 'ContactAPI');
+      return NextResponse.json(
+        { error: 'Failed to save message' },
+        { status: 500 }
+      );
+    }
+
+    logger.info('Contact form submission saved to offers', {
       email: result.data.email,
       name: result.data.name,
-      hasPhone: !!result.data.phone,
     }, 'ContactAPI');
 
     return NextResponse.json({ success: true });

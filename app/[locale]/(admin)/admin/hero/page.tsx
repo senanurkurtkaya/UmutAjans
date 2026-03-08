@@ -1,188 +1,94 @@
 export const dynamic = 'force-dynamic';
 
-import { createSupabaseServerClient } from '@/lib/supabase/server';
-import { createSupabaseAdminClient } from '@/lib/supabase/admin';
+import { getTranslations } from 'next-intl/server';
 import { revalidatePath } from 'next/cache';
+import { getBaseUrl } from '@/lib/api-base-url';
+import { safeJson } from '@/lib/safe-json';
 import { HeroSortableList } from '../components/HeroSortableList';
+import { HeroSlideForm } from '../components/HeroSlideForm';
+
+type HeroSlide = { id: string; title?: string; subtitle?: string; button_text?: string; button_link?: string; display_order?: number; image_url?: string; is_active?: boolean };
 
 type Props = {
-    params: { locale: string };
-    searchParams: { edit?: string };
+    params: Promise<{ locale: string }>;
+    searchParams: Promise<{ edit?: string }>;
 };
 
 export default async function HeroAdminPage({
     params,
     searchParams,
 }: Props) {
-    const supabase = await createSupabaseServerClient();
+    const { locale } = await params;
+    const { edit } = await searchParams;
+    const base = await getBaseUrl();
+    const t = await getTranslations('adminAlerts');
+    const tAdmin = await getTranslations('admin');
 
-    const { data: slides } = await supabase
-        .from('hero_slides')
-        .select('*')
-        .order('display_order', { ascending: true });
+    const slidesRes = await fetch(`${base}/api/hero-slides`, { cache: 'no-store' });
+    const slidesList = (slidesRes.ok ? await safeJson<HeroSlide[]>(slidesRes) : null) ?? [];
+    const editingSlide = (slidesList ?? []).find((s) => s.id === edit);
 
-    const editingSlide = slides?.find(
-        (s) => s.id === searchParams.edit
-    );
-
-    /* ================= ADD ================= */
-    async function addSlide(formData: FormData) {
-        'use server';
-
-        const supabase = createSupabaseAdminClient();
-
-        const file = formData.get('image') as File | null;
-
-        let imageUrl = '';
-
-        if (file && file.size > 0) {
-            const safeFileName = file.name.replaceAll(' ', '-').toLowerCase();
-            const filePath = `hero/${Date.now()}-${safeFileName}`;
-
-            await supabase.storage.from('media').upload(filePath, file);
-
-            const { data } = supabase.storage
-                .from('media')
-                .getPublicUrl(filePath);
-
-            imageUrl = data.publicUrl;
-        }
-
-        await supabase.from('hero_slides').insert({
-            title: String(formData.get('title') ?? ''),
-            subtitle: String(formData.get('subtitle') ?? ''),
-            button_text: String(formData.get('button_text') ?? ''),
-            display_order: Number(formData.get('order') ?? 0),
-            image_url: imageUrl,
-            is_active: true,
-        });
-
-        revalidatePath(`/${params.locale}`);
-    }
-
-    /* ================= UPDATE ================= */
-    async function updateSlide(formData: FormData) {
-        'use server';
-
-        const supabase = createSupabaseAdminClient();
-
-        const id = searchParams.edit;
-
-        await supabase
-            .from('hero_slides')
-            .update({
-                title: String(formData.get('title') ?? ''),
-                subtitle: String(formData.get('subtitle') ?? ''),
-                button_text: String(formData.get('button_text') ?? ''),
-                display_order: Number(formData.get('order') ?? 0),
-            })
-            .eq('id', id);
-
-        revalidatePath(`/${params.locale}`);
-    }
-
-    /* ================= TOGGLE ================= */
     async function toggleSlide(formData: FormData) {
         'use server';
-
-        const supabase = createSupabaseAdminClient();
-
-        const id = formData.get('id');
+        const id = formData.get('id') as string;
         const current = formData.get('current') === 'true';
-
-        await supabase
-            .from('hero_slides')
-            .update({ is_active: !current })
-            .eq('id', id);
-
-        revalidatePath(`/${params.locale}`);
+        const apiBase = await getBaseUrl();
+        await fetch(`${apiBase}/api/hero-slides/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ is_active: !current }),
+        });
+        revalidatePath(`/${locale}`);
     }
 
-    /* ================= DELETE ================= */
     async function deleteSlide(formData: FormData) {
         'use server';
-
-        const supabase = createSupabaseAdminClient();
-        const id = formData.get('id');
-
-        await supabase.from('hero_slides').delete().eq('id', id);
-
-        revalidatePath(`/${params.locale}`);
+        const id = formData.get('id') as string;
+        const apiBase = await getBaseUrl();
+        await fetch(`${apiBase}/api/hero-slides/${id}`, { method: 'DELETE' });
+        revalidatePath(`/${locale}`);
     }
 
-    /* ================= REORDER ================= */
     async function reorderSlides(ids: string[]) {
         'use server';
-
-        const supabase = createSupabaseAdminClient();
-
-        for (let i = 0; i < ids.length; i++) {
-            await supabase
-                .from('hero_slides')
-                .update({ display_order: i })
-                .eq('id', ids[i]);
-        }
-
-        revalidatePath(`/${params.locale}`);
+        const apiBase = await getBaseUrl();
+        await fetch(`${apiBase}/api/hero-slides/reorder`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ids }),
+        });
+        revalidatePath(`/${locale}`);
     }
 
     return (
-        <div className="max-w-5xl mx-auto py-20 space-y-10">
-            <h1 className="text-3xl font-bold">Hero Slider Yönetimi</h1>
+        <div className="max-w-5xl space-y-10">
+            <h1 className="text-2xl md:text-3xl font-bold">{t('heroManagement')}</h1>
 
-            {/* FORM */}
-            <form
-                action={editingSlide ? updateSlide : addSlide}
-                className="space-y-4 border p-6 rounded-xl"
-            >
-                <input
-                    name="title"
-                    placeholder="Başlık"
-                    defaultValue={editingSlide?.title ?? ''}
-                    className="w-full p-2 border rounded"
-                />
-
-                <textarea
-                    name="subtitle"
-                    placeholder="Alt Başlık"
-                    defaultValue={editingSlide?.subtitle ?? ''}
-                    className="w-full p-2 border rounded"
-                />
-
-                <input
-                    name="button_text"
-                    placeholder="Buton Yazısı"
-                    defaultValue={editingSlide?.button_text ?? ''}
-                    className="w-full p-2 border rounded"
-                />
-
-                <input
-                    name="order"
-                    type="number"
-                    placeholder="Sıra"
-                    defaultValue={editingSlide?.display_order ?? 0}
-                    className="w-full p-2 border rounded"
-                />
-
-                {!editingSlide && (
-                    <input
-                        name="image"
-                        type="file"
-                        accept="image/*"
-                        className="w-full"
-                    />
-                )}
-
-                <button
-                    type="submit"
-                    className="bg-black text-white px-4 py-2 rounded"
-                >
-                    {editingSlide ? 'Güncelle' : 'Slide Ekle'}
-                </button>
-            </form>
+            <HeroSlideForm
+                editingSlide={editingSlide}
+                locale={locale}
+                labels={{
+                    placeholderTitle: tAdmin('placeholderTitle'),
+                    placeholderSubtitle: tAdmin('placeholderSubtitle'),
+                    placeholderButton: tAdmin('placeholderButton'),
+                    placeholderButtonLink: tAdmin('placeholderButtonLink'),
+                    placeholderOrder: tAdmin('placeholderOrder'),
+                    image: tAdmin('image'),
+                    changeImage: tAdmin('changeImage'),
+                    addSlide: tAdmin('addSlide'),
+                    update: tAdmin('update'),
+                }}
+            />
 
             <HeroSortableList
-                slides={slides ?? []}
+                slides={(slidesList ?? []).map((s) => ({
+                    id: s.id,
+                    title: s.title ?? '',
+                    subtitle: s.subtitle ?? '',
+                    display_order: s.display_order ?? 0,
+                    image_url: s.image_url,
+                    is_active: s.is_active,
+                }))}
                 onReorder={reorderSlides}
                 onToggle={toggleSlide}
                 onDelete={deleteSlide}

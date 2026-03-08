@@ -32,9 +32,7 @@ export default function OfferPage() {
             {t('title')}
           </h1>
           <p className="text-base text-base-content/70">
-            {locale === 'tr'
-              ? 'İhtiyaçlarınızı kısaca anlatın, size özel baskı teklifini iletelim.'
-              : 'Tell us briefly what you need and we will send you a tailored print quote.'}
+            {t('subtitle')}
           </p>
         </div>
 
@@ -127,10 +125,10 @@ export default function OfferPage() {
                     name="product_type"
                     className="select select-bordered w-full rounded-xl"
                   >
-                    <option value="Broşür">{t('brochure')}</option>
-                    <option value="Kartvizit">{t('card')}</option>
-                    <option value="Afiş">{t('poster')}</option>
-                    <option value="Diğer">{t('other')}</option>
+                    <option value="brochure">{t('brochure')}</option>
+                    <option value="card">{t('card')}</option>
+                    <option value="poster">{t('poster')}</option>
+                    <option value="other">{t('other')}</option>
                   </select>
                 </div>
               </div>

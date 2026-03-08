@@ -3,13 +3,15 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
+    "whatWeDo": "What We Do",
+    "portfolio": "Portfolio",
     "contact": "Contact",
     "login": "Login",
     "getQuote": "Get Quote"
   },
   "hero": {
-    "title": "Transform Your Digital Presence",
-    "subtitle": "We help businesses grow and succeed in the digital world with cutting-edge marketing strategies and innovative solutions.",
+    "title": "Your Ideas Printed on Your Brand, Not Just on Paper",
+    "subtitle": "From business cards to catalogs, labels to promotional products, we produce all print solutions with modern technology.",
     "cta": "Get Started",
     "ctaSecondary": "Our Services"
   },
@@ -55,6 +57,8 @@
   "about": {
     "title": "About Us",
     "subtitle": "We are a passionate team of digital marketing experts dedicated to helping businesses succeed online.",
+    "description1": "We combine creativity with data-driven strategies to deliver results that matter. Our team brings years of experience across digital marketing, branding, and growth.",
+    "description2": "Whether you need SEO, social media, or full-funnel campaigns, we work closely with you to understand your goals and build a plan that fits your business.",
     "team": {
       "title": "Our Team",
       "subtitle": "Meet the people behind our success"
@@ -69,8 +73,15 @@
     }
   },
 
+  "whatWeDo": {
+    "title": "What We Do",
+    "subtitle": "How we work in digital marketing, design and print.",
+    "intro": "From strategy to implementation and reporting, we are with you step by step to help your business reach its goals. We have outlined our process below.",
+    "viewServices": "View Our Services"
+  },
   "process": {
     "title": "Our Process",
+    "step": "Step",
     "subtitle": "A proven approach to digital marketing success",
     "discovery": { "title": "Discovery", "description": "We analyze your business and market to define goals." },
     "strategy": { "title": "Strategy", "description": "We create a tailored plan to achieve your objectives." },
@@ -81,17 +92,104 @@
   "contact": {
     "title": "Get in Touch",
     "subtitle": "Ready to grow your business? Let's start a conversation.",
+    "email": {
+      "title": "Email",
+      "description": "We'll get back to you as soon as we can."
+    },
+    "phone": {
+      "title": "Phone",
+      "description": "Reach us during business hours on weekdays."
+    },
+    "address": {
+      "title": "Address",
+      "description": "You can book an appointment to visit our office.",
+      "street": "Kazım Karabekir Cd. No:87/36 D:36 43",
+      "openInMap": "Open in Maps"
+    },
     "form": {
-      "name": "Name",
+      "title": "Send a Message",
+      "description": "Fill out the form for questions or quote requests.",
+      "name": "Full Name",
       "email": "Email",
       "phone": "Phone",
-      "message": "Message",
-      "submit": "Send Message",
+      "message": "Your Message",
+      "send": "Send",
       "sending": "Sending...",
       "success": "Message sent successfully!",
-      "error": "Something went wrong. Please try again."
+      "successDescription": "We'll get back to you soon.",
+      "error": "Something went wrong. Please try again.",
+      "errors": {
+        "nameRequired": "Name is required.",
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Please enter a valid email address.",
+        "phoneInvalid": "Please enter a valid phone number.",
+        "messageRequired": "Message is required.",
+        "messageMinLength": "Message must be at least 10 characters.",
+        "submitFailed": "Failed to send. Please try again."
+      }
     }
   },
+
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "At Umut Ajans we value our visitors' privacy. This privacy policy explains what information is collected when you visit our website and how it is used.",
+    "collectedTitle": "Information We Collect",
+    "collectedIntro": "When you use our website, the following information may be collected:",
+    "collectedItem1": "Full name",
+    "collectedItem2": "Email address",
+    "collectedItem3": "Phone number",
+    "collectedItem4": "Message content",
+    "collectedItem5": "IP address and browser information",
+    "collectedNote": "This information is used only for communication and service delivery purposes.",
+    "usageTitle": "Use of Information",
+    "usageIntro": "Collected information may be used for the following purposes:",
+    "usageItem1": "Evaluating quote requests",
+    "usageItem2": "Communicating with users",
+    "usageItem3": "Analyzing website performance",
+    "usageItem4": "Improving service quality",
+    "cookiesTitle": "Cookies",
+    "cookiesText": "Our website may use cookies to improve user experience. Cookies are small data files stored on your device by your browser.",
+    "securityTitle": "Data Security",
+    "securityText": "The security of user information is important to us. Therefore, data is stored on secure infrastructure and protected against unauthorized access.",
+    "thirdPartyTitle": "Third-Party Services",
+    "thirdPartyText": "Our website may use analytics tools such as Google Analytics or other third-party services. These services are subject to their own privacy policies.",
+    "contactTitle": "Contact",
+    "contactText": "You can contact us with any questions about our privacy policy."
+  },
+
+  "terms": {
+    "title": "Terms & Conditions",
+    "intro": "By using this website, you are deemed to have accepted the following terms of use.",
+    "servicesTitle": "Services",
+    "servicesText": "Umut Ajans provides digital marketing, design and print services. Information on the website is for informational purposes only.",
+    "contentTitle": "Content Rights",
+    "contentText": "All content, design, text and images on the website belong to Umut Ajans. They may not be copied, distributed or used for commercial purposes without permission.",
+    "disclaimerTitle": "Disclaimer",
+    "disclaimerText": "We strive to keep the information on the website as accurate and up to date as possible. However, no guarantee is given as to the accuracy or completeness of the information.",
+    "linksTitle": "Links",
+    "linksText": "Our website may contain links to third-party websites. Umut Ajans is not responsible for the content of these sites.",
+    "changesTitle": "Changes",
+    "changesText": "Umut Ajans reserves the right to update these terms of use at any time."
+  },
+
+  "cookies": {
+    "title": "Cookie Policy",
+    "intro": "As the Umut Ajans website, we would like to inform you about our use of cookies and how they are managed.",
+    "whatTitle": "What Are Cookies?",
+    "whatText": "Cookies are small text files stored on your device (computer, tablet or mobile) by websites. They are used to ensure the site works properly, remember user preferences and improve the site experience.",
+    "typesTitle": "Types of Cookies We Use",
+    "typesEssential": "Essential cookies:",
+    "typesEssentialDesc": "Required for the basic functionality of the site.",
+    "typesAnalytics": "Analytics cookies:",
+    "typesAnalyticsDesc": "Help us understand visitor behaviour and improve the site.",
+    "typesFunctional": "Functional cookies:",
+    "typesFunctionalDesc": "Allow us to remember your preferences such as language or region.",
+    "manageTitle": "Managing Cookies",
+    "manageText": "You can delete cookies or block certain types of cookies from your browser settings. Some features of the site may not work properly if you disable cookies.",
+    "contactTitle": "Contact",
+    "contactText": "You can contact us with any questions about our cookie policy."
+  },
+
   "footer": {
     "company": "Company",
     "legal": "Legal",
@@ -101,9 +199,11 @@
     "links": {
       "about": "About",
       "services": "Services",
+      "whatWeDo": "What We Do",
       "contact": "Contact",
-      "privacy": "Privacy",
-      "terms": "Terms"
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions",
+      "cookies": "Cookie Policy"
     }
   },
 
@@ -123,14 +223,22 @@
     "addProduct": "Add Product",
     "homepageTitle": "Homepage Management",
     "save": "Save",
+    "update": "Update",
     "placeholderTitle": "Title",
     "placeholderSubtitle": "Subtitle",
     "placeholderButton": "Button text",
+    "placeholderButtonLink": "Button link (e.g. /en/contact, https://wa.me/...)",
+    "placeholderOrder": "Order",
+    "image": "Image",
+    "changeImage": "Change image",
+    "addSlide": "Add slide",
+    "newCard": "New Card",
     "label": "Label",
     "value": "Value",
     "hero": "Hero Slider",
     "homepage": "Homepage",
     "services": "Services",
+    "serviceCards": "Service Cards",
     "portfolio": "Portfolio",
     "products": "Products",
     "offers": "Offers",
@@ -188,6 +296,7 @@
 
   "offer": {
     "title": "Get a Quote",
+    "subtitle": "Tell us briefly what you need and we will send you a tailored print quote.",
     "name": "Full Name",
     "phone": "Phone",
     "email": "Email",
@@ -226,17 +335,139 @@
     "email": "Email",
     "password": "Password",
     "submit": "Login",
-    "logout": "Logout"
+    "backToHome": "Back to Home"
   },
 
   "home": {
     "exploreTitle": "Explore",
-    "exploreSubtitle": "About us, services, contact and get a quote."
+    "exploreSubtitle": "About us, services, contact and get a quote.",
+    "viewAll": "View all",
+    "categories": {
+      "boxProduction": "BOX PRODUCTION",
+      "cardboardBag": "CARDBOARD BAG",
+      "catalogMagazine": "CATALOG / MAGAZINE",
+      "businessCard": "BUSINESS CARD",
+      "signboard": "SIGNAGE",
+      "wetWipe": "WET WIPE"
+    }
   },
+
+  "portfolio": {
+    "title": "Portfolio"
+  },
+
+  "portfolioDetail": {
+    "client": "Client",
+    "year": "Year",
+    "category": "Category",
+    "projectImages": "Project Images",
+    "projectImageAlt": "Project image"
+  },
+
   "metadata": {
+    "contact": {
+      "title": "Contact",
+      "description": "Get in touch with Umut Ajans. Contact us for your questions and quote requests."
+    },
     "home": {
       "title": "Home",
       "description": "Transform your digital presence with our comprehensive marketing solutions."
+    },
+    "about": {
+      "title": "About Us",
+      "description": "Learn about our team, values and how we help businesses grow in the digital world."
+    },
+    "services": {
+      "title": "Services",
+      "description": "Our digital marketing, design and print services. Solutions for your business."
+    },
+    "whatWeDo": {
+      "title": "What We Do",
+      "description": "Our digital marketing, design and print processes. How we work."
+    },
+    "portfolio": {
+      "title": "Portfolio",
+      "description": "Our projects and references."
+    },
+    "offer": {
+      "title": "Get a Quote",
+      "description": "Contact us for print and product quotes."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "Umut Ajans privacy policy. What information we collect and how we use it on our website."
+    },
+    "terms": {
+      "title": "Terms & Conditions",
+      "description": "Umut Ajans website terms of use and conditions."
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "description": "Information about cookie use and cookie management at Umut Ajans."
     }
+  },
+
+  "common": {
+    "skipToContent": "Skip to main content",
+    "toggleTheme": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "close": "Close",
+    "somethingWentWrong": "Something went wrong",
+    "somethingWentWrongDescription": "We're sorry, but something unexpected happened. Please try refreshing the page.",
+    "refreshPage": "Refresh Page",
+    "loading": "Loading..."
+  },
+
+  "languageSwitcher": {
+    "ariaLabel": "Language selection",
+    "english": "English",
+    "turkish": "Türkçe"
+  },
+
+  "adminAlerts": {
+    "titleRequired": "Please enter a title",
+    "selectImage": "Please select an image",
+    "uploadError": "Upload error",
+    "dbError": "Database error",
+    "cardAdded": "Card added",
+    "selectFile": "Please select a file",
+    "productAdded": "Product added",
+    "imageUploadFailed": "Failed to upload image",
+    "projectAddError": "Error adding project",
+    "updateError": "Update error",
+    "newServiceCard": "New Service Card",
+    "newProduct": "New Product",
+    "newPortfolioProject": "New Portfolio Project",
+    "editPortfolio": "Edit Portfolio",
+    "saveProject": "Save Project",
+    "slug": "Slug",
+    "projectDescription": "Project description",
+    "client": "Client",
+    "year": "Year",
+    "category": "Category",
+    "createNewService": "Create New Service",
+    "heroManagement": "Hero Slider Management",
+    "statusPending": "..."
+  },
+
+  "adminIconOptions": {
+    "FileText": "Business card / Flyer / Notepad",
+    "BookOpen": "Brochure / Catalog / Magazine / Menu",
+    "Mail": "Envelope / Invitation",
+    "Folder": "Folder with pockets",
+    "Tag": "Label / Sticker",
+    "Barcode": "Barcode label",
+    "Image": "Poster / Banner / Rollup",
+    "Gift": "Promotional products",
+    "Award": "Plaque",
+    "Book": "Agenda",
+    "Layout": "Corporate identity / Name plate",
+    "Shirt": "Textile printing",
+    "ShoppingBag": "Tote bag",
+    "Magnet": "Magnet printing",
+    "Calendar": "Calendar",
+    "Globe": "Other"
   }
 }

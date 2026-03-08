@@ -1,10 +1,10 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey =
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  process.env.SUPABASE_PUBLISHABLE_KEY ??
+  process.env.SUPABASE_ANON_KEY;
 
 /** Skip Supabase if env looks like placeholder (avoids hanging on invalid URL) */
 const isSupabaseConfigured =
@@ -53,7 +53,6 @@ export async function updateSession(request: NextRequest) {
     );
     await Promise.race([claimsPromise, timeoutPromise]);
   } catch {
-    // Timeout or network error: continue without failing the request
   }
 
   return response;

@@ -1,61 +1,53 @@
-import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import { getTranslations } from "next-intl/server";
+import { getBaseUrl } from "@/lib/api-base-url";
 
 export default async function PortfolioDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
+  const base = await getBaseUrl();
+  const t = await getTranslations("portfolioDetail");
 
-  const supabase = await createSupabaseServerClient();
+  const projectRes = await fetch(`${base}/api/portfolio?slug=${encodeURIComponent(slug)}`, { cache: 'no-store' });
+  if (!projectRes.ok) return notFound();
+  const project = await projectRes.json();
+  if (!project?.id) return notFound();
 
-  const { data: project, error } = await supabase
-    .from("portfolio_projects")
-    .select("*")
-    .eq("slug", params.slug)
-    .single();
-
-  if (!project || error) {
-    return notFound();
-  }
-
-  const { data: images } = await supabase
-    .from("portfolio_images")
-    .select("*")
-    .eq("project_id", project.id)
-    .order("display_order", { ascending: true });
+  const imagesRes = await fetch(`${base}/api/portfolio-images?project_id=${encodeURIComponent(project.id)}`, { cache: 'no-store' });
+  const images = imagesRes.ok ? (await imagesRes.json()) : [];
 
   return (
-    <div className="container mx-auto py-20 max-w-4xl">
+    <div className="container mx-auto max-w-4xl px-4 py-12 sm:py-16 md:py-20">
 
       {project.cover_image && (
-        <div className="relative w-full h-[400px] mb-10">
-          <Image
+        <div className="relative w-full h-56 sm:h-72 md:h-80 lg:h-[400px] mb-8 md:mb-10 overflow-hidden rounded-lg">
+          <img
             src={project.cover_image}
             alt={project.title}
-            fill
-            className="object-cover rounded-lg"
+            className="w-full h-full object-cover"
           />
         </div>
       )}
 
-      <h1 className="text-4xl font-bold mb-6">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-6">
         {project.title}
       </h1>
 
       <div className="flex gap-6 text-sm text-gray-500 mb-8">
 
         {project.client && (
-          <span>Client: {project.client}</span>
+          <span>{t("client")}: {project.client}</span>
         )}
 
         {project.year && (
-          <span>Year: {project.year}</span>
+          <span>{t("year")}: {project.year}</span>
         )}
 
         {project.category && (
-          <span>Category: {project.category}</span>
+          <span>{t("category")}: {project.category}</span>
         )}
 
       </div>
@@ -68,18 +60,17 @@ export default async function PortfolioDetailPage({
         <div>
 
           <h2 className="text-2xl font-semibold mb-6">
-            Project Images
+            {t("projectImages")}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            {images.map((img) => (
-              <div key={img.id} className="relative w-full h-64">
-                <Image
+            {images.map((img: { id: string; image_url: string }) => (
+              <div key={img.id} className="relative w-full h-64 overflow-hidden rounded-lg">
+                <img
                   src={img.image_url}
-                  alt="Project Image"
-                  fill
-                  className="object-cover rounded-lg"
+                  alt={t("projectImageAlt")}
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}

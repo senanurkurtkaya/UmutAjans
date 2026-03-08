@@ -2,14 +2,16 @@
   "nav": {
     "home": "Ana Sayfa",
     "about": "Hakkımızda",
-    "services": "Neler Yapıyoruz",
+    "services": "Hizmetlerimiz",
+    "whatWeDo": "Neler Yapıyoruz",
+    "portfolio": "Portfolyo",
     "contact": "İletişim",
     "login": "Giriş",
     "getQuote": "Teklif Al"
   },
   "hero": {
-    "title": "Dijital Varlığınızı Dönüştürün",
-    "subtitle": "İşletmelerin dijital dünyada büyümesi ve başarılı olması için yenilikçi pazarlama stratejileri ve çözümler sunuyoruz.",
+    "title": "Fikirleriniz Kağıda Değil, Markanıza Basılır",
+    "subtitle": "Kartvizitten kataloğa, etiketlerden promosyon ürünlerine kadar tüm baskı çözümlerini modern teknolojiyle üretiyoruz.",
     "cta": "Başlayın",
     "ctaSecondary": "Hizmetlerimiz"
   },
@@ -55,6 +57,8 @@
   "about": {
     "title": "Hakkımızda",
     "subtitle": "İşletmelerin çevrimiçi başarısına adanmış tutkulu bir dijital pazarlama ekibiyiz.",
+    "description1": "Yaratıcılığı veri odaklı stratejilerle bir araya getirerek önemli sonuçlar elde ediyoruz. Ekibimiz dijital pazarlama, marka ve büyüme alanında yıllarca deneyim getiriyor.",
+    "description2": "SEO, sosyal medya veya tam kanal kampanyalara ihtiyacınız olsun, hedeflerinizi anlamak ve işletmenize uygun bir plan oluşturmak için sizinle yakın çalışıyoruz.",
     "team": {
       "title": "Ekibimiz",
       "subtitle": "Başarımızın arkasındaki isimlerle tanışın"
@@ -69,8 +73,15 @@
     }
   },
 
+  "whatWeDo": {
+    "title": "Neler Yapıyoruz",
+    "subtitle": "Dijital pazarlama, tasarım ve baskı alanında nasıl çalışıyoruz.",
+    "intro": "Strateji belirlemeden uygulama ve raporlamaya kadar işletmenizin hedeflerine ulaşması için adım adım yanınızdayız. Sürecimizi aşağıda özetledik.",
+    "viewServices": "Hizmetlerimizi Görüntüle"
+  },
   "process": {
     "title": "Sürecimiz",
+    "step": "Adım",
     "subtitle": "Dijital pazarlama başarısı için kanıtlanmış yaklaşım",
     "discovery": { "title": "Keşif", "description": "Hedefleri belirlemek için işletmenizi ve pazarı analiz ediyoruz." },
     "strategy": { "title": "Strateji", "description": "Hedeflerinize ulaşmak için özel bir plan oluşturuyoruz." },
@@ -81,17 +92,104 @@
   "contact": {
     "title": "İletişime Geçin",
     "subtitle": "İşletmenizi büyütmeye hazır mısınız? Hemen sohbet edelim.",
+    "email": {
+      "title": "E-posta",
+      "description": "Size en kısa sürede dönüş yapalım."
+    },
+    "phone": {
+      "title": "Telefon",
+      "description": "Hafta içi mesai saatlerinde ulaşabilirsiniz."
+    },
+    "address": {
+      "title": "Adres",
+      "description": "Ofisimizi ziyaret etmek için randevu alabilirsiniz.",
+      "street": "Kazım Karabekir Cd. No:87/36 D:36 43",
+      "openInMap": "Haritada aç"
+    },
     "form": {
-      "name": "Ad",
+      "title": "Mesaj Gönderin",
+      "description": "Sorularınız veya teklif talebiniz için formu doldurun.",
+      "name": "Ad Soyad",
       "email": "E-posta",
       "phone": "Telefon",
-      "message": "Mesaj",
-      "submit": "Gönder",
+      "message": "Mesajınız",
+      "send": "Gönder",
       "sending": "Gönderiliyor...",
       "success": "Mesajınız iletildi!",
-      "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+      "successDescription": "En kısa sürede size dönüş yapacağız.",
+      "error": "Bir hata oluştu. Lütfen tekrar deneyin.",
+      "errors": {
+        "nameRequired": "Ad alanı zorunludur.",
+        "emailRequired": "E-posta alanı zorunludur.",
+        "emailInvalid": "Geçerli bir e-posta adresi girin.",
+        "phoneInvalid": "Geçerli bir telefon numarası girin.",
+        "messageRequired": "Mesaj alanı zorunludur.",
+        "messageMinLength": "Mesaj en az 10 karakter olmalıdır.",
+        "submitFailed": "Gönderilemedi. Lütfen tekrar deneyin."
+      }
     }
   },
+
+  "privacy": {
+    "title": "Gizlilik Politikası",
+    "intro": "Umut Ajans olarak ziyaretçilerimizin gizliliğine önem veriyoruz. Bu gizlilik politikası, web sitemizi ziyaret ettiğinizde hangi bilgilerin toplandığını ve bu bilgilerin nasıl kullanıldığını açıklamaktadır.",
+    "collectedTitle": "Toplanan Bilgiler",
+    "collectedIntro": "Web sitemizi kullandığınızda aşağıdaki bilgiler toplanabilir:",
+    "collectedItem1": "Ad ve soyad",
+    "collectedItem2": "E-posta adresi",
+    "collectedItem3": "Telefon numarası",
+    "collectedItem4": "Mesaj içeriği",
+    "collectedItem5": "IP adresi ve tarayıcı bilgileri",
+    "collectedNote": "Bu bilgiler yalnızca iletişim kurmak ve hizmet sunmak amacıyla kullanılmaktadır.",
+    "usageTitle": "Bilgilerin Kullanımı",
+    "usageIntro": "Toplanan bilgiler aşağıdaki amaçlarla kullanılabilir:",
+    "usageItem1": "Teklif taleplerini değerlendirmek",
+    "usageItem2": "Kullanıcılarla iletişim kurmak",
+    "usageItem3": "Web sitesi performansını analiz etmek",
+    "usageItem4": "Hizmet kalitesini geliştirmek",
+    "cookiesTitle": "Çerezler (Cookies)",
+    "cookiesText": "Web sitemiz kullanıcı deneyimini geliştirmek amacıyla çerezler kullanabilir. Çerezler, tarayıcınız tarafından cihazınıza kaydedilen küçük veri dosyalarıdır.",
+    "securityTitle": "Veri Güvenliği",
+    "securityText": "Kullanıcı bilgilerinin güvenliği bizim için önemlidir. Bu nedenle veriler güvenli altyapılar üzerinde saklanmaktadır ve yetkisiz erişime karşı korunmaktadır.",
+    "thirdPartyTitle": "Üçüncü Taraf Hizmetler",
+    "thirdPartyText": "Web sitemiz Google Analytics gibi analiz araçları veya üçüncü taraf servisler kullanabilir. Bu servisler kendi gizlilik politikalarına tabidir.",
+    "contactTitle": "İletişim",
+    "contactText": "Gizlilik politikamız hakkında sorularınız için bizimle iletişime geçebilirsiniz."
+  },
+
+  "terms": {
+    "title": "Kullanım Koşulları",
+    "intro": "Bu web sitesini kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız.",
+    "servicesTitle": "Hizmetler",
+    "servicesText": "Umut Ajans, dijital pazarlama, tasarım ve baskı hizmetleri sunmaktadır. Web sitesinde yer alan bilgiler yalnızca bilgilendirme amaçlıdır.",
+    "contentTitle": "İçerik Hakları",
+    "contentText": "Web sitesinde yer alan tüm içerik, tasarım, metinler ve görseller Umut Ajans'a aittir. İzinsiz kopyalanamaz, dağıtılamaz veya ticari amaçlarla kullanılamaz.",
+    "disclaimerTitle": "Sorumluluk Reddi",
+    "disclaimerText": "Web sitesinde yer alan bilgiler mümkün olduğunca doğru ve güncel tutulmaya çalışılmaktadır. Ancak bilgilerin doğruluğu veya eksiksizliği konusunda garanti verilmemektedir.",
+    "linksTitle": "Bağlantılar",
+    "linksText": "Web sitemiz üçüncü taraf web sitelerine bağlantılar içerebilir. Bu sitelerin içeriklerinden Umut Ajans sorumlu değildir.",
+    "changesTitle": "Değişiklikler",
+    "changesText": "Umut Ajans bu kullanım koşullarını herhangi bir zamanda güncelleme hakkını saklı tutar."
+  },
+
+  "cookies": {
+    "title": "Çerez Politikası",
+    "intro": "Umut Ajans web sitesi olarak çerez kullanımı ve bu çerezlerin nasıl yönetildiği hakkında sizi bilgilendirmek istiyoruz.",
+    "whatTitle": "Çerez Nedir?",
+    "whatText": "Çerezler, web siteleri tarafından cihazınıza (bilgisayar, tablet veya mobil cihaz) kaydedilen küçük metin dosyalarıdır. Çerezler, sitenin düzgün çalışması, kullanıcı tercihlerinin hatırlanması ve site deneyiminin iyileştirilmesi amacıyla kullanılır.",
+    "typesTitle": "Kullandığımız Çerez Türleri",
+    "typesEssential": "Zorunlu çerezler:",
+    "typesEssentialDesc": "Sitenin temel işlevlerinin çalışması için gereklidir.",
+    "typesAnalytics": "Analitik çerezler:",
+    "typesAnalyticsDesc": "Ziyaretçi davranışını anlamamıza ve siteyi geliştirmemize yardımcı olur.",
+    "typesFunctional": "İşlevsel çerezler:",
+    "typesFunctionalDesc": "Dil veya bölge gibi tercihlerinizi hatırlamamızı sağlar.",
+    "manageTitle": "Çerezleri Yönetme",
+    "manageText": "Tarayıcı ayarlarınızdan çerezleri silebilir veya belirli çerez türlerini engelleyebilirsiniz. Çerezleri devre dışı bırakmanız halinde sitenin bazı özellikleri düzgün çalışmayabilir.",
+    "contactTitle": "İletişim",
+    "contactText": "Çerez politikamız hakkında sorularınız için bizimle iletişime geçebilirsiniz."
+  },
+
   "footer": {
     "company": "Şirket",
     "legal": "Yasal",
@@ -101,9 +199,11 @@
     "links": {
       "about": "Hakkımızda",
       "services": "Hizmetler",
+      "whatWeDo": "Neler Yapıyoruz",
       "contact": "İletişim",
-      "privacy": "Gizlilik",
-      "terms": "Koşullar"
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Koşulları",
+      "cookies": "Çerez Politikası"
     }
   },
 
@@ -123,14 +223,22 @@
     "addProduct": "Ürün Ekle",
     "homepageTitle": "Ana Sayfa Yönetimi",
     "save": "Kaydet",
+    "update": "Güncelle",
     "placeholderTitle": "Başlık",
     "placeholderSubtitle": "Alt Başlık",
     "placeholderButton": "Buton Yazısı",
+    "placeholderButtonLink": "Buton linki (örn: /tr/contact, https://wa.me/90...)",
+    "placeholderOrder": "Sıra",
+    "image": "Görsel",
+    "changeImage": "Görseli değiştir",
+    "addSlide": "Slide Ekle",
+    "newCard": "Yeni Kart",
     "label": "Etiket",
     "value": "Değer",
     "hero": "Hero Slider",
     "homepage": "Ana Sayfa",
-    "services": "Neler Yapıyoruz",
+    "services": "Hizmetlerimiz",
+    "serviceCards": "Hizmet Kartları",
     "portfolio": "Portfolyo",
     "products": "Ürünler",
     "offers": "Teklifler",
@@ -188,6 +296,7 @@
 
   "offer": {
     "title": "Teklif Alın",
+    "subtitle": "İhtiyaçlarınızı kısaca anlatın, size özel baskı teklifini iletelim.",
     "name": "Ad Soyad",
     "phone": "Telefon",
     "email": "E-posta",
@@ -226,17 +335,139 @@
     "email": "E-posta",
     "password": "Şifre",
     "submit": "Giriş Yap",
-    "logout": "Çıkış"
+    "backToHome": "Ana Sayfaya Dön"
   },
 
   "home": {
     "exploreTitle": "Keşfet",
-    "exploreSubtitle": "Hakkımızda, hizmetler, iletişim ve teklif alın."
+    "exploreSubtitle": "Hakkımızda, hizmetler, iletişim ve teklif alın.",
+    "viewAll": "Tümünü Gör",
+    "categories": {
+      "boxProduction": "KUTU ÜRETİMİ",
+      "cardboardBag": "KARTON ÇANTA",
+      "catalogMagazine": "KATALOG / DERGİ",
+      "businessCard": "KARTVİZİT",
+      "signboard": "TABELA",
+      "wetWipe": "ISLAK MENDİL"
+    }
   },
+
+  "portfolio": {
+    "title": "Portfolyo"
+  },
+
+  "portfolioDetail": {
+    "client": "Müşteri",
+    "year": "Yıl",
+    "category": "Kategori",
+    "projectImages": "Proje Görselleri",
+    "projectImageAlt": "Proje görseli"
+  },
+
   "metadata": {
+    "contact": {
+      "title": "İletişim",
+      "description": "Umut Ajans ile iletişime geçin. Sorularınız ve teklif talepleriniz için bize ulaşın."
+    },
     "home": {
       "title": "Ana Sayfa",
       "description": "Kapsamlı pazarlama çözümlerimizle dijital varlığınızı dönüştürün."
+    },
+    "about": {
+      "title": "Hakkımızda",
+      "description": "Ekibimizi, değerlerimizi ve işletmelerin dijital dünyada büyümesine nasıl yardımcı olduğumuzu keşfedin."
+    },
+    "services": {
+      "title": "Hizmetler",
+      "description": "Dijital pazarlama, tasarım ve baskı hizmetlerimiz. İşletmeniz için çözümler."
+    },
+    "whatWeDo": {
+      "title": "Neler Yapıyoruz",
+      "description": "Dijital pazarlama, tasarım ve baskı süreçlerimiz. Nasıl çalışıyoruz?"
+    },
+    "portfolio": {
+      "title": "Portfolyo",
+      "description": "Projelerimiz ve referanslarımız."
+    },
+    "offer": {
+      "title": "Teklif Alın",
+      "description": "Baskı ve ürün teklifi almak için iletişime geçin."
+    },
+    "privacy": {
+      "title": "Gizlilik Politikası",
+      "description": "Umut Ajans gizlilik politikası. Web sitemizde hangi bilgilerin toplandığı ve nasıl kullanıldığı."
+    },
+    "terms": {
+      "title": "Kullanım Koşulları",
+      "description": "Umut Ajans web sitesi kullanım koşulları ve şartları."
+    },
+    "cookies": {
+      "title": "Çerez Politikası",
+      "description": "Umut Ajans çerez kullanımı ve çerez yönetimi hakkında bilgi."
     }
+  },
+
+  "common": {
+    "skipToContent": "Ana içeriğe geç",
+    "toggleTheme": "Tema değiştir",
+    "light": "Açık",
+    "dark": "Koyu",
+    "system": "Sistem",
+    "close": "Kapat",
+    "somethingWentWrong": "Bir şeyler yanlış gitti",
+    "somethingWentWrongDescription": "Üzgünüz, beklenmeyen bir hata oluştu. Lütfen sayfayı yenilemeyi deneyin.",
+    "refreshPage": "Sayfayı Yenile",
+    "loading": "Yükleniyor..."
+  },
+
+  "languageSwitcher": {
+    "ariaLabel": "Dil seçimi",
+    "english": "English",
+    "turkish": "Türkçe"
+  },
+
+  "adminAlerts": {
+    "titleRequired": "Başlık girin",
+    "selectImage": "Resim seçin",
+    "uploadError": "Upload hatası",
+    "dbError": "DB kayıt hatası",
+    "cardAdded": "Kart eklendi",
+    "selectFile": "Dosya seçmelisiniz",
+    "productAdded": "Ürün eklendi",
+    "imageUploadFailed": "Görsel yüklenemedi",
+    "projectAddError": "Proje eklenirken hata oluştu",
+    "updateError": "Güncelleme hatası",
+    "newServiceCard": "Yeni Service Kart",
+    "newProduct": "Yeni Ürün",
+    "newPortfolioProject": "Yeni Portfolio Projesi",
+    "editPortfolio": "Portfolio Düzenle",
+    "saveProject": "Projeyi Kaydet",
+    "slug": "Slug",
+    "projectDescription": "Proje açıklaması",
+    "client": "Client",
+    "year": "Year",
+    "category": "Category",
+    "createNewService": "Yeni Hizmet Oluştur",
+    "heroManagement": "Hero Slider Yönetimi",
+    "statusPending": "..."
+  },
+
+  "adminIconOptions": {
+    "FileText": "Kartvizit / El ilanı / Bloknot",
+    "BookOpen": "Broşür / Katalog / Dergi / Menü",
+    "Mail": "Zarf / Davetiye",
+    "Folder": "Cepli dosya",
+    "Tag": "Etiket / Sticker",
+    "Barcode": "Barkod etiket",
+    "Image": "Poster / Afiş / Rollup",
+    "Gift": "Promosyon ürünleri",
+    "Award": "Plaket",
+    "Book": "Ajanda",
+    "Layout": "Kurumsal kimlik / Masa isimliği",
+    "Shirt": "Tekstil baskı",
+    "ShoppingBag": "Bez çanta",
+    "Magnet": "Magnet baskı",
+    "Calendar": "Takvim",
+    "Globe": "Diğer"
   }
 }

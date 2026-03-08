@@ -30,47 +30,68 @@ export default async function ContactPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          <Card>
-            <CardHeader>
-              <Mail className="h-8 w-8 text-primary mb-4" />
-              <CardTitle>{t('email.title')}</CardTitle>
-              <CardDescription>{t('email.description')}</CardDescription>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-12">
+          <Card className="overflow-hidden">
+            <CardHeader className="flex flex-col items-center p-4 pb-0 space-y-1.5 text-center">
+              <Mail className="h-6 w-6 text-primary shrink-0" />
+              <CardTitle className="text-lg">{t('email.title')}</CardTitle>
+              <CardDescription className="text-sm">{t('email.description')}</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 pt-2 text-center">
               <a
                 href="mailto:info@umutajans.com"
-                className="text-primary hover:underline"
+                className="text-base text-primary hover:underline"
               >
                 info@umutajans.com
               </a>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <Phone className="h-8 w-8 text-primary mb-4" />
-              <CardTitle>{t('phone.title')}</CardTitle>
-              <CardDescription>{t('phone.description')}</CardDescription>
+          <Card className="overflow-hidden">
+            <CardHeader className="flex flex-col items-center p-4 pb-0 space-y-1.5 text-center">
+              <Phone className="h-6 w-6 text-primary shrink-0" />
+              <CardTitle className="text-lg">{t('phone.title')}</CardTitle>
+              <CardDescription className="text-sm">{t('phone.description')}</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 pt-2 text-center">
               <a
                 href="tel:+1234567890"
-                className="text-primary hover:underline"
+                className="text-base text-primary hover:underline"
               >
                 +1 (234) 567-890
               </a>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <MapPin className="h-8 w-8 text-primary mb-4" />
-              <CardTitle>{t('address.title')}</CardTitle>
-              <CardDescription>{t('address.description')}</CardDescription>
+          <Card className="overflow-hidden">
+            <CardHeader className="flex flex-col items-center p-4 pb-0 space-y-1.5 text-center">
+              <MapPin className="h-6 w-6 text-primary shrink-0" />
+              <CardTitle className="text-lg">{t('address.title')}</CardTitle>
+              <CardDescription className="text-sm">{t('address.description')}</CardDescription>
             </CardHeader>
-            <CardContent>
-              <p className="text-sm">123 Business Street, City, Country</p>
+            <CardContent className="flex flex-col items-center p-4 pt-2 space-y-3 text-center">
+              <p className="text-sm text-muted-foreground">{t('address.street')}</p>
+              <div className="relative h-40 w-full overflow-hidden rounded-lg bg-muted/20 ring-1 ring-border/50 shadow-inner">
+                <iframe
+                  title={t('address.title')}
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.254643040779!2d32.850676!3d39.948823000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f9a84dd0d35%3A0xb8dc59a2d74c253b!2sUmut%20Ajans%20Reklam%20Ve%20Matbaa!5e1!3m2!1str!2str!4v1772845043933!5m2!1str!2str"
+                  width="100%"
+                  height="100%"
+                  className="absolute inset-0 h-full w-full border-0"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+              <a
+                href="https://maps.app.goo.gl/kv9xH3qtC5157RfW6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-muted/30 px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
+              >
+                <MapPin className="h-3.5 w-3.5 shrink-0" />
+                {t('address.openInMap')}
+              </a>
             </CardContent>
           </Card>
         </div>
