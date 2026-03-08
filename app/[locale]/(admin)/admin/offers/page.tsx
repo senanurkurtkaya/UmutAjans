@@ -1,44 +1,33 @@
-import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { getTranslations } from 'next-intl/server';
 import StatusButton from './StatusButton';
 import Link from 'next/link';
+import { getBaseUrl } from '@/lib/api-base-url';
+import { safeJson } from '@/lib/safe-json';
 
 export default async function AdminOffersPage({
   params,
   searchParams,
 }: {
-  params: { locale: string };
-  searchParams: { status?: string };
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ status?: string }>;
 }) {
-  const supabase = createSupabaseServerClient();
-  const t = await getTranslations({ locale: params.locale, namespace: 'admin.offersPage' });
+  const { locale } = await params;
+  const { status } = await searchParams;
+  const base = await getBaseUrl();
+  const t = await getTranslations({ locale, namespace: 'admin.offersPage' });
 
-  const { data: allOffers } = await supabase
-    .from('offers')
-    .select('status');
+  const allRes = await fetch(`${base}/api/offers`, { cache: 'no-store' });
+  const allOffers = (allRes.ok ? await safeJson<{ status: string }[]>(allRes) : null) ?? [];
+  const newCount = allOffers.filter((o) => o.status === 'new').length;
+  const doneCount = allOffers.filter((o) => o.status === 'done').length;
 
-  const newCount =
-    allOffers?.filter(o => o.status === 'new').length ?? 0;
+  const listUrl = status === 'new' || status === 'done'
+    ? `${base}/api/offers?status=${status}`
+    : `${base}/api/offers`;
+  const listRes = await fetch(listUrl, { cache: 'no-store' });
+  const offers = (listRes.ok ? await safeJson<unknown[]>(listRes) : null) ?? [];
 
-  const doneCount =
-    allOffers?.filter(o => o.status === 'done').length ?? 0;
-
-  let query = supabase
-    .from('offers')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (searchParams?.status === 'new') {
-    query = query.eq('status', 'new');
-  }
-
-  if (searchParams?.status === 'done') {
-    query = query.eq('status', 'done');
-  }
-
-  const { data: offers } = await query;
-
-  const activeFilter = searchParams?.status ?? 'all';
+  const activeFilter = status ?? 'all';
 
   const filterClass = (value: string) =>
     `px-4 py-2 rounded-lg transition ${activeFilter === value
@@ -62,13 +51,13 @@ export default async function AdminOffersPage({
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <Link href={`/${params.locale}/admin/offers`} className={filterClass('all')}>
+        <Link href={`/${locale}/admin/offers`} className={filterClass('all')}>
           {t('all')}
         </Link>
-        <Link href={`/${params.locale}/admin/offers?status=new`} className={filterClass('new')}>
+        <Link href={`/${locale}/admin/offers?status=new`} className={filterClass('new')}>
           {t('new')}
         </Link>
-        <Link href={`/${params.locale}/admin/offers?status=done`} className={filterClass('done')}>
+        <Link href={`/${locale}/admin/offers?status=done`} className={filterClass('done')}>
           {t('done')}
         </Link>
       </div>
@@ -78,7 +67,7 @@ export default async function AdminOffersPage({
           <p className="text-white/50 py-6">{t('noRecords')}</p>
         )}
 
-        {offers?.map((offer) => (
+        {offers?.map((offer: { id: string; name: string; product_type: string; quantity: number; created_at: string; status: string }) => (
           <div
             key={offer.id}
             className="p-4 bg-[#0f1a2b] border border-white/10 rounded-xl flex flex-wrap justify-between items-center gap-4 hover:border-white/20 transition-colors shadow-xl"
@@ -97,7 +86,7 @@ export default async function AdminOffersPage({
             <div className="flex items-center gap-3">
               <StatusButton id={offer.id} status={offer.status} />
               <Link
-                href={`/${params.locale}/admin/offers/${offer.id}`}
+                href={`/${locale}/admin/offers/${offer.id}`}
                 className="text-sm font-medium text-white/90 hover:text-white underline underline-offset-2 transition"
               >
                 {t('viewDetail')}

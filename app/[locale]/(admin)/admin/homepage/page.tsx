@@ -1,116 +1,76 @@
 export const dynamic = 'force-dynamic';
 
-import { createSupabaseServerClient } from '@/lib/supabase/server';
-import { createSupabaseAdminClient } from '@/lib/supabase/admin';
 import { revalidatePath } from 'next/cache';
 import { getTranslations } from 'next-intl/server';
+import { getBaseUrl } from '@/lib/api-base-url';
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function HomepageAdminPage({ params }: Props) {
-  const supabase = await createSupabaseServerClient();
-  const t = await getTranslations({ locale: params.locale, namespace: 'admin' });
+  const { locale } = await params;
+  const base = await getBaseUrl();
+  const t = await getTranslations({ locale, namespace: 'admin' });
 
-  const { data: sections, error } = await supabase
-    .from('homepage_sections')
-    .select('*');
-
-  if (error) {
-    console.error('FETCH ERROR:', error);
-  }
-
-  const hero = sections?.find(s => s.section_key === 'hero');
-  const stats = sections?.find(s => s.section_key === 'stats');
-  const cta = sections?.find(s => s.section_key === 'cta');
+  const sectionsRes = await fetch(`${base}/api/homepage-sections`, { cache: 'no-store' });
+  const sectionsList = (sectionsRes.ok ? await sectionsRes.json().catch(() => null) : null) ?? [];
+  const sections = Array.isArray(sectionsList) ? sectionsList : [];
+  const hero = sections.find((s: { section_key: string }) => s.section_key === 'hero');
+  const stats = sections.find((s: { section_key: string }) => s.section_key === 'stats');
+  const cta = sections.find((s: { section_key: string }) => s.section_key === 'cta');
 
   async function updateHero(formData: FormData) {
     'use server';
-
-    const supabase = createSupabaseAdminClient();
-
-    const { error } = await supabase
-      .from('homepage_sections')
-      .update({
-        content: {
-          title: String(formData.get('title') ?? ''),
-          subtitle: String(formData.get('subtitle') ?? ''),
-          button_text: String(formData.get('button_text') ?? ''),
-          button_link: (formData.get('button_link') as string) || undefined,
-        },
-      })
-      .eq('section_key', 'hero');
-
-    if (error) {
-      console.error('HERO UPDATE ERROR:', error);
-      return;
-    }
-
-    revalidatePath(`/${params.locale}`, 'page');
+    const apiBase = await getBaseUrl();
+    const content = {
+      title: String(formData.get('title') ?? ''),
+      subtitle: String(formData.get('subtitle') ?? ''),
+      button_text: String(formData.get('button_text') ?? ''),
+      button_link: (formData.get('button_link') as string) || undefined,
+    };
+    await fetch(`${apiBase}/api/homepage-sections`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ section_key: 'hero', content }),
+    });
+    revalidatePath(`/${locale}`, 'page');
+    revalidatePath(`/${locale}/admin/homepage`, 'page');
   }
 
   async function updateStats(formData: FormData) {
     'use server';
-
-    const supabase = createSupabaseAdminClient();
-
+    const apiBase = await getBaseUrl();
     const statsArray = [
-      {
-        label: String(formData.get('label1') ?? ''),
-        value: String(formData.get('value1') ?? ''),
-      },
-      {
-        label: String(formData.get('label2') ?? ''),
-        value: String(formData.get('value2') ?? ''),
-      },
-      {
-        label: String(formData.get('label3') ?? ''),
-        value: String(formData.get('value3') ?? ''),
-      },
-      {
-        label: String(formData.get('label4') ?? ''),
-        value: String(formData.get('value4') ?? ''),
-      },
+      { label: String(formData.get('label1') ?? ''), value: String(formData.get('value1') ?? '') },
+      { label: String(formData.get('label2') ?? ''), value: String(formData.get('value2') ?? '') },
+      { label: String(formData.get('label3') ?? ''), value: String(formData.get('value3') ?? '') },
+      { label: String(formData.get('label4') ?? ''), value: String(formData.get('value4') ?? '') },
     ];
-
-    const { error } = await supabase
-      .from('homepage_sections')
-      .update({
-        content: { stats: statsArray },
-      })
-      .eq('section_key', 'stats');
-
-    if (error) {
-      console.error('STATS UPDATE ERROR:', error);
-      return;
-    }
-
-    revalidatePath(`/${params.locale}`, 'page');
+    await fetch(`${apiBase}/api/homepage-sections`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ section_key: 'stats', content: { stats: statsArray } }),
+    });
+    revalidatePath(`/${locale}`, 'page');
+    revalidatePath(`/${locale}/admin/homepage`, 'page');
   }
 
   async function updateCTA(formData: FormData) {
     'use server';
-
-    const supabase = createSupabaseAdminClient();
-
-    const { error } = await supabase
-      .from('homepage_sections')
-      .update({
-        content: {
-          title: String(formData.get('cta_title') ?? ''),
-          subtitle: String(formData.get('cta_subtitle') ?? ''),
-          button_text: String(formData.get('cta_button') ?? ''),
-        },
-      })
-      .eq('section_key', 'cta');
-
-    if (error) {
-      console.error('CTA UPDATE ERROR:', error);
-      return;
-    }
-
-    revalidatePath(`/${params.locale}`, 'page');
+    const apiBase = await getBaseUrl();
+    const content = {
+      title: String(formData.get('cta_title') ?? ''),
+      subtitle: String(formData.get('cta_subtitle') ?? ''),
+      button_text: String(formData.get('cta_button') ?? ''),
+    };
+    await fetch(`${apiBase}/api/homepage-sections`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ section_key: 'cta', content }),
+    });
+    revalidatePath(`/${locale}`, 'page');
+    revalidatePath(`/${locale}/admin/homepage`, 'page');
   }
 
   const inputClass = 'w-full px-3 py-2.5 rounded-lg bg-[#0f1a2b] border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 transition';
@@ -152,17 +112,21 @@ export default async function HomepageAdminPage({ params }: Props) {
 
       <form action={updateStats} className="space-y-4 p-6 bg-[#0f1a2b] border border-white/10 rounded-xl shadow-xl">
         <h2 className="text-lg font-semibold border-b border-white/10 pb-2">{t('homepageStatsSection')}</h2>
-        {stats?.content?.stats?.map((item: any, i: number) => (
+        {(() => {
+          const list = Array.isArray(stats?.content?.stats) ? stats.content.stats.slice(0, 4) : [];
+          while (list.length < 4) list.push({ label: '', value: '' });
+          return list;
+        })().map((item: { label?: string; value?: string }, i: number) => (
           <div key={i} className="flex flex-wrap gap-4">
             <input
               name={`label${i + 1}`}
-              defaultValue={item.label ?? ''}
+              defaultValue={item?.label ?? ''}
               placeholder={t('label')}
               className={inputClass}
             />
             <input
               name={`value${i + 1}`}
-              defaultValue={item.value ?? ''}
+              defaultValue={item?.value ?? ''}
               placeholder={t('value')}
               className={inputClass}
             />

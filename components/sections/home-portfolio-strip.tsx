@@ -1,7 +1,6 @@
 'use client';
 
 import { Link } from '@/lib/i18n/navigation';
-import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 
 const FALLBACK_TITLE = { en: 'Our Work', tr: 'Çalışmalarımız' };
@@ -50,21 +49,19 @@ export function HomePortfolioStrip({
               className="group block"
             >
               <div className="card bg-base-100 shadow-xl overflow-hidden rounded-2xl border border-base-300 hover:border-primary/40 hover:shadow-2xl transition-all duration-300">
-                <figure className="relative aspect-[4/3] overflow-hidden">
+                <figure className="relative aspect-[4/3] overflow-hidden bg-base-300">
                   {project.cover_image ? (
-                    <Image
+                    <img
                       src={project.cover_image}
                       alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full bg-base-300 flex items-center justify-center text-base-content/50">
+                    <div className="absolute inset-0 flex items-center justify-center text-base-content/50">
                       Görsel yok
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 </figure>
                 <div className="card-body p-4">
                   <h3 className="card-title text-base group-hover:text-primary transition-colors">

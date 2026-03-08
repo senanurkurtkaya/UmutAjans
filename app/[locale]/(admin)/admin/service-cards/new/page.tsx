@@ -2,17 +2,17 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-// import { createClient } from '@/lib/supabase/client'
+import { useRouter } from 'next/navigation'
 
 export default function NewServiceCard() {
   const t = useTranslations('adminAlerts')
   const tAdmin = useTranslations('admin')
-  // const supabase = createClient()
+  const router = useRouter()
 
   const [title, setTitle] = useState('')
   const [imageFile, setImageFile] = useState<File | null>(null)
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!title) {
@@ -25,43 +25,25 @@ export default function NewServiceCard() {
       return
     }
 
-    const fileName = Date.now() + "-" + imageFile.name
+    const formData = new FormData()
+    formData.set('title', title)
+    formData.set('image', imageFile)
 
-    // const { error: uploadError } = await supabase.storage
-    //   .from('service-images')
-    //   .upload(fileName, imageFile, { upsert: true })
-    // if (uploadError) {
-    //   console.log(uploadError)
-    //   alert(t('uploadError'))
-    //   return
-    // }
+    const res = await fetch('/api/service-cards', {
+      method: 'POST',
+      body: formData,
+    })
+    const result = await res.json()
 
-    // const { data } = supabase.storage
-    //   .from('service-images')
-    //   .getPublicUrl(fileName)
-
-    // const imageUrl = data.publicUrl
-
-    // const { error } = await supabase
-    //   .from('service_cards')
-    //   .insert([
-    //     {
-    //       title,
-    //       image_url: imageUrl,
-    //       published: true
-    //     }
-    //   ])
-
-    // if (error) {
-    //   console.log(error)
-    //   alert(t('dbError'))
-    //   return
-    // }
+    if (!result.success) {
+      alert(result.error ?? t('uploadError'))
+      return
+    }
 
     alert(t('cardAdded'))
-
     setTitle('')
     setImageFile(null)
+    router.refresh()
   }
 
   return (

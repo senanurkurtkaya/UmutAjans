@@ -1,14 +1,10 @@
-import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { getBaseUrl } from '@/lib/api-base-url';
+import { safeJson } from '@/lib/safe-json';
 
 export async function getProducts() {
-
-  const supabase = await createSupabaseServerClient()
-
-  const { data } = await supabase
-    .from('products')
-    .select('*')
-    .eq('is_active', true)
-    .order('created_at')
-
-  return data ?? []
+  const base = await getBaseUrl();
+  const res = await fetch(`${base}/api/products?published=true`, { cache: 'no-store' });
+  if (!res.ok) return [];
+  const data = await safeJson<unknown[]>(res);
+  return Array.isArray(data) ? data : [];
 }

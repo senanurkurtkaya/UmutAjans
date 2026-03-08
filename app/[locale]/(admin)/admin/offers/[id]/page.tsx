@@ -1,30 +1,27 @@
-import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+import { getBaseUrl } from '@/lib/api-base-url';
+import { safeJson } from '@/lib/safe-json';
 
 export default async function OfferDetailPage({
   params,
 }: {
-  params: { id: string; locale: string };
+  params: Promise<{ id: string; locale: string }>;
 }) {
-  const supabase = createSupabaseServerClient();
-  const t = await getTranslations({ locale: params.locale, namespace: 'admin.offersPage' });
+  const { id, locale } = await params;
+  const base = await getBaseUrl();
+  const t = await getTranslations({ locale, namespace: 'admin.offersPage' });
 
-  const { data: offer, error } = await supabase
-    .from('offers')
-    .select('*')
-    .eq('id', params.id)
-    .single();
-
-  if (!offer || error) {
-    notFound();
-  }
+  const res = await fetch(`${base}/api/offers/${id}`, { cache: 'no-store' });
+  if (!res.ok) notFound();
+  const offer = await safeJson<{ id?: string; name?: string; email?: string; phone?: string; product_type?: string; quantity?: string; description?: string; status?: string; created_at?: string }>(res);
+  if (!offer?.id) notFound();
 
   return (
     <div className="space-y-8">
       <Link
-        href={`/${params.locale}/admin/offers`}
+        href={`/${locale}/admin/offers`}
         className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition"
       >
         ← {t('back')}
@@ -66,18 +63,21 @@ export default async function OfferDetailPage({
         <div>
           <p className="text-sm text-white/70">{t('status')}</p>
           <span
-            className={`inline-block px-3 py-1.5 rounded-lg text-sm font-medium ${
-              offer.status === 'new'
+            className={`inline-block px-3 py-1.5 rounded-lg text-sm font-medium ${offer.status === 'new'
                 ? 'bg-red-500/20 text-red-400'
                 : 'bg-green-500/20 text-green-400'
-            }`}
+              }`}
           >
             {offer.status === 'new' ? t('new') : t('done')}
           </span>
         </div>
         <div>
           <p className="text-sm text-white/70">{t('created')}</p>
-          <p className="text-white/80">{new Date(offer.created_at).toLocaleString()}</p>
+          <p className="text-white/80">
+            {offer.created_at
+              ? new Date(offer.created_at).toLocaleString()
+              : '-'}
+          </p>
         </div>
 
       </div>

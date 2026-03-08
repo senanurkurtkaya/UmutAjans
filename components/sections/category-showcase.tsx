@@ -4,7 +4,6 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useMemo, useState } from 'react';
 import { Link } from '@/lib/i18n/navigation';
 import { useReducedMotion } from '@/lib/hooks/use-reduced-motion';
-import { useTranslations } from 'next-intl';
 import Image from "next/image";
 
 export type CategoryItem = {
@@ -16,6 +15,7 @@ export type CategoryItem = {
 
 type CategoryShowcaseProps = {
   categories: CategoryItem[];
+  viewAllLabel?: string;
   locale?: string;
 };
 
@@ -28,12 +28,10 @@ const LAYOUT = [
   { colSpan: 1, rowSpan: 1, colStart: 3, rowStart: 3 },
 ] as const;
 
-export function CategoryShowcase({ categories }: CategoryShowcaseProps) {
+export function CategoryShowcase({ categories, viewAllLabel = 'View all' }: CategoryShowcaseProps) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const prefersReducedMotion = useReducedMotion();
-  const t = useTranslations('home');
-  const viewAllLabel = t('viewAll');
 
   const containerVariants = useMemo(
     () =>
@@ -66,7 +64,7 @@ export function CategoryShowcase({ categories }: CategoryShowcaseProps) {
 
   if (!categories?.length) return null;
 
- const displayCategories = categories.slice(0, 6);
+  const displayCategories = categories.slice(0, 6);
 
   return (
     <section ref={ref} className="mt-16">

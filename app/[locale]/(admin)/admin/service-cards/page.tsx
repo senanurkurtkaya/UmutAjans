@@ -1,16 +1,13 @@
-import { createSupabaseServerClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
+import { getBaseUrl } from '@/lib/api-base-url'
 
 export default async function AdminServiceCardsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
+  const base = await getBaseUrl()
+  const res = await fetch(`${base}/api/service-cards`, { cache: 'no-store' })
+  const cards = res.ok ? (await res.json()) : []
   const t = await getTranslations('admin')
-  const supabase = createSupabaseServerClient()
-
-  const { data: cards } = await supabase
-    .from('service_cards')
-    .select('*')
-    .order('created_at', { ascending:false })
 
   return (
     <div className="space-y-8">
@@ -28,7 +25,7 @@ export default async function AdminServiceCardsPage({ params }: { params: Promis
       </div>
 
       <div className="space-y-3">
-        {cards?.map(card => (
+        {cards?.map((card: { id: string; title: string; image_url: string }) => (
           <div
             key={card.id}
             className="flex items-center justify-between p-4 bg-[#0f1a2b] border border-white/10 rounded-xl hover:border-white/20 transition-colors shadow-xl"

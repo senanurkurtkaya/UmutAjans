@@ -221,6 +221,8 @@
     "placeholderButton": "Buton Yazısı",
     "placeholderButtonLink": "Buton linki (örn: /tr/contact, https://wa.me/90...)",
     "placeholderOrder": "Sıra",
+    "image": "Görsel",
+    "changeImage": "Görseli değiştir",
     "addSlide": "Slide Ekle",
     "newCard": "Yeni Kart",
     "label": "Etiket",

@@ -1,39 +1,29 @@
 export const dynamic = 'force-dynamic';
 
-import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+import { getBaseUrl } from '@/lib/api-base-url';
 
 async function deleteProject(formData: FormData) {
-  "use server";
-
-  const supabase = await createSupabaseServerClient();
-
-  const id = formData.get("id") as string;
-  const locale = formData.get("locale") as string;
-
-  await supabase
-    .from("portfolio_projects")
-    .delete()
-    .eq("id", id);
-
+  'use server';
+  const id = formData.get('id') as string;
+  const locale = formData.get('locale') as string;
+  const base = await getBaseUrl();
+  await fetch(`${base}/api/portfolio/${id}`, { method: 'DELETE' });
   revalidatePath(`/${locale}/admin/portfolio`);
 }
 
 export default async function AdminPortfolioPage({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const locale = params.locale;
+  const { locale } = await params;
+  const base = await getBaseUrl();
+  const res = await fetch(`${base}/api/portfolio`, { cache: 'no-store' });
+  const projects = res.ok ? (await res.json()) : [];
   const t = await getTranslations({ locale, namespace: 'admin' });
-  const supabase = await createSupabaseServerClient();
-
-  const { data: projects } = await supabase
-    .from('portfolio_projects')
-    .select('*')
-    .order('created_at', { ascending: false });
 
   return (
     <div className="space-y-8">
@@ -48,7 +38,7 @@ export default async function AdminPortfolioPage({
       </div>
 
       <div className="space-y-3">
-        {projects?.map((project) => (
+        {projects?.map((project: { id: string; title: string; category?: string; cover_image?: string }) => (
           <div
             key={project.id}
             className="p-4 bg-[#0f1a2b] border border-white/10 rounded-xl flex flex-wrap justify-between items-center gap-4 hover:border-white/20 transition-colors shadow-xl"

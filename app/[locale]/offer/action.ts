@@ -1,33 +1,32 @@
 'use server';
 
-import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { getBaseUrl } from '@/lib/api-base-url';
 
 export async function submitOffer(
   _prevState: unknown,
   formData: FormData
 ) {
-  const supabase = createSupabaseServerClient();
+  const base = await getBaseUrl();
+  const body = {
+    name: formData.get('name'),
+    phone: formData.get('phone'),
+    email: formData.get('email'),
+    product_type: formData.get('product_type'),
+    quantity: Number(formData.get('quantity')) || 0,
+    size: formData.get('size'),
+    description: formData.get('description'),
+    locale: formData.get('locale'),
+  };
 
-  const locale = formData.get('locale');
+  const res = await fetch(`${base}/api/offers`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
 
-  const { error } = await supabase.from('offers').insert([
-    {
-      name: formData.get('name'),
-      phone: formData.get('phone'),
-      email: formData.get('email'),
-      product_type: formData.get('product_type'),
-      quantity: Number(formData.get('quantity')),
-      size: formData.get('size'),
-      description: formData.get('description'),
-      status: 'new',
-      locale: locale
-    }
-  ]);
-
-  if (error) {
-    console.log('INSERT ERROR:', error);
-    return { success: false };
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    return { success: false, error: (err as { error?: string }).error ?? 'Failed to submit' };
   }
-
   return { success: true };
 }

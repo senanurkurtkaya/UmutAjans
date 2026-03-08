@@ -5,9 +5,9 @@ import { createSupabaseServerClient } from '@/lib/supabase/server';
 
 const CONTACT_BODY_MAX_LENGTH = 50_000;
 
-export const CONTACT_OFFER_PRODUCT_TYPE = 'İletişim formu';
+const CONTACT_OFFER_PRODUCT_TYPE = 'İletişim formu';
 
-export interface ContactBody {
+interface ContactBody {
   name: string;
   email: string;
   phone?: string;

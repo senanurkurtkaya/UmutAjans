@@ -3,7 +3,7 @@
 type Service = {
     id: string
     title: string
-    image_url: string
+    image_url?: string
 }
 
 type Props = {
@@ -28,7 +28,7 @@ export default function ServicesGrid({ services }: Props) {
 
                             <div className="aspect-[4/5] w-full overflow-hidden rounded-xl mb-4">
                                 <img
-                                    src={service.image_url}
+                                    src={service.image_url ?? "/placeholder.jpg"}
                                     alt={service.title}
                                     className="w-full h-full object-cover"
                                 />

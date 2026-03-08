@@ -1,17 +1,12 @@
 import { Link } from '@/lib/i18n/navigation';
-import Image from 'next/image';
-import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { getTranslations } from 'next-intl/server';
+import { getBaseUrl } from '@/lib/api-base-url';
 
 export default async function PortfolioPage() {
   const t = await getTranslations('portfolio');
-  const supabase = await createSupabaseServerClient();
-
-  const { data: projects } = await supabase
-    .from("portfolio_projects")
-    .select("*")
-    .eq("published", true)
-    .order("created_at", { ascending: false });
+  const base = await getBaseUrl();
+  const res = await fetch(`${base}/api/portfolio?published=true`, { cache: 'no-store' });
+  const projects = res.ok ? (await res.json()) : [];
 
   return (
     <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20">
@@ -22,7 +17,7 @@ export default async function PortfolioPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        {projects?.map((project) => (
+        {projects?.map((project: { id: string; slug: string; title: string; category?: string; cover_image?: string }) => (
           <Link
             key={project.id}
             href={`/portfolio/${project.slug}`}
@@ -30,16 +25,15 @@ export default async function PortfolioPage() {
           >
 
             <div className="relative w-full h-72 overflow-hidden rounded-xl">
-
-              {project.cover_image && (
-                <Image
+              {project.cover_image ? (
+                <img
                   src={project.cover_image}
                   alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+              ) : (
+                <div className="absolute inset-0 bg-base-300" />
               )}
-
             </div>
 
             <div className="mt-4">

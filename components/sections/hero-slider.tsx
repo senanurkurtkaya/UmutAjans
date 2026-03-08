@@ -4,11 +4,28 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+function HeroSlideImage({ src }: { src: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed || !src) {
+    return <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-base-300" />;
+  }
+  return (
+    <img
+      src={src}
+      alt=""
+      className="absolute inset-0 w-full h-full object-cover object-center"
+      sizes="100vw"
+      fetchPriority="high"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 type Slide = {
   id: string;
   title: string;
   subtitle: string;
-  image_url: string;
+  image_url?: string | null;
   button_text?: string | null;
   button_link?: string | null;
   display_order: number;
@@ -110,13 +127,11 @@ export function HeroSlider({ slides, heroContent }: Props) {
           transition={{ duration: 0.7, ease: 'easeOut' }}
           className="absolute inset-0"
         >
-          <img
-            src={slide.image_url}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover object-center"
-            sizes="100vw"
-            fetchPriority="high"
-          />
+          {slide.image_url ? (
+            <HeroSlideImage src={slide.image_url} />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-base-300" />
+          )}
         </motion.div>
       </AnimatePresence>
 

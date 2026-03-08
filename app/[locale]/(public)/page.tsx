@@ -1,7 +1,8 @@
 export const dynamic = 'force-dynamic';
 
-import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { getTranslations } from 'next-intl/server';
+import { getBaseUrl } from '@/lib/api-base-url';
+import { safeJson } from '@/lib/safe-json';
 
 import { StatsSection } from '@/components/sections/stats-section';
 import { CTASection } from '@/components/sections/cta-section';
@@ -19,34 +20,36 @@ type Props = {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations('home');
-  const supabase = await createSupabaseServerClient();
 
-  const { data: slides } = await supabase
-    .from('hero_slides')
-    .select('*')
-    .eq('is_active', true)
-    .order('display_order', { ascending: true });
+  let slides: unknown[] = [];
+  let products: unknown[] = [];
+  let portfolio: unknown[] = [];
+  let homepageSections: unknown[] = [];
 
-  const { data: products } = await supabase
-    .from('products')
-    .select('id,title,image_url')
-    .eq('published', true)
-    .order('created_at', { ascending: true });
+  try {
+    const base = await getBaseUrl();
+    const [slidesRes, productsRes, portfolioRes, sectionsRes] = await Promise.all([
+      fetch(`${base}/api/hero-slides?active=true`, { cache: 'no-store' }),
+      fetch(`${base}/api/products?published=true`, { cache: 'no-store' }),
+      fetch(`${base}/api/portfolio?published=true`, { cache: 'no-store' }),
+      fetch(`${base}/api/homepage-sections?active=true`, { cache: 'no-store' }),
+    ]);
 
-  const { data: portfolio } = await supabase
-    .from('portfolio_projects')
-    .select('id, title, slug, category, cover_image')
-    .eq('published', true)
-    .order('created_at', { ascending: false })
-    .limit(6);
+    slides = (slidesRes.ok ? await safeJson<unknown[]>(slidesRes) : null) ?? [];
+    products = (productsRes.ok ? await safeJson<unknown[]>(productsRes) : null) ?? [];
+    const portfolioRaw = portfolioRes.ok ? await safeJson<unknown[]>(portfolioRes) : null;
+    portfolio = Array.isArray(portfolioRaw) ? portfolioRaw.slice(0, 6) : [];
+    homepageSections = (sectionsRes.ok ? await safeJson<unknown[]>(sectionsRes) : null) ?? [];
+  } catch {
+    // Base URL, fetch or parse failed; render with empty data to avoid 500
+  }
 
-  const { data: homepageSections } = await supabase
-    .from('homepage_sections')
-    .select('*')
-    .eq('is_active', true);
-
+  type SectionItem = { section_key: string; content?: unknown };
   const sections = Object.fromEntries(
-    (homepageSections ?? []).map((s) => [s.section_key, s])
+    (homepageSections ?? []).map((s: unknown) => {
+      const sec = s as SectionItem;
+      return [sec.section_key, sec] as [string, SectionItem];
+    })
   );
 
   const heroContent = sections.hero?.content as
@@ -92,18 +95,18 @@ export default async function HomePage({ params }: Props) {
   ]
   return (
     <>
-      <HeroSlider slides={slides ?? []} heroContent={heroContent} />
+      <HeroSlider slides={(slides ?? []) as { id: string; title: string; subtitle: string; image_url: string; button_text?: string | null; button_link?: string | null; display_order: number }[]} heroContent={heroContent} />
 
-      <CategoryShowcase categories={categories} />
+      <CategoryShowcase categories={categories} viewAllLabel={t('viewAll')} />
 
-      <ProductSlider products={products ?? []} />
+      <ProductSlider products={((products ?? []) as { id: string; title: string; image_url?: string }[]).map((p) => ({ id: p.id, title: p.title, image_url: p.image_url ?? '' }))} />
 
-      <HomePortfolioStrip projects={portfolio ?? []} locale={locale} />
+      <HomePortfolioStrip projects={((portfolio ?? []) as { id: string; title: string; slug: string; category?: string | null; cover_image?: string | null }[]).map((p) => ({ ...p, category: p.category ?? null, cover_image: p.cover_image ?? null }))} locale={locale} />
 
       <LocationSection />
-      <CTASection data={sections.cta?.content} />
+      <CTASection data={sections.cta?.content as { title?: string; subtitle?: string; button_text?: string } | undefined} />
 
-      <StatsSection data={sections.stats?.content} />
+      <StatsSection data={sections.stats?.content as { stats?: { label: string; value: string }[] } | undefined} />
 
     </>
   );

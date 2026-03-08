@@ -1,13 +1,9 @@
-import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { getBaseUrl } from '@/lib/api-base-url';
 
 export default async function ProductsPage() {
-
-  const supabase = await createSupabaseServerClient();
-
-  const { data: products } = await supabase
-    .from('products')
-    .select('*')
-    .order('created_at', { ascending: false });
+  const base = await getBaseUrl();
+  const res = await fetch(`${base}/api/products`, { cache: 'no-store' });
+  const products = res.ok ? (await res.json()) : [];
 
   return (
     <div className="space-y-8">
@@ -16,7 +12,7 @@ export default async function ProductsPage() {
       </h1>
 
       <div className="space-y-3">
-        {products?.map((product) => (
+        {products?.map((product: { id: string; title: string; image_url?: string }) => (
           <div
             key={product.id}
             className="flex items-center gap-4 p-4 bg-[#0f1a2b] border border-white/10 rounded-xl hover:border-white/20 transition-colors shadow-xl"

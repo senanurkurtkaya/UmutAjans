@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { createClient } from "@/lib/supabase/client";
 import PortfolioPreview from "../../../components/PortfolioPreview";
 
 export default function EditPortfolioPage() {
@@ -16,95 +15,51 @@ export default function EditPortfolioPage() {
   const locale = params.locale as string;
   const id = params.id as string;
 
-  const supabase = createClient();
-
   const [form, setForm] = useState<any>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   useEffect(() => {
-
     async function fetchProject() {
-
-      const { data, error } = await supabase
-        .from("portfolio_projects")
-        .select("*")
-        .eq("id", id)
-        .single();
-
-      if (error) {
-        console.error(error);
-        return;
-      }
-
+      const res = await fetch(`/api/portfolio/${id}`);
+      if (!res.ok) return;
+      const data = await res.json();
       setForm(data);
-
     }
-
     fetchProject();
-
   }, [id]);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
-
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
-
   }
 
   async function handleSubmit(e: React.FormEvent) {
-
     e.preventDefault();
 
-    let imageUrl = form.cover_image;
+    const formData = new FormData();
+    formData.set("title", form.title);
+    formData.set("description", form.description ?? "");
+    formData.set("cover_image", form.cover_image ?? "");
+    if (imageFile) formData.set("image", imageFile);
 
-    if (imageFile) {
+    const res = await fetch(`/api/portfolio/${id}`, {
+      method: "PUT",
+      body: formData,
+    });
+    const result = await res.json();
 
-      const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
-
-      const { error: uploadError } = await supabase
-        .storage
-        .from("portfolio")
-        .upload(fileName, imageFile);
-
-      if (uploadError) {
-        alert(t("imageUploadFailed"));
-        return;
-      }
-
-      const { data } = supabase
-        .storage
-        .from("portfolio")
-        .getPublicUrl(fileName);
-
-      imageUrl = data.publicUrl;
-
-    }
-
-    const { error } = await supabase
-      .from("portfolio_projects")
-      .update({
-        title: form.title,
-        description: form.description,
-        cover_image: imageUrl,
-      })
-      .eq("id", id);
-
-    if (error) {
-
-      console.error(error);
-      alert(t("updateError"));
+    if (!result.success) {
+      alert(result.error ?? t("updateError"));
       return;
-
     }
 
     router.push(`/${locale}/admin/portfolio`);
     router.refresh();
-
   }
 
   if (!form) return <p>{tCommon("loading")}</p>;

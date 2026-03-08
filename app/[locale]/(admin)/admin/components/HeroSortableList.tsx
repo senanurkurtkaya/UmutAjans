@@ -27,6 +27,28 @@ type Slide = {
   is_active?: boolean;
 };
 
+function SlideThumbnail({ src }: { src: string | undefined }) {
+  const [failed, setFailed] = useState(false);
+  if (!src || failed) {
+    return (
+      <div
+        className="w-32 h-20 rounded-lg bg-gradient-to-br from-primary/40 to-base-300 flex items-center justify-center text-white/50 text-xs"
+        title="Görsel yok"
+      >
+        Görsel yok
+      </div>
+    );
+  }
+  return (
+    <img
+      src={src}
+      alt="slide"
+      className="w-32 h-20 object-cover rounded-lg"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 export function HeroSortableList({
   slides,
   onReorder,
@@ -82,13 +104,7 @@ export function HeroSortableList({
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2">
-                  {slide.image_url && (
-                    <img
-                      src={slide.image_url}
-                      alt="slide"
-                      className="w-32 h-20 object-cover rounded-lg"
-                    />
-                  )}
+                  <SlideThumbnail src={slide.image_url} />
 
                   <a
                     href={`?edit=${slide.id}`}

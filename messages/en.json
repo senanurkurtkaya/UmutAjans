@@ -221,6 +221,8 @@
     "placeholderButton": "Button text",
     "placeholderButtonLink": "Button link (e.g. /en/contact, https://wa.me/...)",
     "placeholderOrder": "Order",
+    "image": "Image",
+    "changeImage": "Change image",
     "addSlide": "Add slide",
     "newCard": "New Card",
     "label": "Label",

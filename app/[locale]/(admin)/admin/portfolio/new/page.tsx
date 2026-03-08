@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { createClient } from "@/lib/supabase/client";
 
 export default function NewPortfolioPage() {
   const t = useTranslations("adminAlerts");
@@ -12,8 +11,6 @@ export default function NewPortfolioPage() {
   const params = useParams();
 
   const locale = params.locale as string;
-
-  const supabase = createClient();
 
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -29,63 +26,36 @@ export default function NewPortfolioPage() {
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
-
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
-
   }
 
   async function handleSubmit(e: React.FormEvent) {
-
     e.preventDefault();
 
-    let imageUrl = "";
+    const formData = new FormData();
+    formData.set("title", form.title);
+    formData.set("slug", form.slug);
+    formData.set("description", form.description);
+    formData.set("client", form.client);
+    formData.set("year", form.year);
+    formData.set("category", form.category);
+    if (imageFile) formData.set("image", imageFile);
 
-    if (imageFile) {
+    const res = await fetch("/api/portfolio", {
+      method: "POST",
+      body: formData,
+    });
+    const result = await res.json();
 
-const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
-      const { error: uploadError } = await supabase
-        .storage
-        .from("portfolio")
-        .upload(fileName, imageFile);
-
-      if (uploadError) {
-
-        alert(t("imageUploadFailed"));
-        return;
-
-      }
-
-      const { data } = supabase
-        .storage
-        .from("portfolio")
-        .getPublicUrl(fileName);
-
-      imageUrl = data.publicUrl;
-
-    }
-
-    const { error } = await supabase
-      .from("portfolio_projects")
-      .insert([
-        {
-          ...form,
-          cover_image: imageUrl,
-          published: true,
-        },
-      ]);
-
-    if (error) {
-
-      alert(t("projectAddError"));
+    if (!result.success) {
+      alert(result.error ?? t("projectAddError"));
       return;
-
     }
 
     router.push(`/${locale}/admin/portfolio`);
-
   }
 
   return (
