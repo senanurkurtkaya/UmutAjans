@@ -29,7 +29,7 @@ type Props = {
   };
 };
 
-export function HeroSlideForm({ editingSlide, locale, labels }: Props) {
+export function HeroSlideForm({ editingSlide, labels }: Props) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -40,7 +40,7 @@ export function HeroSlideForm({ editingSlide, locale, labels }: Props) {
 
     const form = e.currentTarget;
     const fileInput = form.querySelector('[name="image"]') as HTMLInputElement;
-    if (!editingSlide && (!fileInput?.files?.length || fileInput.files[0].size === 0)) {
+    if (!editingSlide && (!fileInput?.files?.length || fileInput.files[0]?.size === 0)) {
       setError('Hero görseli gerekli');
       return;
     }

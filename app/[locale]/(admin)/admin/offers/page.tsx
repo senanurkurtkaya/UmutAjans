@@ -4,6 +4,15 @@ import Link from 'next/link';
 import { getBaseUrl } from '@/lib/api-base-url';
 import { safeJson } from '@/lib/safe-json';
 
+type Offer = {
+  id: string;
+  name: string;
+  product_type: string;
+  quantity: number;
+  created_at: string;
+  status: string
+}
+
 export default async function AdminOffersPage({
   params,
   searchParams,
@@ -25,7 +34,7 @@ export default async function AdminOffersPage({
     ? `${base}/api/offers?status=${status}`
     : `${base}/api/offers`;
   const listRes = await fetch(listUrl, { cache: 'no-store' });
-  const offers = (listRes.ok ? await safeJson<unknown[]>(listRes) : null) ?? [];
+  const offers = (listRes.ok ? await safeJson<Offer[]>(listRes) : null) ?? [];
 
   const activeFilter = status ?? 'all';
 
@@ -67,7 +76,7 @@ export default async function AdminOffersPage({
           <p className="text-white/50 py-6">{t('noRecords')}</p>
         )}
 
-        {offers?.map((offer: { id: string; name: string; product_type: string; quantity: number; created_at: string; status: string }) => (
+        {offers?.map((offer: Offer) => (
           <div
             key={offer.id}
             className="p-4 bg-[#0f1a2b] border border-white/10 rounded-xl flex flex-wrap justify-between items-center gap-4 hover:border-white/20 transition-colors shadow-xl"

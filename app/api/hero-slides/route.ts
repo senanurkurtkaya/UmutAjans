@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
   const validated = createHeroSlideSchema.safeParse({ image_url: imageUrl ?? '' });
   if (!validated.success) {
     return Response.json(
-      { success: false, error: validated.error.errors[0]?.message ?? 'Hero görseli gerekli' },
+      { success: false, error: validated.error?.message ?? 'Hero görseli gerekli' },
       { status: 400 }
     );
   }
