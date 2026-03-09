@@ -60,8 +60,8 @@
     "description1": "We combine creativity with data-driven strategies to deliver results that matter. Our team brings years of experience across digital marketing, branding, and growth.",
     "description2": "Whether you need SEO, social media, or full-funnel campaigns, we work closely with you to understand your goals and build a plan that fits your business.",
     "team": {
-      "title": "Our Team",
-      "subtitle": "Meet the people behind our success"
+      "title": "Our Clients",
+      "subtitle": "Some of the brands and businesses we work with"
     },
     "values": {
       "title": "Our Values",
@@ -170,6 +170,12 @@
     "linksText": "Our website may contain links to third-party websites. Umut Ajans is not responsible for the content of these sites.",
     "changesTitle": "Changes",
     "changesText": "Umut Ajans reserves the right to update these terms of use at any time."
+  },
+
+  "cookieConsent": {
+    "description": "We use cookies to improve your experience and for analytics. By continuing you accept our use of cookies. See our privacy policy for more.",
+    "accept": "Accept",
+    "reject": "Reject"
   },
 
   "cookies": {
