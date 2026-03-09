@@ -42,7 +42,7 @@ export const ProcessSection = React.memo(function ProcessSection() {
       className="py-20 bg-muted/50"
       aria-label="Our process"
     >
-      <div className="container">
+      <div className="container mx-auto">
         <motion.div
           {...animationProps}
           className="text-center space-y-4 mb-12"

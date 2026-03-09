@@ -66,10 +66,22 @@
     "values": {
       "title": "Our Values",
       "subtitle": "The principles that guide everything we do",
-      "results": { "title": "Results Driven", "description": "We focus on delivering measurable outcomes for your business." },
-      "client": { "title": "Client First", "description": "Your success is our priority. We build lasting partnerships." },
-      "innovation": { "title": "Innovation", "description": "We stay ahead with the latest strategies and technologies." },
-      "transparency": { "title": "Transparency", "description": "Clear communication and honest reporting at every step." }
+      "results": {
+        "title": "Results Driven",
+        "description": "We focus on delivering measurable outcomes for your business."
+      },
+      "client": {
+        "title": "Client First",
+        "description": "Your success is our priority. We build lasting partnerships."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We stay ahead with the latest strategies and technologies."
+      },
+      "transparency": {
+        "title": "Transparency",
+        "description": "Clear communication and honest reporting at every step."
+      }
     }
   },
 
@@ -83,10 +95,22 @@
     "title": "Our Process",
     "step": "Step",
     "subtitle": "A proven approach to digital marketing success",
-    "discovery": { "title": "Discovery", "description": "We analyze your business and market to define goals." },
-    "strategy": { "title": "Strategy", "description": "We create a tailored plan to achieve your objectives." },
-    "implementation": { "title": "Implementation", "description": "We execute campaigns with precision and care." },
-    "optimization": { "title": "Optimization", "description": "We continuously improve based on data and results." }
+    "discovery": {
+      "title": "Discovery",
+      "description": "We analyze your business and market to define goals."
+    },
+    "strategy": {
+      "title": "Strategy",
+      "description": "We create a tailored plan to achieve your objectives."
+    },
+    "implementation": {
+      "title": "Implementation",
+      "description": "We execute campaigns with precision and care."
+    },
+    "optimization": {
+      "title": "Optimization",
+      "description": "We continuously improve based on data and results."
+    }
   },
 
   "contact": {
@@ -309,7 +333,7 @@
     "quantity": "Quantity",
     "size": "Size (e.g. 10x15 cm)",
     "description": "Description",
-    "submit": "Send Quote",
+    "submit": "Get Offer",
     "sending": "Sending...",
     "success": "Quote sent successfully 🎉",
     "brochure": "Brochure",

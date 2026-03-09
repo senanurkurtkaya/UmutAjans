@@ -20,8 +20,8 @@ export default async function AboutPage() {
   const t = await getTranslations('about');
 
   return (
-    <div className="py-20">
-      <div className="container">
+    <div className="py-20 ">
+      <div className="container mx-auto">
         <div className="max-w-3xl mx-auto space-y-8">
           <div className="text-center space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">{t('title')}</h1>

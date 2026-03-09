@@ -38,7 +38,7 @@ export default async function ServicesPage() {
 
   return (
     <div className="py-20">
-      <div className="container">
+      <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
           <h1 className="text-4xl md:text-5xl font-bold">
             {t('title')}

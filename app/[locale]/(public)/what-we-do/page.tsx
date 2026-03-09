@@ -68,6 +68,10 @@ export default async function WhatWeDoPage() {
         {/* Services Grid */}
         <ServicesGrid services={serviceCards} />
 
+
+      </div>
+
+      
         {/* Process Section */}
         <div className="mt-24">
           <ProcessSection />
@@ -82,8 +86,6 @@ export default async function WhatWeDoPage() {
             {t('viewServices')}
           </Link>
         </div>
-
-      </div>
 
     </div>
   );

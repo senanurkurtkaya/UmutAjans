@@ -39,7 +39,7 @@ export const ValuesSection = React.memo(function ValuesSection() {
 
   return (
     <section className="py-20" aria-label="Our values">
-      <div className="container">
+      <div className="container mx-auto">
         <motion.div
           {...animationProps}
           className="text-center space-y-4 mb-12"
