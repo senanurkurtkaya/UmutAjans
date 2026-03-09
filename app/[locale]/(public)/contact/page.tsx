@@ -22,7 +22,8 @@ export default async function ContactPage() {
 
   return (
     <div className="py-20">
-      <div className="container">
+      <div className="container mx-auto max-w-7xl px-6">
+
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
           <h1 className="text-4xl md:text-5xl font-bold">{t('title')}</h1>
           <p className="text-xl text-muted-foreground">
@@ -30,14 +31,18 @@ export default async function ContactPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
+
           <Card className="overflow-hidden">
-            <CardHeader className="flex flex-col items-center p-4 pb-0 space-y-1.5 text-center">
+            <CardHeader className="flex flex-col items-center p-6 pb-0 space-y-2 text-center">
               <Mail className="h-6 w-6 text-primary shrink-0" />
               <CardTitle className="text-lg">{t('email.title')}</CardTitle>
-              <CardDescription className="text-sm">{t('email.description')}</CardDescription>
+              <CardDescription className="text-sm">
+                {t('email.description')}
+              </CardDescription>
             </CardHeader>
-            <CardContent className="p-4 pt-2 text-center">
+
+            <CardContent className="p-6 pt-3 text-center">
               <a
                 href="mailto:info@umutajans.com"
                 className="text-base text-primary hover:underline"
@@ -48,12 +53,15 @@ export default async function ContactPage() {
           </Card>
 
           <Card className="overflow-hidden">
-            <CardHeader className="flex flex-col items-center p-4 pb-0 space-y-1.5 text-center">
+            <CardHeader className="flex flex-col items-center p-6 pb-0 space-y-2 text-center">
               <Phone className="h-6 w-6 text-primary shrink-0" />
               <CardTitle className="text-lg">{t('phone.title')}</CardTitle>
-              <CardDescription className="text-sm">{t('phone.description')}</CardDescription>
+              <CardDescription className="text-sm">
+                {t('phone.description')}
+              </CardDescription>
             </CardHeader>
-            <CardContent className="p-4 pt-2 text-center">
+
+            <CardContent className="p-6 pt-3 text-center">
               <a
                 href="tel:+1234567890"
                 className="text-base text-primary hover:underline"
@@ -64,13 +72,19 @@ export default async function ContactPage() {
           </Card>
 
           <Card className="overflow-hidden">
-            <CardHeader className="flex flex-col items-center p-4 pb-0 space-y-1.5 text-center">
+            <CardHeader className="flex flex-col items-center p-6 pb-0 space-y-2 text-center">
               <MapPin className="h-6 w-6 text-primary shrink-0" />
               <CardTitle className="text-lg">{t('address.title')}</CardTitle>
-              <CardDescription className="text-sm">{t('address.description')}</CardDescription>
+              <CardDescription className="text-sm">
+                {t('address.description')}
+              </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col items-center p-4 pt-2 space-y-3 text-center">
-              <p className="text-sm text-muted-foreground">{t('address.street')}</p>
+
+            <CardContent className="flex flex-col items-center p-6 pt-3 space-y-3 text-center">
+              <p className="text-sm text-muted-foreground">
+                {t('address.street')}
+              </p>
+
               <div className="relative h-40 w-full overflow-hidden rounded-lg bg-muted/20 ring-1 ring-border/50 shadow-inner">
                 <iframe
                   title={t('address.title')}
@@ -83,6 +97,7 @@ export default async function ContactPage() {
                   referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
+
               <a
                 href="https://maps.app.goo.gl/kv9xH3qtC5157RfW6"
                 target="_blank"
@@ -94,11 +109,13 @@ export default async function ContactPage() {
               </a>
             </CardContent>
           </Card>
+
         </div>
 
         <div className="max-w-2xl mx-auto">
           <ContactForm />
         </div>
+
       </div>
     </div>
   );
