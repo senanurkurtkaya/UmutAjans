@@ -19,13 +19,19 @@ export default async function TermsPage() {
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-base-content">
             {t('title')}
           </h1>
+
           <p className="mt-4 text-lg md:text-xl text-base-content/80 leading-relaxed max-w-2xl">
             {t('intro')}
           </p>
+
+          <p className="mt-3 text-sm text-base-content/60">
+            Son Güncelleme: 09 Mart 2026
+          </p>
         </header>
 
-        <div className="space-y-10">
-          <section className="rounded-2xl border border-base-300/60 bg-base-200/50 p-6 md:p-8 shadow-sm">
+        <div className="space-y-12">
+
+          <section className="rounded-2xl border border-base-300/60 bg-base-200/50 p-6 md:p-8 shadow-sm transition hover:border-primary/40">
             <h2 className="text-xl font-semibold text-base-content mb-4 pb-2 border-b border-primary/30">
               {t('servicesTitle')}
             </h2>
@@ -34,7 +40,7 @@ export default async function TermsPage() {
             </p>
           </section>
 
-          <section className="rounded-2xl border border-base-300/60 bg-base-200/50 p-6 md:p-8 shadow-sm">
+          <section className="rounded-2xl border border-base-300/60 bg-base-200/50 p-6 md:p-8 shadow-sm transition hover:border-primary/40">
             <h2 className="text-xl font-semibold text-base-content mb-4 pb-2 border-b border-primary/30">
               {t('contentTitle')}
             </h2>
@@ -43,7 +49,7 @@ export default async function TermsPage() {
             </p>
           </section>
 
-          <section className="rounded-2xl border border-base-300/60 bg-base-200/50 p-6 md:p-8 shadow-sm">
+          <section className="rounded-2xl border border-base-300/60 bg-base-200/50 p-6 md:p-8 shadow-sm transition hover:border-primary/40">
             <h2 className="text-xl font-semibold text-base-content mb-4 pb-2 border-b border-primary/30">
               {t('disclaimerTitle')}
             </h2>
@@ -52,7 +58,7 @@ export default async function TermsPage() {
             </p>
           </section>
 
-          <section className="rounded-2xl border border-base-300/60 bg-base-200/50 p-6 md:p-8 shadow-sm">
+          <section className="rounded-2xl border border-base-300/60 bg-base-200/50 p-6 md:p-8 shadow-sm transition hover:border-primary/40">
             <h2 className="text-xl font-semibold text-base-content mb-4 pb-2 border-b border-primary/30">
               {t('linksTitle')}
             </h2>
@@ -61,7 +67,7 @@ export default async function TermsPage() {
             </p>
           </section>
 
-          <section className="rounded-2xl border border-base-300/60 bg-base-200/50 p-6 md:p-8 shadow-sm">
+          <section className="rounded-2xl border border-base-300/60 bg-base-200/50 p-6 md:p-8 shadow-sm transition hover:border-primary/40">
             <h2 className="text-xl font-semibold text-base-content mb-4 pb-2 border-b border-primary/30">
               {t('changesTitle')}
             </h2>
@@ -69,6 +75,7 @@ export default async function TermsPage() {
               {t('changesText')}
             </p>
           </section>
+
         </div>
       </article>
     </div>

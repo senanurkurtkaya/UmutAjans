@@ -2,32 +2,21 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useMemo } from 'react';
 import { useReducedMotion } from '@/lib/hooks/use-reduced-motion';
 import React from 'react';
 
-const teamMembers = [
-  {
-    name: 'John Doe',
-    role: 'CEO & Founder',
-    description: 'Visionary leader with 15+ years in digital marketing',
-  },
-  {
-    name: 'Jane Smith',
-    role: 'Creative Director',
-    description: 'Award-winning designer and brand strategist',
-  },
-  {
-    name: 'Mike Johnson',
-    role: 'Head of SEO',
-    description: 'SEO expert with proven track record of success',
-  },
-  {
-    name: 'Sarah Williams',
-    role: 'Social Media Manager',
-    description: 'Social media strategist and content creator',
-  },
+const references = [
+  { name: 'Müşteri 1' },
+  { name: 'Müşteri 2' },
+  { name: 'Müşteri 3' },
+  { name: 'Müşteri 4' },
+  { name: 'Müşteri 5' },
+  { name: 'Müşteri 6' },
+  { name: 'Müşteri 7' },
+  { name: 'Müşteri 8' },
+  { name: 'Müşteri 9' },
+  { name: 'Müşteri 10' },
 ];
 
 export const TeamSection = React.memo(function TeamSection() {
@@ -53,7 +42,7 @@ export const TeamSection = React.memo(function TeamSection() {
   );
 
   return (
-    <section className="py-20 bg-muted/50" aria-label="Our team">
+    <section className="py-20 bg-muted/50" aria-label="Referanslarımız">
       <div className="container">
         <motion.div
           {...animationProps}
@@ -65,27 +54,21 @@ export const TeamSection = React.memo(function TeamSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {teamMembers.map((member, index) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-6">
+          {references.map((ref, index) => (
             <motion.div
-              key={`${member.name}-${index}`}
+              key={`${ref.name}-${index}`}
               {...animationProps}
               transition={{
                 ...animationProps.transition,
-                delay: prefersReducedMotion ? 0 : index * 0.1,
+                delay: prefersReducedMotion ? 0 : index * 0.05,
               }}
             >
-              <Card className="h-full">
-                <CardHeader>
-                  <CardTitle>{member.name}</CardTitle>
-                  <CardDescription>{member.role}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    {member.description}
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="flex h-16 items-center justify-center rounded-xl border border-border bg-background/60 px-4 py-3 shadow-sm">
+                <span className="text-sm md:text-base font-medium text-muted-foreground tracking-wide">
+                  {ref.name}
+                </span>
+              </div>
             </motion.div>
           ))}
         </div>

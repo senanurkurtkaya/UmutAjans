@@ -18,6 +18,8 @@ import { DocumentLang } from '@/components/scripts/document-lang';
 import { SkipLink } from '@/components/layout/skip-link';
 import { StructuredData } from '@/components/seo/structured-data';
 import { ErrorBoundary } from '@/components/providers/error-boundary';
+import { AnalyticsLoader } from '@/components/cookie/analytics-loader';
+import { CookieConsent } from '@/components/cookie/cookie-consent';
 
 import { locales, type Locale } from '@/lib/i18n/i18n';
 import { generateSEOMetadata } from '@/lib/seo/metadata';
@@ -69,6 +71,8 @@ export default async function LocaleLayout({
               <SkipLink />
               {children}
             </div>
+            <AnalyticsLoader />
+            <CookieConsent />
           </ErrorBoundary>
         </ThemeProvider>
       </NextIntlClientProvider>

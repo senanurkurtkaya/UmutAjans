@@ -60,8 +60,8 @@
     "description1": "Yaratıcılığı veri odaklı stratejilerle bir araya getirerek önemli sonuçlar elde ediyoruz. Ekibimiz dijital pazarlama, marka ve büyüme alanında yıllarca deneyim getiriyor.",
     "description2": "SEO, sosyal medya veya tam kanal kampanyalara ihtiyacınız olsun, hedeflerinizi anlamak ve işletmenize uygun bir plan oluşturmak için sizinle yakın çalışıyoruz.",
     "team": {
-      "title": "Ekibimiz",
-      "subtitle": "Başarımızın arkasındaki isimlerle tanışın"
+      "title": "Referanslarımız",
+      "subtitle": "Birlikte çalıştığımız marka ve işletmelerden bazıları"
     },
     "values": {
       "title": "Değerlerimiz",
@@ -170,6 +170,12 @@
     "linksText": "Web sitemiz üçüncü taraf web sitelerine bağlantılar içerebilir. Bu sitelerin içeriklerinden Umut Ajans sorumlu değildir.",
     "changesTitle": "Değişiklikler",
     "changesText": "Umut Ajans bu kullanım koşullarını herhangi bir zamanda güncelleme hakkını saklı tutar."
+  },
+
+  "cookieConsent": {
+    "description": "Deneyiminizi iyileştirmek ve analitik için çerezler kullanıyoruz. Devam ederek çerez kullanımını kabul etmiş olursunuz. Daha fazla bilgi için gizlilik politikamıza bakabilirsiniz.",
+    "accept": "Kabul Et",
+    "reject": "Reddet"
   },
 
   "cookies": {

@@ -55,6 +55,16 @@ export const Footer = React.memo(function Footer({
     { icon: 'Linkedin', href: '#', label: 'LinkedIn' },
   ];
 
+  const handleCookieSettingsClick = () => {
+    if (typeof window === 'undefined') return;
+    try {
+      localStorage.removeItem('cookie-consent');
+    } catch {
+      // ignore
+    }
+    window.location.reload();
+  };
+
   return (
     <footer className="footer footer-center p-10 bg-base-200/90 text-base-content border-t border-base-300/80" role="contentinfo">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10 max-w-6xl mx-auto w-full">
@@ -84,6 +94,15 @@ export const Footer = React.memo(function Footer({
                 </Link>
               </li>
             ))}
+            <li>
+              <button
+                type="button"
+                onClick={handleCookieSettingsClick}
+                className="link link-hover text-sm text-left"
+              >
+                Çerez Ayarları
+              </button>
+            </li>
           </ul>
         </nav>
         <div>
