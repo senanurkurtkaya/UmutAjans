@@ -6,9 +6,13 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 function HeroSlideImage({ src }: { src: string }) {
   const [failed, setFailed] = useState(false);
+
   if (failed || !src) {
-    return <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-base-300" />;
+    return (
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-base-300" />
+    );
   }
+
   return (
     <img
       src={src}
@@ -40,6 +44,7 @@ type HeroContent = {
 
 function isExternalLink(href: string): boolean {
   const t = href.trim();
+
   return (
     t.startsWith('http://') ||
     t.startsWith('https://') ||
@@ -63,11 +68,15 @@ export function HeroSlider({ slides, heroContent }: Props) {
     if (!hasSlides) return;
 
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % slides!.length);
+      setIndex((prev) => (prev + 1) % slides.length);
     }, 6000);
 
     return () => clearInterval(interval);
   }, [hasSlides, slides?.length]);
+
+  /* ------------------------------------------------ */
+  /* Eğer slide yoksa sadece heroContent göster       */
+  /* ------------------------------------------------ */
 
   if (!hasSlides) {
     const title = heroContent?.title ?? '';
@@ -79,15 +88,20 @@ export function HeroSlider({ slides, heroContent }: Props) {
     if (!title && !subtitle && !buttonText) return null;
 
     return (
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden rounded-b-3xl shadow-xl mt-4 md:mt-8 mx-4 md:mx-8">
+      <section className="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden shadow-xl">
+
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+
         <div className="relative z-10 container mx-auto px-6 text-center text-white max-w-4xl">
+
           <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-xl tracking-tight">
             {title}
           </h1>
+
           <p className="text-lg md:text-xl mb-10 text-white/90 drop-shadow-md max-w-2xl mx-auto">
             {subtitle}
           </p>
+
           {buttonText && (
             <a
               href={buttonLink}
@@ -102,6 +116,10 @@ export function HeroSlider({ slides, heroContent }: Props) {
     );
   }
 
+  /* ------------------------------------------------ */
+  /* Slider aktif                                    */
+  /* ------------------------------------------------ */
+
   const slide = slides[index];
   if (!slide) return null;
 
@@ -112,11 +130,12 @@ export function HeroSlider({ slides, heroContent }: Props) {
   const external = isExternalLink(buttonLink);
 
   const nextSlide = () => setIndex((prev) => (prev + 1) % slides.length);
+
   const prevSlide = () =>
     setIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
 
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden rounded-b-3xl shadow-xl mt-4 md:mt-8 mx-4 md:mx-8">
+    <section className="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden shadow-xl">
 
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
@@ -158,6 +177,7 @@ export function HeroSlider({ slides, heroContent }: Props) {
         )}
       </div>
 
+      {/* SOL OK */}
       <button
         type="button"
         onClick={prevSlide}
@@ -166,6 +186,7 @@ export function HeroSlider({ slides, heroContent }: Props) {
         <ChevronLeft className="h-6 w-6" />
       </button>
 
+      {/* SAĞ OK */}
       <button
         type="button"
         onClick={nextSlide}
@@ -174,6 +195,7 @@ export function HeroSlider({ slides, heroContent }: Props) {
         <ChevronRight className="h-6 w-6" />
       </button>
 
+      {/* DOT PAGINATION */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
         {slides.map((_, i) => (
           <button
