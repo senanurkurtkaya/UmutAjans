@@ -3,8 +3,10 @@
     "home": "Ana Sayfa",
     "about": "Hakkımızda",
     "services": "Hizmetlerimiz",
+    "products": "Ürünler",
     "whatWeDo": "Neler Yapıyoruz",
     "portfolio": "Portfolyo",
+    "references": "Referanslar",
     "contact": "İletişim",
     "login": "Giriş",
     "getQuote": "Teklif Al"
@@ -206,6 +208,7 @@
       "about": "Hakkımızda",
       "services": "Hizmetler",
       "whatWeDo": "Neler Yapıyoruz",
+      "references": "Referanslar",
       "contact": "İletişim",
       "privacy": "Gizlilik Politikası",
       "terms": "Kullanım Koşulları",
@@ -248,6 +251,7 @@
     "portfolio": "Portfolyo",
     "products": "Ürünler",
     "offers": "Teklifler",
+    "productMenu": "Ürün Menüsü",
     "settings": "Ayarlar",
     "offersPage": {
       "title": "Teklif Talepleri",
@@ -410,7 +414,16 @@
     "cookies": {
       "title": "Çerez Politikası",
       "description": "Umut Ajans çerez kullanımı ve çerez yönetimi hakkında bilgi."
+    },
+    "references": {
+      "title": "Referanslar",
+      "description": "Birlikte çalıştığımız markalar ve işletmeler."
     }
+  },
+
+  "references": {
+    "title": "Referanslarımız",
+    "subtitle": "Birlikte çalıştığımız markalar ve işletmelerden bazıları"
   },
 
   "common": {

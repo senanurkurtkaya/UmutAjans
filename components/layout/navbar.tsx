@@ -11,24 +11,30 @@ import { LanguageSwitcher } from './language-switcher';
 import { Link } from '@/lib/i18n/navigation';
 import { useScroll } from '@/lib/hooks/use-scroll';
 import { useReducedMotion } from '@/lib/hooks/use-reduced-motion';
+import { ProductMegaMenu } from '@/components/layout/ProductMegaMenu';
+import type { ProductMenuData } from '@/lib/products/get-product-menu';
 
 const navItems = [
   { href: '/', key: 'home' },
   { href: '/about', key: 'about' },
   { href: '/services', key: 'services' },
+  { href: '/urunler', key: 'products' },
   { href: '/what-we-do', key: 'whatWeDo' },
   { href: '/portfolio', key: 'portfolio' },
+  { href: '/referanslar', key: 'references' },
   { href: '/contact', key: 'contact' },
 ] as const;
 
 type NavbarProps = {
   siteName?: string;
   logoUrl?: string;
+  productMenuData?: ProductMenuData;
 };
 
 export const Navbar = React.memo(function Navbar({
   siteName = 'Umut Ajans',
   logoUrl,
+  productMenuData,
 }: NavbarProps) {
   const drawerRef = React.useRef<HTMLInputElement>(null);
   const scrolled = useScroll(10);
@@ -52,6 +58,9 @@ export const Navbar = React.memo(function Navbar({
     },
     [pathname, locale]
   );
+
+  const productsHref = '/urunler';
+  const categories = productMenuData?.categories ?? [];
 
   const animationProps = React.useMemo(
     () =>
@@ -99,22 +108,59 @@ export const Navbar = React.memo(function Navbar({
                   </label>
                 </li>
 
-                {navItems.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={closeDrawer}
-                      className={cn(
-                        'rounded-lg',
-                        isActive(item.href)
-                          ? 'active bg-primary text-primary-content'
-                          : ''
-                      )}
-                    >
-                      {t(item.key)}
-                    </Link>
-                  </li>
-                ))}
+                {navItems.map((item) => {
+                  if (item.href === productsHref) {
+                    return (
+                      <li key={item.href}>
+                        <details>
+                          <summary
+                            className={cn(
+                              'rounded-lg',
+                              isActive(item.href) ? 'active bg-primary text-primary-content' : ''
+                            )}
+                          >
+                            {t(item.key)}
+                          </summary>
+                          <ul className="p-2">
+                            <li>
+                              <Link href={item.href} onClick={closeDrawer}>
+                                {t(item.key)}
+                              </Link>
+                            </li>
+                            {categories.map((cat) => (
+                              <React.Fragment key={cat.slug}>
+                                <li className="menu-title mt-2">
+                                  <span>{cat.title}</span>
+                                </li>
+                                {cat.items.map((p) => (
+                                  <li key={p.slug}>
+                                    <Link href={`/urunler/${p.slug}`} onClick={closeDrawer}>
+                                      {p.name}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </React.Fragment>
+                            ))}
+                          </ul>
+                        </details>
+                      </li>
+                    );
+                  }
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={closeDrawer}
+                        className={cn(
+                          'rounded-lg',
+                          isActive(item.href) ? 'active bg-primary text-primary-content' : ''
+                        )}
+                      >
+                        {t(item.key)}
+                      </Link>
+                    </li>
+                  );
+                })}
 
                 <li className="pt-2">
                   <Link
@@ -170,21 +216,34 @@ export const Navbar = React.memo(function Navbar({
         {/* CENTER */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal gap-2 px-2">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={cn(
-                    'rounded-xl font-medium transition-colors',
-                    isActive(item.href)
-                      ? 'bg-primary text-primary-content shadow-sm'
-                      : 'hover:bg-base-200/80 text-base-content'
-                  )}
-                >
-                  {t(item.key)}
-                </Link>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              if (item.href === productsHref) {
+                return (
+                  <li key={item.href} className="relative">
+                    <ProductMegaMenu
+                      label={t(item.key)}
+                      isActive={isActive(item.href)}
+                      categories={categories}
+                    />
+                  </li>
+                );
+              }
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      'rounded-xl font-medium transition-colors',
+                      isActive(item.href)
+                        ? 'bg-primary text-primary-content shadow-sm'
+                        : 'hover:bg-base-200/80 text-base-content'
+                    )}
+                  >
+                    {t(item.key)}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
