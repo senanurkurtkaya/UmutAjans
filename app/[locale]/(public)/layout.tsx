@@ -4,6 +4,7 @@ import { Footer } from '@/components/layout/footer';
 import { FloatingContact } from '@/components/ui/floating-contact';
 import { siteConfig } from '@/lib/seo/config';
 import { APP_CONFIG } from '@/lib/constants';
+import { getProductMenuData } from '@/lib/products/get-product-menu';
 
 const socialLinks = [
   { icon: 'Facebook', href: APP_CONFIG.social.facebook, label: 'Facebook' },
@@ -26,9 +27,10 @@ export default async function PublicLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const productMenuData = await getProductMenuData();
   return (
     <div className="flex min-h-screen flex-col bg-base-100">
-      <Navbar siteName={APP_CONFIG.name} logoUrl={undefined} />
+      <Navbar siteName={APP_CONFIG.name} logoUrl={undefined} productMenuData={productMenuData} />
       <main className="flex-1">{children}</main>
       <FloatingContact />
       <Footer

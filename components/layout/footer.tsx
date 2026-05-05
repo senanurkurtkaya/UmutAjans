@@ -30,6 +30,7 @@ const FOOTER_LINKS = {
     { href: '/about', key: 'links.about' },
     { href: '/services', key: 'links.services' },
     { href: '/what-we-do', key: 'links.whatWeDo' },
+    { href: '/referanslar', key: 'links.references' },
     { href: '/contact', key: 'links.contact' },
   ],
   legal: [

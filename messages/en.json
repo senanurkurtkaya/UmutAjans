@@ -3,8 +3,10 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
+    "products": "Products",
     "whatWeDo": "What We Do",
     "portfolio": "Portfolio",
+    "references": "References",
     "contact": "Contact",
     "login": "Login",
     "getQuote": "Get Quote"
@@ -230,6 +232,7 @@
       "about": "About",
       "services": "Services",
       "whatWeDo": "What We Do",
+      "references": "References",
       "contact": "Contact",
       "privacy": "Privacy Policy",
       "terms": "Terms & Conditions",
@@ -272,6 +275,7 @@
     "portfolio": "Portfolio",
     "products": "Products",
     "offers": "Offers",
+    "productMenu": "Product Menu",
     "settings": "Settings",
     "offersPage": {
       "title": "Offer Requests",
@@ -434,7 +438,16 @@
     "cookies": {
       "title": "Cookie Policy",
       "description": "Information about cookie use and cookie management at Umut Ajans."
+    },
+    "references": {
+      "title": "References",
+      "description": "Some of the brands and businesses we work with."
     }
+  },
+
+  "references": {
+    "title": "Our References",
+    "subtitle": "Some of the brands and businesses we work with"
   },
 
   "common": {

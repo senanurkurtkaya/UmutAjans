@@ -82,6 +82,14 @@ export default function AdminSidebar() {
             {t('offers')}
           </Link>
 
+          <Link
+            href="/admin/product-menu"
+            onClick={handleNavigate}
+            className={linkClass('/admin/product-menu')}
+          >
+            {t('productMenu')}
+          </Link>
+
         </nav>
       </aside>
     </>
